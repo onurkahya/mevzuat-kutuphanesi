@@ -153,46 +153,45 @@ def title_case_score(text):
 
 def normalize_article_heading(value):
     """
-    Birleşmiş üst başlık + gerçek madde başlığını ayırır.
+    Madde başlığını güvenli biçimde temizler.
 
-    Güvenli örnekler:
-      Amaç, Kapsam, Dayanak ve Tanımlar Amaç -> Amaç
-      Ön Bilgilendirme Yükümlülüğü Ön bilgilendirme -> Ön bilgilendirme
-      Cayma Hakkının Kullanımı ve Tarafların Yükümlülükleri Cayma hakkı -> Cayma hakkı
+    Yalnızca gerçekten birleşmiş görünen üst başlık + madde başlığı
+    durumlarını ayırır. Normal başlıkları kısaltmaz.
 
-    Normal sentence-case başlıklara (örn. "Ön bilgilendirmeye ilişkin diğer yükümlülükler")
-    dokunmaz.
+    Örnek:
+      "Amaç, Kapsam, Dayanak ve Tanımlar Amaç" -> "Amaç"
+      "Ön Bilgilendirme Yükümlülüğü Ön bilgilendirme" -> "Ön bilgilendirme"
+      "Cayma Hakkının Kullanımı ve Tarafların Yükümlülükleri Cayma hakkı"
+          -> "Cayma hakkı"
+
+    "Ön bilgilendirmeye ilişkin diğer yükümlülükler" aynen korunur.
     """
     value = clean_line(value)
+
     if not value or SECTION_RE.match(value):
         return ""
 
-    # Olası bölme noktaları: ilk kelimeden sonraki büyük harfle başlayan kelimeler.
-    positions = [m.start() for m in re.finditer(r"(?<![A-Za-zÇĞİÖŞÜçğıöşü])[A-ZÇĞİÖŞÜ][A-Za-zÇĞİÖŞÜçğıöşü]*", value)]
-    candidates = []
+    # Aynı kelime/ifadenin ikinci kez başladığı açık birleşmeler.
+    words = list(re.finditer(r"[A-Za-zÇĞİÖŞÜçğıöşü]+", value))
+    if not words:
+        return value
 
-    for pos in positions[1:]:
-        prefix = value[:pos].strip(" ,;:-–—")
-        suffix = value[pos:].strip(" ,;:-–—")
-        if not prefix or not suffix or len(suffix) > 130:
-            continue
+    first_word = words[0].group(0)
 
-        # Üst başlık çoğunlukla Title Case; gerçek madde başlığı çoğunlukla sentence case.
-        prefix_title = title_case_score(prefix)
-        suffix_sentence = sentence_case_score(suffix)
+    repeats = list(re.finditer(
+        rf"(?i)(?<![A-Za-zÇĞİÖŞÜçğıöşü]){re.escape(first_word)}(?![A-Za-zÇĞİÖŞÜçğıöşü])",
+        value
+    ))
 
-        # Tek kelimelik suffix ("Amaç") da geçerlidir.
-        suffix_words = re.findall(r"[A-Za-zÇĞİÖŞÜçğıöşü]+", suffix)
-        suffix_ok = (len(suffix_words) == 1) or (suffix_sentence >= 0.5)
+    # İlk kelime metinde ikinci kez geçiyorsa, ikinci başlangıçtan sonrasını
+    # gerçek madde başlığı kabul etmek güvenlidir.
+    if len(repeats) >= 2:
+        suffix = value[repeats[-1].start():].strip(" ,;:-–—")
+        if 1 <= len(suffix) <= 140:
+            return suffix
 
-        # Prefix güçlü biçimde üst başlık görünümündeyse böl.
-        if prefix_title >= 0.65 and suffix_ok:
-            candidates.append((pos, suffix))
-
-    if candidates:
-        # En erken güvenli bölünme, gerçek madde başlığını tam tutar.
-        return candidates[0][1]
-
+    # Çok bilinen yapı: üst başlık Title Case, gerçek başlık aynı ilk kelimeyle
+    # tekrar başlamıyorsa dokunma. Böylece Madde 8 gibi normal başlıklar korunur.
     return value
 
 def heading_block_before(lines, article_index):
@@ -239,6 +238,43 @@ def format_article_text(body_lines):
 
     return re.sub(r"\n{2,}", "\n", text).strip()
 
+ORDINAL_ONLY_RE = re.compile(
+    r"^(?:BİRİNCİ|İKİNCİ|ÜÇÜNCÜ|DÖRDÜNCÜ|BEŞİNCİ|ALTINCI|YEDİNCİ|SEKİZİNCİ|"
+    r"DOKUZUNCU|ONUNCU|ON BİRİNCİ|ON İKİNCİ|ON ÜÇÜNCÜ|ON DÖRDÜNCÜ|ON BEŞİNCİ|"
+    r"ON ALTINCI|ON YEDİNCİ|ON SEKİZİNCİ|ON DOKUZUNCU|YİRMİNCİ)$",
+    re.IGNORECASE,
+)
+
+def merge_split_section_lines(lines):
+    """
+    HTML bazı bölüm başlıklarını iki ayrı satıra bölebilir:
+        ÜÇÜNCÜ
+        BÖLÜM
+
+    Bunları:
+        ÜÇÜNCÜ BÖLÜM
+    olarak birleştirir.
+    """
+    merged = []
+    i = 0
+
+    while i < len(lines):
+        line = lines[i]
+
+        if (
+            ORDINAL_ONLY_RE.match(line)
+            and i + 1 < len(lines)
+            and lines[i + 1].upper() in {"BÖLÜM", "KISIM"}
+        ):
+            merged.append(f"{line} {lines[i + 1]}")
+            i += 2
+            continue
+
+        merged.append(line)
+        i += 1
+
+    return merged
+
 def parse_articles(soup):
     for tag in soup(["script", "style", "noscript", "iframe"]):
         tag.decompose()
@@ -246,6 +282,7 @@ def parse_articles(soup):
     raw_text = soup.get_text("\n").replace("\xa0", " ").replace("\r", "\n")
     lines = [clean_line(x) for x in raw_text.split("\n")]
     lines = [x for x in lines if x]
+    lines = merge_split_section_lines(lines)
 
     positions = []
     for index, line in enumerate(lines):
@@ -273,6 +310,14 @@ def parse_articles(soup):
         for line in body:
             if SECTION_RE.match(line):
                 break
+
+            # Emniyet: tek başına kalmış "BÖLÜM"/"KISIM" veya ordinal satır da
+            # sonraki bölümün başlangıcı kabul edilir.
+            if line.upper() in {"BÖLÜM", "KISIM"}:
+                break
+            if ORDINAL_ONLY_RE.match(line):
+                break
+
             cleaned.append(line)
 
         kind = (match.group("kind") or "").upper()
