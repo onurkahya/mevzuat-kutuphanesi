@@ -5,7 +5,7 @@
   "mevzuat_tur": "7",
   "mevzuat_tertip": "5",
   "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20444&MevzuatTur=7&MevzuatTertip=5",
-  "son_guncelleme": "2026-09-05T02:40:22+03:00",
+  "son_guncelleme": "2026-09-05T02:48:32+03:00",
   "madde_sayisi": 30,
   "maddeler": [
     {
@@ -41,7 +41,7 @@
     {
       "madde": "6",
       "tur": "normal",
-      "baslik": "geçerliliği",
+      "baslik": "Sözleşmenin şekli ve geçerliliği",
       "metin": "(1) İş yeri dışında kurulan sözleşmeler, Bakanlık tarafından yetkilendirilmiş satıcı veya sağlayıcı tarafından kurulur.\n(2) İş yeri dışında kurulan sözleşmeler yazılı olarak yapılmadıkça geçerli olmaz. Kurulan sözleşmelerin en az on iki punto büyüklüğünde anlaşılabilir bir dilde, açık, sade ve okunabilir bir şekilde düzenlenmesi ve sözleşmenin bir örneğinin tüketiciye verilmesi zorunludur. Geçerli bir sözleşme kurmamış olan satıcı veya sağlayıcı, sonradan sözleşmenin geçersizliğini tüketicinin aleyhine olacak şekilde ileri süremez."
     },
     {
@@ -71,7 +71,7 @@
     {
       "madde": "11",
       "tur": "normal",
-      "baslik": "yükümlülükleri",
+      "baslik": "Satıcı veya sağlayıcının yükümlülükleri",
       "metin": "(1) Satıcı veya sağlayıcı, 14 üncü maddede yer alan sözleşmeler hariç olmak üzere, cayma süresi içerisinde sözleşmeye konu mal veya hizmet karşılığında tüketiciden herhangi bir isim altında ödeme yapmasını veya tüketiciyi borç altına sokan herhangi bir belge vermesini isteyemez. Bu yasağa rağmen tüketiciden herhangi bir bedel alınması durumunda, alınan bedel tüketiciye derhal iade edilir. Ayrıca tüketiciyi borç altına sokan her türlü belge tüketici yönünden geçersizdir.\n(2) (Değişik:RG-23/8/2024-32641) 1 Satıcı, cayma bildiriminin kendisine ulaştığı tarihten itibaren on dört gün içinde malı geri almakla yükümlüdür. Bu süre içerisinde malın geri alınmaması durumunda, tüketici malı muhafaza etmekle yükümlü değildir."
     },
     {
@@ -83,7 +83,7 @@
     {
       "madde": "13",
       "tur": "normal",
-      "baslik": "yan sözleşmelere etkisi",
+      "baslik": "Cayma hakkının kullanımının yan sözleşmelere etkisi",
       "metin": "(1) Kanunun 30 uncu maddesi hükümleri saklı kalmak koşuluyla, tüketicinin cayma hakkını kullanması durumunda yan sözleşmeler de kendiliğinden sona erer. Bu durumda tüketici herhangi bir masraf, tazminat veya cezai şart ödemekle yükümlü değildir.\n(2) Satıcı veya sağlayıcı, tüketicinin cayma hakkını kullandığını yan sözleşmenin tarafı olan üçüncü kişiye derhal bildirir."
     },
     {
@@ -150,18 +150,18 @@
       "madde": "24",
       "tur": "normal",
       "baslik": "Doğrudan satış",
-      "metin": ""
+      "metin": "(Mülga:RG-8/8/2025-32980)"
     },
     {
       "madde": "25",
       "tur": "normal",
-      "baslik": "temel esaslar",
+      "baslik": "Doğrudan satışlara ilişkin temel esaslar",
       "metin": "(Mülga:RG-8/8/2025-32980)"
     },
     {
       "madde": "26",
       "tur": "normal",
-      "baslik": "yönetmelik",
+      "baslik": "Yürürlükten kaldırılan yönetmelik",
       "metin": "(1) 13/6/2003 tarihli ve 25137 sayılı Resmî Gazete’de yayımlanan Kapıdan Satışlara İlişkin Uygulama Usul ve Esasları Hakkında Yönetmelik yürürlükten kaldırılmıştır."
     },
     {

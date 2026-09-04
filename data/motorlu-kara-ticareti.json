@@ -5,7 +5,7 @@
   "mevzuat_tur": "7",
   "mevzuat_tertip": "5",
   "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=40940&MevzuatTur=7&MevzuatTertip=5",
-  "son_guncelleme": "2026-09-05T02:41:00+03:00",
+  "son_guncelleme": "2026-09-05T02:49:12+03:00",
   "madde_sayisi": 38,
   "maddeler": [
     {
@@ -53,7 +53,7 @@
     {
       "madde": "8",
       "tur": "normal",
-      "baslik": "belgesinin tadili ve yenilenmesi",
+      "baslik": "Yetki belgesinin tadili ve yenilenmesi",
       "metin": "(Başlığı ile Birlikte Değişik:RG-29/4/2026-33238) (1) Yetki belgesi, ticaret ünvanı veya işletme adı değişikliği hariç olmak üzere, içeriğindeki bilgilerden herhangi birinde değişiklik olması durumunda tadil edilir. Ticaret ünvanı veya işletme adının değişmesi durumunda yetki belgesi yenilenir. Tadil ve yenileme başvurusu, değişikliğin gerçekleştiği tarihten itibaren otuz gün içinde Bilgi Sistemi üzerinden yapılır ve il müdürlüğünce başvuru tarihinden itibaren on gün içinde sonuçlandırılır."
     },
     {
@@ -119,7 +119,7 @@
     {
       "madde": "19",
       "tur": "normal",
-      "baslik": "belgesi",
+      "baslik": "İkinci el motorlu kara taşıtı satışına aracılık ve taşıt teslim belgesi",
       "metin": "(1) Satışa sunulmak üzere işletmeye teslim edilen ikinci el motorlu kara taşıtı için taşıt teslim belgesi düzenlenir.\n(2) Taşıt teslim belgesi, ikinci el motorlu kara taşıtının adına tescilli olduğu kişi ile işletme arasında birer nüshası taraflarda kalacak şekilde en az iki nüsha düzenlenir ve işletme tarafından en az beş yıl süreyle saklanır.\n(3) Taşıt teslim belgesinde asgari olarak aşağıdaki bilgilere yer verilir:\na) Tarafların adı ve soyadı veya ticaret unvanı ve işletme adı ile kimlik ve iletişim bilgileri.\nb) İkinci el motorlu kara taşıtının tescil belgesi ve kilometre bilgileri ile boyalı ve değişen parça bilgileri.\nc) İkinci el motorlu kara taşıtının adına tescilli olduğu kişi tarafından beyan edilen taşıta ilişkin arıza ve hasar bilgileri ile güvenlik, iç donanım, dış donanım ve multimedya özellikleri gibi diğer bilgiler.\nç) Aracılık hizmeti karşılığında işletmeye ödenecek ücretin tutarı veya satış bedeli üzerinden oranı.\nd) İkinci el motorlu kara taşıtının işletmede kalacağı süre.\ne) Tarafların tebligat adresleri ve imzaları.\nf) Taşıt üzerindeki rehin veya haciz gibi şerh bilgileri.\n(4) İkinci el motorlu kara taşıtında üçüncü fıkranın (d) bendinde belirtilen süre içinde oluşan arıza ve hasardan işletme sorumludur.\n(5) Bakanlık, taşıt teslim belgesinin şekli ve içeriği ile aracılık hizmeti karşılığında işletmeye ödenecek ücretin üst sınırını üst meslek kuruluşlarının görüşünü alarak belirlemeye yetkilidir."
     },
     {
@@ -155,7 +155,7 @@
     {
       "madde": "25",
       "tur": "normal",
-      "baslik": "entegrasyon",
+      "baslik": "Bilgi Sistemi ve entegrasyon",
       "metin": "(1) Motorlu kara taşıtı ticaretinin takip ve kontrolü amacıyla Bakanlık tarafından Bilgi Sistemi oluşturulur.\n(2) Yetki belgesine sahip işletmelerin güncel listesine Bilgi Sistemi üzerinden erişilir.\n(3) Tescilsiz motorlu kara taşıtlarının tedarik zincirinde gerçekleşen üretim, ithalat, sipariş, alış, satış, devir ve teslim gibi hareketleri Bilgi Sistemi üzerinden Bakanlıkça takip edilebilir.\n(4) Bakanlıkça gerekli görülen bilgi ve belgeler, belirlenen usul ve esaslara uygun şekilde motorlu kara taşıtı üretici ve distribütörleri, yetkili satıcılar, işletmeler, ekspertiz işletmeleri ve ilgili diğer kişi, kurum ve kuruluşlar tarafından Bilgi Sistemine aktarılır.\n(5) Bilgi Sistemi ilgili kamu kurum ve kuruluşlarının erişimine açılabilir ve ihtiyaç duyulan diğer bilgi sistemlerine entegre edilebilir."
     },
     {

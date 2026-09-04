@@ -5,7 +5,7 @@
   "mevzuat_tur": "7",
   "mevzuat_tertip": "5",
   "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20442&MevzuatTur=7&MevzuatTertip=5",
-  "son_guncelleme": "2026-09-05T02:40:09+03:00",
+  "son_guncelleme": "2026-09-05T02:48:17+03:00",
   "madde_sayisi": 23,
   "maddeler": [
     {
@@ -65,7 +65,7 @@
     {
       "madde": "9",
       "tur": "normal",
-      "baslik": "yükümlülükleri",
+      "baslik": "Satıcı veya sağlayıcının yükümlülükleri",
       "metin": "(1) (Değişik ibare:RG-29/7/2022-31907) Satıcı veya sağlayıcı, cayma süresi dolmadan tüketiciden herhangi bir isim altında ödeme yapmasını veya tüketiciyi borç altına sokan herhangi bir belge vermesini isteyemez. Bu yasağa rağmen tüketiciden herhangi bir bedel alınması durumunda, alınan bedel tüketiciye derhal iade edilir. Ayrıca tüketiciyi borç altına sokan her türlü belge tüketici yönünden geçersizdir.\n(2) Tüketicinin cayma hakkını kullanması durumunda, cayma hakkının kullanılmasından önce sunulan hizmete ilişkin olarak tüketiciden herhangi bir bedel talep edilemez.\n(3) Tüketicinin devre mülk hakkı veren sözleşmelerden cayma hakkını kullanması durumunda, tüketiciye iade edilmesi gereken tutar ve tüketiciyi borç altına sokan her türlü belge, cayma bildiriminin satıcı veya sağlayıcıya ulaştığı tarihten itibaren en geç on dört gün içinde tüketiciye geri verilir.\n(4) Değişim sözleşmesinin devre tatil sözleşmesi ile birlikte ve aynı zamanda tüketicilere verildiği hallerde, cayma hakkının kullanımına ilişkin süreler her iki sözleşme için de geçerlidir.\n(5) Satıcı veya sağlayıcı, yeniden satış sözleşmesi kapsamında satış işlemi gerçekleşmedikçe tüketiciden ödeme yapmasını isteyemez."
     },
     {
@@ -83,31 +83,31 @@
     {
       "madde": "12",
       "tur": "normal",
-      "baslik": "sözleşmesi",
+      "baslik": "Uzun süreli tatil hizmeti sözleşmesi",
       "metin": "(1) Uzun süreli tatil hizmeti sözleşmeleri, bir yıldan uzun süre için kurulan ve tüketiciye, belirlenen süre zarfında konaklamaya veya konaklama ile birlikte seyahat ya da diğer hizmetlerin beraber sunulduğu durumlara ilişkin indirim yahut diğer menfaatlerden faydalanma hakkı verilen sözleşmelerdir.\n(2) Uzun süreli tatil hizmeti sözleşmelerine ilişkin ödemelerin, üyelik aidatı da dâhil olmak üzere eşit olarak yıllık taksitlere bölündüğü bir ödeme planına göre yapılması zorunludur. Sözleşmede, bedelin taksitli ödeme planının dışında başka bir ödeme seçeneğiyle yapılmasına imkan veren hükümler yer alamaz. Aksi takdirde bu hükümler geçersizdir."
     },
     {
       "madde": "13",
       "tur": "normal",
-      "baslik": "sözleşmenin feshi",
+      "baslik": "Ödeme bildirimi yükümlülüğü ve sözleşmenin feshi",
       "metin": "(1) Satıcı veya sağlayıcının, tüketiciye her ödeme tarihinden en az on dört gün önce yazılı olarak veya kalıcı veri saklayıcısı ile ödeme bildiriminde bulunması zorunludur.\n(2) Tüketici, ilk iki taksiti ödedikten sonra, üçüncü yıldan itibaren her taksite ilişkin ödeme bildirimini almasını takiben on dört gün içinde satıcı veya sağlayıcıya yazılı olarak veya kalıcı veri saklayıcısı ile bildirimde bulunarak herhangi bir cezai şart ödemeksizin sözleşmeyi feshedebilir."
     },
     {
       "madde": "14",
       "tur": "normal",
       "baslik": "Genel esaslar",
-      "metin": ""
+      "metin": "(Mülga:RG-29/7/2022-31907)"
     },
     {
       "madde": "15",
       "tur": "normal",
-      "baslik": "ödemeli satışı",
-      "metin": ""
+      "baslik": "Ayni hakka konu taşınmazın ön ödemeli satışı",
+      "metin": "(Mülga:RG-29/7/2022-31907)"
     },
     {
       "madde": "16",
       "tur": "normal",
-      "baslik": "ödemeli satışı",
+      "baslik": "Şahsi hakka konu taşınmazın ön ödemeli satışı",
       "metin": "(Mülga:RG-29/7/2022-31907)"
     },
     {
@@ -119,13 +119,13 @@
     {
       "madde": "17/A",
       "tur": "normal",
-      "baslik": "kullanılmaması",
+      "baslik": "Devre tatil hakkının kullanılmaması",
       "metin": "(Ek:RG-29/7/2022-31907) (1) Tüketici, şahsi hak sağlayan devre tatil sözleşmesinden kaynaklanan tatil hakkını belirli bir dönem için kullanmayacağını tatilin başlayacağı tarihten en az doksan gün önce sağlayıcıya yazılı olarak veya kalıcı veri saklayıcısı ile bildirirse, o dönem için tüketiciden yıllık gider payı, aidat, katılım bedeli, genel idari masraf ve benzeri herhangi bir isim altında bir bedel talep edilemez."
     },
     {
       "madde": "18",
       "tur": "normal",
-      "baslik": "yönetmelik",
+      "baslik": "Yürürlükten kaldırılan yönetmelik",
       "metin": "(1) 13/6/2003 tarihli ve 25137 sayılı Resmî Gazete’de yayımlanan Devre Tatil Sözleşmeleri Uygulama Usul ve Esasları Hakkında Yönetmelik yürürlükten kaldırılmıştır."
     },
     {

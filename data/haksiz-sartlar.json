@@ -5,7 +5,7 @@
   "mevzuat_tur": "7",
   "mevzuat_tertip": "5",
   "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=19798&MevzuatTur=7&MevzuatTertip=5",
-  "son_guncelleme": "2026-09-05T02:40:48+03:00",
+  "son_guncelleme": "2026-09-05T02:49:00+03:00",
   "madde_sayisi": 11,
   "maddeler": [
     {
@@ -41,13 +41,13 @@
     {
       "madde": "6",
       "tur": "normal",
-      "baslik": "değerlendirilmesi",
+      "baslik": "Haksız şartların değerlendirilmesi",
       "metin": "(1) Bir sözleşme şartının haksızlığı; sözleşme konusu mal veya hizmetin niteliği, sözleşmenin kuruluşunda var olan şartlar ve sözleşmenin diğer hükümleri veya haksız şartın ilgili olduğu diğer bir sözleşmenin hükümleri de dikkate alınmak suretiyle sözleşmenin kuruluş anına göre belirlenir.\n(2) Sözleşme şartlarının haksızlığının takdirinde, bu şartların açık ve anlaşılır bir dille yazılmış olması kaydıyla, hem sözleşmeden doğan asli edim yükümlülükleri arasındaki hem de mal veya hizmetin piyasa değeri ile sözleşmede belirlenen fiyatı arasındaki dengeye ilişkin bir değerlendirme yapılamaz.\n(3) Sözleşme şartlarının yazılı olması halinde, tüketicinin anlayabileceği açık ve anlaşılır bir dilin kullanılmış olması gerekir. Sözleşmede yer alan bir hükmün açık ve anlaşılır olmaması veya birden çok anlama gelmesi hâlinde; bu hüküm, tüketicinin lehine yorumlanır."
     },
     {
       "madde": "7",
       "tur": "normal",
-      "baslik": "şartların sözleşmeye etkisi",
+      "baslik": "Haksız şartların sözleşmeye etkisi",
       "metin": "(1) Tüketiciyle kurulan sözleşmelerde yer alan haksız şartlar kesin olarak hükümsüzdür. Ancak sözleşmenin haksız şartlar dışındaki hükümleri geçerliliğini korur. Bu durumda sözleşmeyi düzenleyen, kesin olarak hükümsüz sayılan şartlar olmasaydı diğer hükümlerle sözleşmeyi yapmayacak olduğunu ileri süremez."
     },
     {
@@ -59,7 +59,7 @@
     {
       "madde": "9",
       "tur": "normal",
-      "baslik": "kaldırılan yönetmelik",
+      "baslik": "Yürürlükten kaldırılan yönetmelik",
       "metin": "(1) 13/6/2003 tarihli ve 25137 sayılı Resmî Gazete’de yayımlanan Tüketici Sözleşmelerindeki Haksız Şartlar Hakkında Yönetmelik yürürlükten kaldırılmıştır."
     },
     {

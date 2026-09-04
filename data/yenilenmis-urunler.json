@@ -5,7 +5,7 @@
   "mevzuat_tur": "7",
   "mevzuat_tertip": "5",
   "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=46233&MevzuatTur=7&MevzuatTertip=5",
-  "son_guncelleme": "2026-09-05T02:40:51+03:00",
+  "son_guncelleme": "2026-09-05T02:49:02+03:00",
   "madde_sayisi": 20,
   "maddeler": [
     {
@@ -47,7 +47,7 @@
     {
       "madde": "7",
       "tur": "normal",
-      "baslik": "işlemler",
+      "baslik": "Yenileme yetki belgesinin geçerlilik süresi ve diğer işlemler",
       "metin": "(1) Yenileme yetki belgesinin geçerlilik süresi beş yıldır. Geçerlilik süresi dolmadan başvuruda bulunulmuş olması şartıyla, bu süre başvuru sonuçlanıncaya kadar uzatılmış kabul edilir.\n(2) Yenileme merkezinin ünvan, adres ve diğer iletişim bilgilerindeki değişiklikler ile temsile yetkili kişilerde değişiklik olması durumunda; yeni temsilcilerin 6 ncı maddenin birinci fıkrasının (c) bendinde yer alan şartları taşıdığını gösterir bilgi ve belgeleri otuz gün içinde Bakanlığa bildirmesi zorunludur."
     },
     {

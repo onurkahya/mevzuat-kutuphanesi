@@ -5,7 +5,7 @@
   "mevzuat_tur": "7",
   "mevzuat_tertip": "5",
   "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20495&MevzuatTur=7&MevzuatTertip=5",
-  "son_guncelleme": "2026-09-05T02:40:14+03:00",
+  "son_guncelleme": "2026-09-05T02:48:23+03:00",
   "madde_sayisi": 17,
   "maddeler": [
     {
@@ -77,7 +77,7 @@
     {
       "madde": "12",
       "tur": "normal",
-      "baslik": "etkisi",
+      "baslik": "Cayma hakkının kullanımının yan sözleşmelere etkisi",
       "metin": "(1) Tüketicinin cayma hakkını kullanması halinde, varsa yan sözleşme de, herhangi bir tazminat veya cezai şart ödeme yükümlülüğü söz konusu olmaksızın sona erer.\n(2) Sağlayıcı, tüketicinin cayma hakkını kullandığını yan sözleşmenin tarafı olan üçüncü kişiye yazılı olarak veya kalıcı veri saklayıcısı ile derhal bildirir."
     },
     {

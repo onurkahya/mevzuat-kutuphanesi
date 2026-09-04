@@ -5,7 +5,7 @@
   "mevzuat_tur": "7",
   "mevzuat_tertip": "5",
   "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=19782&MevzuatTur=7&MevzuatTertip=5",
-  "son_guncelleme": "2026-09-05T02:40:20+03:00",
+  "son_guncelleme": "2026-09-05T02:48:30+03:00",
   "madde_sayisi": 14,
   "maddeler": [
     {
@@ -35,49 +35,49 @@
     {
       "madde": "5",
       "tur": "normal",
-      "baslik": "belgesi düzenleme zorunluluğu",
+      "baslik": "Garanti belgesi düzenleme zorunluluğu",
       "metin": "(1) (Değişik:RG-5/11/2020-31295) [[SUP]](1)[[/SUP]] Üretici ve ithalatçılar, tüketicilere yönelik ürettikleri veya ithal ettikleri, bu Yönetmeliğe ekli listede yer alan kullanılmamış mallar için bu Yönetmelik hükümlerine uygun olarak anlaşılabilir bir dilde, açık, sade ve okunabilir bir şekilde garanti belgesi düzenlemek zorundadırlar.\n(2) (Değişik:RG-5/11/2020-31295) [[SUP]](1)[[/SUP]] Garanti belgesinin tekemmül ettirilerek tüketiciye verilmesi sorumluluğu ve bu sorumluluğun yerine getirildiğinin ispatı satıcıya aittir. Garanti belgesi kâğıt üzerinde yazılı olarak veya kalıcı veri saklayıcısı aracılığıyla verilebilir. Tüketicinin talep etmesi halinde kâğıt üzerinde yazılı olarak verilmesi zorunludur.\n(3) Satılan mala ilişkin olarak düzenlenen faturalar garanti belgesi yerine geçmez."
     },
     {
       "madde": "6",
       "tur": "normal",
-      "baslik": "süresi",
+      "baslik": "Garanti süresi",
       "metin": "(1) Garanti süresi; malın tüketiciye teslim tarihinden itibaren başlar ve asgari iki yıl veya bu Yönetmeliğe ekli listedeki ölçü birimi ile tespit edilen değer kadardır.\n(2) Garanti süresinin başka bir ölçü birimi ile belirlenmiş olması halinde, malın üzerinde bu ölçü biriminin tespitine yönelik bir düzeneğin bulunması veya yapısının bu değerin tespitine uygun olması gerekir. Aksi halde garanti süresinin asgari iki yıl olduğu kabul edilir.\n(3) Malın arızalanması durumunda, tamirde geçen süre garanti süresine eklenir."
     },
     {
       "madde": "7",
       "tur": "normal",
-      "baslik": "belgesinde bulunması zorunlu bilgiler",
+      "baslik": "Garanti belgesinde bulunması zorunlu bilgiler",
       "metin": "(1) Tüketicilere verilecek garanti belgesinde aşağıdaki bilgilerin yer alması zorunludur:\na) Üretici veya ithalatçı firmanın unvanı, adresi, telefonu ve diğer iletişim bilgileri ile yetkilisinin imzası ve kaşesi,\nb) Satıcının unvanı, adresi, telefonu ve diğer iletişim bilgileri ile yetkilisinin imzası ve kaşesi,\nc) Fatura tarih ve sayısı,\nç) Malın cinsi, markası, modeli ile varsa bandrol ve seri numarası,\nd) Malın tüketiciye teslim tarihi ve yeri,\ne) Garanti süresi,\nf) Azami tamir süresi,\ng) Bütün parçaları dahil olmak üzere malın tamamının garanti süresince garanti kapsamında olduğuna ilişkin bilgi,\nğ) Kanunun 11 inci maddesinde tüketiciye sağlanan seçimlik haklara ilişkin bilgi,\nh) Kullanım hatalarına ilişkin bilgi,\nı) Tüketicilerin şikayet ve itirazları konusundaki başvurularını tüketici mahkemelerine ve tüketici hakem heyetlerine yapabileceklerine ilişkin bilgi,\ni) Varsa tüketiciye sağlanan diğer haklar.\n(2) (Ek:RG-5/11/2020-31295) [[SUP]](1)[[/SUP]] Mesafeli olarak kurulan sözleşmelerde birinci fıkranın (b), (c) ve (d) bentlerinde yer alan şartlar aranmaz. Bu durumda faturada yer alan bilgiler esas alınır.\n(3) (Ek:RG-5/11/2020-31295) [[SUP]](1)[[/SUP]] Garanti belgesinin kalıcı veri saklayıcısıyla verilmesi durumunda birinci fıkranın (b) bendinde yer alan imza ve kaşe şartı aranmaz."
     },
     {
       "madde": "8",
       "tur": "normal",
-      "baslik": "onarım isteme hakkı",
+      "baslik": "Ücretsiz onarım isteme hakkı",
       "metin": "(1) Tüketicinin, Kanunun 11 inci maddesinde yer alan seçimlik haklarından ücretsiz onarım hakkını seçmesi durumunda satıcı; işçilik masrafı, değiştirilen parça bedeli ya da başka herhangi bir ad altında hiçbir ücret talep etmeksizin malın onarımını yapmak veya yaptırmakla yükümlüdür.\n(2) Tüketici, ücretsiz onarım hakkını üretici veya ithalatçıya karşı da kullanabilir. Satıcı, üretici ve ithalatçı, tüketicinin bu hakkını kullanmasından müteselsilen sorumludur."
     },
     {
       "madde": "9",
       "tur": "normal",
-      "baslik": "diğer hakları",
+      "baslik": "Tüketicinin diğer hakları",
       "metin": "(1) Tüketicinin, ücretsiz onarım hakkını kullanması halinde malın;\na) Garanti süresi içinde tekrar arızalanması,\nb) Tamiri için gereken azami sürenin aşılması,\nc) Tamirinin mümkün olmadığının, yetkili servis istasyonu, satıcı, üretici veya ithalatçı tarafından bir raporla belirlenmesi, durumlarında; tüketici malın bedel iadesini, ayıp oranında bedel indirimini veya imkan varsa malın ayıpsız misli ile değiştirilmesini satıcıdan talep edebilir. Satıcı, tüketicinin talebini reddedemez. Bu talebin yerine getirilmemesi durumunda satıcı, üretici ve ithalatçı müteselsilen sorumludur.\n(2) Malın ayıpsız misli ile değiştirilmesinin satıcı için orantısız güçlükleri beraberinde getirecek olması halinde tüketici, sözleşmeden dönme veya ayıp oranında bedelden indirim haklarından birini kullanabilir. Orantısızlığın tayininde malın ayıpsız değeri, ayıbın önemi ve diğer seçimlik haklara başvurmanın tüketici açısından sorun teşkil edip etmeyeceği gibi hususlar dikkate alınır.\n(3) Tüketicinin sözleşmeden dönme veya ayıp oranında bedelden indirim hakkını seçtiği durumlarda, satıcı, malın bedelinin tümünü veya bedelden yapılan indirim tutarını derhal tüketiciye iade etmek zorundadır.\n(4) Tüketicinin, malın ayıpsız misli ile değiştirilmesi hakkını seçmesi durumunda satıcı, üretici veya ithalatçının, malın ayıpsız misli ile değiştirilmesi talebinin kendilerine bildirilmesinden itibaren azami otuz iş günü içerisinde, bu talebi yerine getirmesi zorunludur.\n(5) Birinci fıkranın (c) bendinde belirtilen raporun, arızanın bildirim tarihinden itibaren o mala ilişkin azami tamir süresi içerisinde düzenlenmesi zorunludur."
     },
     {
       "madde": "10",
       "tur": "normal",
-      "baslik": "malın garanti süresi",
+      "baslik": "Değiştirilen malın garanti süresi",
       "metin": "(1) Garanti uygulaması sırasında değiştirilen malın garanti süresi, satın alınan malın kalan garanti süresi ile sınırlıdır."
     },
     {
       "madde": "11",
       "tur": "normal",
-      "baslik": "hatası",
+      "baslik": "Kullanım hatası",
       "metin": "(1) Tüketicinin malı tanıtma ve kullanma kılavuzunda yer alan hususlara aykırı olarak kullanmasından kaynaklanan arızalar hakkında 8 inci ve 9 uncu madde hükümleri uygulanmaz.\n(2) Arızalarda kullanım hatasının bulunup bulunmadığının, yetkili servis istasyonları, yetkili servis istasyonunun mevcut olmaması halinde sırasıyla; malın satıcısı, ithalatçısı veya üreticisinden birisi tarafından mala ilişkin azami tamir süresi içerisinde düzenlenen raporla belirlenmesi ve bu raporun bir nüshasının tüketiciye verilmesi zorunludur.\n(3) Tüketiciler, ikinci fıkrada belirtilen rapora ilişkin olarak bilirkişi tarafından tespit yapılması talebiyle uyuşmazlığın parasal değerini dikkate alarak tüketici hakem heyetine veya tüketici mahkemesine başvurabilir."
     },
     {
       "madde": "12",
       "tur": "normal",
-      "baslik": "kaldırılan yönetmelik",
+      "baslik": "Yürürlükten kaldırılan yönetmelik",
       "metin": "(1) 14/6/2003 tarihli ve 25138 sayılı Resmî Gazete’de yayımlanan Garanti Belgesi Uygulama Esaslarına Dair Yönetmelik yürürlükten kaldırılmıştır."
     },
     {
