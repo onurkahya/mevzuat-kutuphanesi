@@ -1,5 +1,5 @@
 {
-  "son_guncelleme": "2026-09-05T01:56:26+03:00",
+  "son_guncelleme": "2026-09-05T02:03:42+03:00",
   "mevzuatlar": [
     {
       "id": "mesafeli-sozlesmeler",
@@ -7,7 +7,7 @@
       "dosya": "data/mesafeli-sozlesmeler.json",
       "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20237&MevzuatTur=7&MevzuatTertip=5",
       "madde_sayisi": 22,
-      "son_guncelleme": "2026-09-05T01:56:21+03:00"
+      "son_guncelleme": "2026-09-05T02:03:37+03:00"
     },
     {
       "id": "fiyat-etiketi",
@@ -15,7 +15,7 @@
       "dosya": "data/fiyat-etiketi.json",
       "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=19819&MevzuatTur=7&MevzuatTertip=5",
       "madde_sayisi": 16,
-      "son_guncelleme": "2026-09-05T01:56:24+03:00"
+      "son_guncelleme": "2026-09-05T02:03:40+03:00"
     }
   ],
   "hatalar": []
