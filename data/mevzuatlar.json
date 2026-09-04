@@ -1,13 +1,57 @@
 {
-  "son_guncelleme": "2026-09-05T02:07:13+03:00",
+  "son_guncelleme": "2026-09-05T02:41:11+03:00",
+  "mevzuat_sayisi": 28,
+  "basarili_veya_korumali": 28,
   "mevzuatlar": [
     {
-      "id": "mesafeli-sozlesmeler",
-      "ad": "MESAFELİ SÖZLEŞMELER YÖNETMELİĞİ",
-      "dosya": "data/mesafeli-sozlesmeler.json",
-      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20237&MevzuatTur=7&MevzuatTertip=5",
-      "madde_sayisi": 25,
-      "son_guncelleme": "2026-09-05T02:07:07+03:00"
+      "id": "6502-tuketici-kanunu",
+      "ad": "6502 SAYILI TÜKETİCİNİN KORUNMASI HAKKINDA KANUN",
+      "dosya": "data/6502-tuketici-kanunu.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=6502&MevzuatTur=1&MevzuatTertip=5",
+      "madde_sayisi": 96,
+      "son_guncelleme": "2026-09-05T02:40:02+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "abonelik-sozlesmeleri",
+      "ad": "ABONELİK SÖZLEŞMELERİ YÖNETMELİĞİ",
+      "dosya": "data/abonelik-sozlesmeleri.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20480&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 28,
+      "son_guncelleme": "2026-09-05T02:40:06+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "devre-tatil",
+      "ad": "DEVRE TATİL VE UZUN SÜRELİ TATİL HİZMETİ SÖZLEŞMELERİ YÖNETMELİĞİ",
+      "dosya": "data/devre-tatil.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20442&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 23,
+      "son_guncelleme": "2026-09-05T02:40:09+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "dogrudan-satislar",
+      "ad": "DOĞRUDAN SATIŞLAR HAKKINDA YÖNETMELİK",
+      "dosya": "data/dogrudan-satislar.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=42526&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 23,
+      "son_guncelleme": "2026-09-05T02:40:12+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "finansal-hizmetler-mesafeli",
+      "ad": "FİNANSAL HİZMETLERE İLİŞKİN MESAFELİ SÖZLEŞMELER YÖNETMELİĞİ",
+      "dosya": "data/finansal-hizmetler-mesafeli.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20495&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 17,
+      "son_guncelleme": "2026-09-05T02:40:14+03:00",
+      "durum": "guncel",
+      "hata": null
     },
     {
       "id": "fiyat-etiketi",
@@ -15,7 +59,229 @@
       "dosya": "data/fiyat-etiketi.json",
       "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=19819&MevzuatTur=7&MevzuatTertip=5",
       "madde_sayisi": 16,
-      "son_guncelleme": "2026-09-05T02:07:11+03:00"
+      "son_guncelleme": "2026-09-05T02:40:17+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "garanti-belgesi",
+      "ad": "GARANTİ BELGESİ YÖNETMELİĞİ",
+      "dosya": "data/garanti-belgesi.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=19782&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 14,
+      "son_guncelleme": "2026-09-05T02:40:20+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "isyeri-disinda-kurulan",
+      "ad": "İŞ YERİ DIŞINDA KURULAN SÖZLEŞMELER YÖNETMELİĞİ",
+      "dosya": "data/isyeri-disinda-kurulan.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20444&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 30,
+      "son_guncelleme": "2026-09-05T02:40:22+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "konut-finansmani",
+      "ad": "KONUT FİNANSMANI SÖZLEŞMELERİ YÖNETMELİĞİ",
+      "dosya": "data/konut-finansmani.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20793&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 21,
+      "son_guncelleme": "2026-09-05T02:40:24+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "mesafeli-sozlesmeler",
+      "ad": "MESAFELİ SÖZLEŞMELER YÖNETMELİĞİ",
+      "dosya": "data/mesafeli-sozlesmeler.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20237&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 25,
+      "son_guncelleme": "2026-09-05T02:40:26+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "on-odemeli-konut",
+      "ad": "ÖN ÖDEMELİ KONUT SATIŞLARI HAKKINDA YÖNETMELİK",
+      "dosya": "data/on-odemeli-konut.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20238&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 19,
+      "son_guncelleme": "2026-09-05T02:40:29+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "paket-tur",
+      "ad": "PAKET TUR SÖZLEŞMELERİ YÖNETMELİĞİ",
+      "dosya": "data/paket-tur.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20446&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 22,
+      "son_guncelleme": "2026-09-05T02:40:31+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "satis-sonrasi-hizmetler",
+      "ad": "SATIŞ SONRASI HİZMETLER YÖNETMELİĞİ",
+      "dosya": "data/satis-sonrasi-hizmetler.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=19783&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 20,
+      "son_guncelleme": "2026-09-05T02:40:33+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "sureli-yayin-promosyon",
+      "ad": "SÜRELİ YAYIN KURULUŞLARINCA DÜZENLENEN PROMOSYON UYGULAMALARINA İLİŞKİN YÖNETMELİK",
+      "dosya": "data/sureli-yayin-promosyon.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=19800&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 11,
+      "son_guncelleme": "2026-09-05T02:40:36+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "taksitle-satis",
+      "ad": "TAKSİTLE SATIŞ SÖZLEŞMELERİ HAKKINDA YÖNETMELİK",
+      "dosya": "data/taksitle-satis.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20447&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 13,
+      "son_guncelleme": "2026-09-05T02:40:39+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "tanitma-kullanma-kilavuzu",
+      "ad": "TANITMA VE KULLANMA KILAVUZU YÖNETMELİĞİ",
+      "dosya": "data/tanitma-kullanma-kilavuzu.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=19784&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 11,
+      "son_guncelleme": "2026-09-05T02:40:42+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "ticari-reklam",
+      "ad": "TİCARİ REKLAM VE HAKSIZ TİCARİ UYGULAMALAR YÖNETMELİĞİ",
+      "dosya": "data/ticari-reklam.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20435&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 41,
+      "son_guncelleme": "2026-09-05T02:40:44+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "tuketici-kredisi",
+      "ad": "TÜKETİCİ KREDİSİ SÖZLEŞMELERİ YÖNETMELİĞİ",
+      "dosya": "data/tuketici-kredisi.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20767&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 32,
+      "son_guncelleme": "2026-09-05T02:40:46+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "haksiz-sartlar",
+      "ad": "TÜKETİCİ SÖZLEŞMELERİNDEKİ HAKSIZ ŞARTLAR HAKKINDA YÖNETMELİK",
+      "dosya": "data/haksiz-sartlar.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=19798&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 11,
+      "son_guncelleme": "2026-09-05T02:40:48+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "yenilenmis-urunler",
+      "ad": "YENİLENMİŞ ÜRÜNLER HAKKINDA YÖNETMELİK",
+      "dosya": "data/yenilenmis-urunler.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=46233&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 20,
+      "son_guncelleme": "2026-09-05T02:40:51+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "6585-perakende-kanunu",
+      "ad": "6585 SAYILI PERAKENDE TİCARETİN DÜZENLENMESİ HAKKINDA KANUN",
+      "dosya": "data/6585-perakende-kanunu.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=6585&MevzuatTur=1&MevzuatTertip=5",
+      "madde_sayisi": 32,
+      "son_guncelleme": "2026-09-05T02:40:53+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "haksiz-fiyat",
+      "ad": "HAKSIZ FİYAT DEĞERLENDİRME KURULU YÖNETMELİĞİ",
+      "dosya": "data/haksiz-fiyat.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=34561&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 18,
+      "son_guncelleme": "2026-09-05T02:40:55+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "tasinmaz-ticareti",
+      "ad": "TAŞINMAZ TİCARETİ HAKKINDA YÖNETMELİK",
+      "dosya": "data/tasinmaz-ticareti.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=24645&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 25,
+      "son_guncelleme": "2026-09-05T02:40:57+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "motorlu-kara-ticareti",
+      "ad": "MOTORLU KARA TAŞITLARININ TİCARETİ HAKKINDA YÖNETMELİK",
+      "dosya": "data/motorlu-kara-ticareti.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=40940&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 38,
+      "son_guncelleme": "2026-09-05T02:41:00+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "kuyum-ticareti",
+      "ad": "KUYUM TİCARETİ HAKKINDA YÖNETMELİK",
+      "dosya": "data/kuyum-ticareti.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=38527&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 16,
+      "son_guncelleme": "2026-09-05T02:41:02+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "alisveris-merkezleri",
+      "ad": "ALIŞVERİŞ MERKEZLERİ HAKKINDA YÖNETMELİK",
+      "dosya": "data/alisveris-merkezleri.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=21431&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 24,
+      "son_guncelleme": "2026-09-05T02:41:04+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "perakende-ilke-kurallar",
+      "ad": "PERAKENDE TİCARETTE UYGULANACAK İLKE VE KURALLAR HAKKINDA YÖNETMELİK",
+      "dosya": "data/perakende-ilke-kurallar.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=22722&MevzuatTur=7&MevzuatTertip=5",
+      "madde_sayisi": 24,
+      "son_guncelleme": "2026-09-05T02:41:06+03:00",
+      "durum": "guncel",
+      "hata": null
+    },
+    {
+      "id": "6563-elektronik-ticaret",
+      "ad": "6563 SAYILI ELEKTRONİK TİCARETİN DÜZENLENMESİ HAKKINDA KANUN",
+      "dosya": "data/6563-elektronik-ticaret.json",
+      "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=6563&MevzuatTur=1&MevzuatTertip=5",
+      "madde_sayisi": 28,
+      "son_guncelleme": "2026-09-05T02:41:09+03:00",
+      "durum": "guncel",
+      "hata": null
     }
   ],
   "hatalar": []

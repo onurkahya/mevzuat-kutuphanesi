@@ -1,0 +1,150 @@
+{
+  "id": "dogrudan-satislar",
+  "ad": "DOĞRUDAN SATIŞLAR HAKKINDA YÖNETMELİK",
+  "mevzuat_no": "42526",
+  "mevzuat_tur": "7",
+  "mevzuat_tertip": "5",
+  "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=42526&MevzuatTur=7&MevzuatTertip=5",
+  "son_guncelleme": "2026-09-05T02:40:12+03:00",
+  "madde_sayisi": 23,
+  "maddeler": [
+    {
+      "madde": "1",
+      "tur": "normal",
+      "baslik": "Amaç",
+      "metin": "(1) Bu Yönetmeliğin amacı, doğrudan satış sistemlerine ilişkin uygulama usul ve esaslarını düzenlemektir."
+    },
+    {
+      "madde": "2",
+      "tur": "normal",
+      "baslik": "Kapsam",
+      "metin": "(1) Bu Yönetmelik hükümleri; doğrudan satış sistemlerine, doğrudan satış şirketlerine ve doğrudan satışlara uygulanır.\n(2) Doğrudan satıcının, kendisinin oluşturduğu bir sistem veya aracı hizmet sağlayıcılarına ait platformlar vasıtasıyla mesafeli olarak gerçekleştirdiği doğrudan satışlara, yalnızca 8 inci maddenin ikinci fıkrası hükmü uygulanır.\n(3) Bu Yönetmelik hükümleri; doğrudan satıcının kazanç planı dahilinde herhangi bir menfaat elde etmediği, doğrudan satış şirketi veya doğrudan satıcı olmayan üçüncü kişiler tarafından tüketiciye yapılan mal veya hizmet satışlarına uygulanmaz."
+    },
+    {
+      "madde": "3",
+      "tur": "normal",
+      "baslik": "Dayanak",
+      "metin": "(1) Bu Yönetmelik, 7/11/2013 tarihli ve 6502 sayılı Tüketicinin Korunması Hakkında Kanunun 47/A ve 84 üncü maddelerine dayanılarak hazırlanmıştır."
+    },
+    {
+      "madde": "4",
+      "tur": "normal",
+      "baslik": "Tanımlar",
+      "metin": "(1) Bu Yönetmeliğin uygulanmasında;\na) Aracı hizmet sağlayıcı: Oluşturduğu sistem ile uzaktan iletişim araçlarını kullanmak veya kullandırmak suretiyle satıcı veya sağlayıcı adına mesafeli sözleşme kurulmasına aracılık eden gerçek veya tüzel kişiyi,\nb) Bakanlık: Ticaret Bakanlığını,\nc) Doğrudan satıcı: Doğrudan satış sisteminde, tüketiciye mal veya hizmetleri tanıtarak satışını yapan ya da doğrudan satış şirketinden mal veya hizmet alınmasına aracı olan ve bu faaliyetleri karşılığında doğrudan satış şirketi tarafından sunulan kazanç planı çerçevesinde komisyon, prim, teşvik ve ödül gibi menfaatler elde eden gerçek veya tüzel kişiyi,\nç) Doğrudan satıcı numarası: Doğrudan satıcının adı veya ünvanının ayırt edilmesini sağlamak için doğrudan satış şirketi tarafından her bir doğrudan satıcıya ayrı ayrı tahsis edilmesi zorunlu olan numarayı,\nd) Doğrudan satış: Tüketicinin, doğrudan satıcıdan ya da aracılık ettiği doğrudan satış şirketinden mal veya hizmet satın alması neticesinde doğrudan satıcının menfaat elde ettiği satışı,\ne) Doğrudan satış sistemi: Doğrudan satış şirketi tarafından oluşturulan ve iş sözleşmesi ile istihdam edilmeyen, bağımsız temsilci, distribütör, danışman ve benzeri isimlerle komisyon, prim, teşvik ve ödül gibi menfaatler karşılığında faaliyet gösteren doğrudan satıcının, tüketiciye mal veya hizmet sattığı ya da pazarladığı satış sistemini,\nf) Doğrudan satış şirketi: Doğrudan satış sistemi kapsamında tüketiciye mal veya hizmet satışını gerçekleştiren satıcı veya sağlayıcıyı,\ng) Doğrudan satış yetki belgesi: Doğrudan satış şirketinin faaliyette bulunması için Genel Müdürlük tarafından verilen belgeyi,\nğ) Genel Müdürlük: Tüketicinin Korunması ve Piyasa Gözetimi Genel Müdürlüğünü,\nh) Giriş paketi: Doğrudan satış şirketinin belirlediği miktar veya tutarda mal veya hizmet içeren ve doğrudan satıcının sisteme katılmak için satın aldığı paketi,\nı) Hizmet: Bir ücret veya menfaat karşılığında yapılan ya da yapılması taahhüt edilen mal sağlama dışındaki her türlü tüketici işleminin konusunu,\ni) Kalıcı veri saklayıcısı: Tüketicinin gönderdiği veya kendisine gönderilen bilgiyi, bu bilginin amacına uygun olarak makul bir süre incelemesine elverecek şekilde kaydedilmesini ve değiştirilmeden kopyalanmasını sağlayan ve bu bilgiye aynen ulaşılmasına imkan veren kısa mesaj, elektronik posta, internet, disk, CD, DVD, hafıza kartı ve benzeri her türlü araç veya ortamı,\nj) Kanun: 7/11/2013 tarihli ve 6502 sayılı Tüketicinin Korunması Hakkında Kanunu,\nk) Kazanç planı: Doğrudan satış sisteminde, doğrudan satıcıların menfaat elde etmesine ilişkin doğrudan satış şirketi tarafından belirlenen kuralları,\nl) Mal: Alışverişe konu olan; taşınır eşya, konut veya tatil amaçlı taşınmaz mallar ile elektronik ortamda kullanılmak üzere hazırlanan yazılım, ses, görüntü ve benzeri her türlü gayri maddi malları,\nm) Menfaat: Doğrudan satış sisteminde doğrudan satıcıya vaat edilen komisyon, prim, teşvik ve ödül gibi kazançları,\nn) Perakende satış kârı: Doğrudan satıcının, doğrudan satış şirketinden satın aldığı mal veya hizmetin fiyatı ile tavsiye edilen satış fiyatı arasındaki farkı,\no) Platform: Kamu hizmetlerinin tek noktadan sunulduğu ortak kamu elektronik platformu hariç olmak üzere, aracı hizmet sağlayıcının mesafeli sözleşme kurulmasına aracılık etmek üzere oluşturduğu sistemi,\nö) Sağlayıcı: Kamu tüzel kişileri de dahil olmak üzere ticari veya mesleki amaçlarla tüketiciye hizmet sunan ya da hizmet sunanın adına ya da hesabına hareket eden gerçek veya tüzel kişiyi,\np) Satıcı: Kamu tüzel kişileri de dahil olmak üzere ticari veya mesleki amaçlarla tüketiciye mal sunan ya da mal sunanın adına ya da hesabına hareket eden gerçek veya tüzel kişiyi,\nr) Tavsiye edilen satış fiyatı: Doğrudan satış şirketinin kazanç planı kapsamında perakende satış kârının belirlenmesi için esas aldığı mal veya hizmetin indirimsiz fiyatını,\ns) Tüketici: Ticari veya mesleki olmayan amaçlarla hareket eden gerçek veya tüzel kişiyi,\nş) Uzaktan iletişim aracı: Mektup, katalog, telefon, faks, radyo, televizyon, elektronik posta mesajı, kısa mesaj, internet gibi fiziksel olarak karşı karşıya gelinmeksizin sözleşme kurulmasına imkan veren her türlü araç veya ortamı, ifade eder."
+    },
+    {
+      "madde": "5",
+      "tur": "normal",
+      "baslik": "Genel ilke ve esaslar",
+      "metin": "(1) Doğrudan satış sistemiyle sunulan mal veya hizmetin tüketicilere satılabilir ve pazarlanabilir nitelikte olması zorunludur.\n(2) İlgili mevzuatı uyarınca piyasaya arzı yasak olanlar ile doğrudan satış yöntemiyle piyasaya arzı yasak olan mal veya hizmetler, 6/12/2012 tarihli ve 6362 sayılı Sermaye Piyasası Kanununda tanımlanan sermaye piyasası araçları ile kripto varlıkların doğrudan satış sistemiyle satışı yasaktır.\n(3) Doğrudan satış sisteminde hızlı zengin olma fırsatları, gerçekleşmesi mümkün olmayan vaatler gibi sistemle ilgili yanıltıcı bilgiler verilemez. Kişiler baskı kurma, aldatma, rahatsızlık verme ve buna benzer yollarla sisteme dahil olmaya zorlanamaz.\n(4) Doğrudan satış sisteminin, sistemden elde edilecek kazancın ağırlıklı olarak sisteme yeni doğrudan satıcılar kazandırılması ve bu sayede ortaya çıkan menfaatlerin dağıtılması üzerine kurulmaması, mal veya hizmetin tüketicilere satışını esas alması zorunludur.\n(5) Perakende satış kârı hariç olmak üzere, doğrudan satış şirketi tarafından doğrudan satıcılara sağlanan komisyon, prim ve benzeri menfaatlerin toplamı, şirketin doğrudan satışa konu mal veya hizmetin yıllık net satışlarının yüzde ellisini geçemez.\n(6) Perakende satış kârı hariç olmak üzere, doğrudan satış şirketi tarafından, sisteme yeni doğrudan satıcıların katılımından kaynaklı olarak ödenen komisyon, prim, teşvik ve ödül gibi menfaatlerin toplamı, ilgili takvim yılında dağıtılan tüm menfaatlerin yüzde otuzunu aşamaz."
+    },
+    {
+      "madde": "6",
+      "tur": "normal",
+      "baslik": "Doğrudan satış şirketine ilişkin esaslar",
+      "metin": "(1) Doğrudan satış şirketinin sermaye şirketi olması ve ödenmiş sermayesinin en az on milyon Türk Lirası olması zorunludur.\n(2) Doğrudan satış şirketi tarafından, Türkiye’de yerleşik bankalarda açılmış olan bloke vadeli mevduat, vadesiz mevduat, özel cari hesap, katılma fonu hesabı, döviz tevdiat hesabı veya kıymetli maden hesabına, üç milyon Türk Lirası tutarında meblağın yatırılması zorunludur. Döviz tevdiat hesabına yatırılan tutarın belirlenmesinde işlemin yapıldığı tarihteki Türkiye Cumhuriyet Merkez Bankasının efektif satış kuru esas alınır. Döviz tevdiat veya kıymetli maden hesabına yatırılan meblağ bu fıkrada belirlenen tutarın altına düşemez.\n(3) Doğrudan satış şirketinin faaliyette bulunabilmesi için Genel Müdürlükten doğrudan satış yetki belgesi alması zorunludur."
+    },
+    {
+      "madde": "7",
+      "tur": "normal",
+      "baslik": "ayrılmasına ilişkin şartlar",
+      "metin": "(1) Doğrudan satış şirketi on sekiz yaşından küçükleri, fiil ehliyetine sahip olmayanları, şirketin ortakları ve yöneticileri ile bunların eşi ve birinci dereceye kadar kan ve kayın hısımlarını doğrudan satıcı olarak sisteme dahil edemez. Doğrudan satış şirketi, kazanç planına dahil edilmemek kaydıyla çalışanlarına indirimli mal veya hizmet satın alma hakkı sunabilir.\n(2) Doğrudan satıcıdan, sisteme dahil olması ya da sistemde kalması için tüketiciye satışı öngörülen mal veya hizmeti içermeyen yenileme, paket, ücret, aidat ve benzeri isimler altında herhangi bir bedel veya borç altına sokan belge alınamaz.\n(3) Satın alınması zorunlu olan giriş paketi, yeni katılan doğrudan satıcının sistem içindeki seviyesini belirleyemez.\n(4) Giriş paketinde yer alan mal veya hizmetlerin fiyatı tavsiye edilen satış fiyatını aşamaz.\n(5) Doğrudan satıcı, herhangi bir yükümlülük altına girmeden sistemden ayrılma hakkına sahiptir. Doğrudan satıcının sisteme dahil olduğu tarihten itibaren otuz gün içinde sistemden ayrılması halinde, doğrudan satış şirketi, doğrudan satıcının elinde bulunan kullanılmamış tüm malları geri almak, iadeye konu mal veya hizmetler için ödenen menfaatler çıkarıldıktan sonra mal veya hizmetin bedelini otuz gün içinde iade etmek zorundadır."
+    },
+    {
+      "madde": "8",
+      "tur": "normal",
+      "baslik": "Doğrudan satıcının sorumlulukları",
+      "metin": "(1) Doğrudan satıcı; bu Yönetmelik kapsamında tüketiciye tanınan hakların kullandırılmasından ve tüketiciye karşı diğer yükümlülüklerinin yerine getirilmesinden doğrudan satış şirketine karşı sorumludur.\n(2) Doğrudan satıcı, doğrudan satış şirketine ait mal veya hizmetlerin satılması ya da satışına aracılık edilmesi durumunda doğrudan satıcı numarasının belirtilmesinden doğrudan satış şirketine karşı sorumludur.\n(3) Doğrudan satış şirketinin yetkilendirdiği doğrudan satıcılar, mal veya hizmetleri şirketin belirlediği esaslar dahilinde satmaya yetkilidir.\n(4) Doğrudan satış şirketleri, doğrudan satıcının bu Yönetmelik kapsamında tüketiciye tanınan hakları kullandırmasından ve tüketiciye karşı diğer yükümlülükleri yerine getirmesinden müteselsilen sorumludur."
+    },
+    {
+      "madde": "9",
+      "tur": "normal",
+      "baslik": "Başvuru",
+      "metin": "(1) Doğrudan satış yetki belgesi için yapılacak başvuruda aşağıdaki bilgi ve belgelerin sunulması zorunludur:\na) Doğrudan satış şirketinin konusunu ve kuruluşunu gösteren Türkiye Ticaret Sicili Gazetesi.\nb) Doğrudan satış şirketi ortak ve yöneticilerinin listesi.\nc) Doğrudan satış şirketi tarafından, Türkiye’de yerleşik bankalarda açılmış olan bloke vadeli mevduat, vadesiz mevduat, özel cari hesap, katılma fonu hesabı, döviz tevdiat hesabı veya kıymetli maden hesabına, üç milyon Türk Lirası tutarında meblağın yatırıldığını gösteren belge.\nç) Vergi levhası.\nd) Kazanç planında doğrudan satıcılara vaat edilen menfaatlerin açıklanması ve hesaplanmasına ilişkin bilgiler.\ne) Doğrudan satış şirketinin serbest muhasebeci mali müşavir veya yeminli mali müşavir tarafından onaylı son tarihli bilançosu ile gelir tablosu ya da yeni işe başlamaları halinde açılış bilançosu ve yoklama fişi.\nf) Satışa konu edilen mal veya hizmetlerin tavsiye edilen satış fiyatı listesi.\ng) Tüketicilerin bilgilendirilmesine ilişkin sistemde kullanılacak iletişim bilgileri ve bilgilendirme sisteminin işleyişini gösteren iş akış şeması.\nğ) İlgili mevzuatı gereği ruhsat, izin veya bildirime tabi olan mal veya hizmetlere ilişkin belgeler.\n(2) Genel Müdürlük ihtiyaç halinde, tüketicilerin sağlık ve güvenliği ile ekonomik çıkarlarını korumak amacıyla ilave bilgi ve belge talep edebilir."
+    },
+    {
+      "madde": "10",
+      "tur": "normal",
+      "baslik": "Başvurunun değerlendirilmesi",
+      "metin": "(1) Genel Müdürlük tarafından yapılan değerlendirme sonucunda uygun görülen doğrudan satış şirketine yetki belgesi verilir. Yetki belgesi verilen doğrudan satış şirketi Bakanlık internet sitesinde ilan edilir.\n(2) Genel Müdürlük, başvuruya esas bilgi ve belgelere ilişkin incelemeleri yapmaya veya yaptırmaya yetkili olmakla birlikte diğer kurum ve kuruluşlar tarafından verilen belgeleri de dikkate alabilir.\n(3) Yetki belgesi başvurusuna esas bilgi ve belgelerde eksiklik tespit edilmesi halinde eksik bilgi ve belgelerin tamamlanması için doğrudan satış şirketine Genel Müdürlük tarafından üç ayı geçmeyecek şekilde ek süre verilir.\n(4) Genel Müdürlük tarafından yapılacak değerlendirmede, Bakanlık veya diğer kurum ve kuruluşlar tarafından doğrudan satış şirketi hakkında gerçekleştirilen denetimler dikkate alınabilir."
+    },
+    {
+      "madde": "11",
+      "tur": "normal",
+      "baslik": "Yetki belgesinin geçerlilik süresi",
+      "metin": "(1) Yetki belgesinin geçerlilik süresi üç yıldır.\n(2) Geçerlilik süresi dolmadan başvuruda bulunulmuş olması şartıyla, yetki belgesinin geçerlilik süresi, başvuru sonuçlanıncaya kadar uzatılmış kabul edilir.\n(3) Yetki belgesinin geçerlilik süresi sona ermeden önce başvuru yapılmadığı takdirde, yetki belgesi geçerlilik süresinin bitiminde iptal olur."
+    },
+    {
+      "madde": "12",
+      "tur": "normal",
+      "baslik": "Yetki belgesinin iptal edilmesi",
+      "metin": "(1) Bu Yönetmeliğin;\na) 6 ncı maddesinin birinci ve ikinci fıkralarında belirtilen esaslara aykırı bir hususun tespit edilmesi halinde, yapılacak uyarıya rağmen aykırılığın giderilmemesi veya tekrarlanması,\nb) 9 uncu maddesinin birinci fıkrasının (b), (c), (g) ve (ğ) bentlerinde sayılan bilgi ve belgelerde değişiklik olması ve yapılacak uyarıya rağmen bu değişikliklerin Genel Müdürlüğe bildirilmemesi, hallerinde yetki belgesi iptal edilir.\n(2) 5 inci maddenin birinci ve ikinci fıkralarına aykırı bir hususun tespit edilmesi halinde, doğrudan satış şirketinin yetki belgesi uyarı yapılmaksızın iptal edilir ve yeniden yetki belgesi verilmez.\n(3) Belgesi iptal edilen doğrudan satış şirketi, Bakanlık internet sitesinde ilan edilir."
+    },
+    {
+      "madde": "13",
+      "tur": "normal",
+      "baslik": "Bilgilendirme formu",
+      "metin": "(1) Mal veya hizmet satışına ilişkin ilgili mevzuatında düzenlenen ön bilgilendirme ile sözleşmenin şekli ve zorunlu içeriğine ilişkin hükümler saklı kalmak kaydıyla, doğrudan satışlarda, bilgilendirme formunun yazılı olarak veya kalıcı veri saklayıcısı yoluyla tüketiciye verilmesi zorunludur.\n(2) Bilgilendirme formunda;\na) Satılan mal veya hizmet bilgisinin,\nb) Mal veya hizmetin Türk Lirası olarak vergiler dahil toplam fiyatı ve varsa teslim masraflarının,\nc) Doğrudan satış şirketinin ünvanı, açık adresi ve iletişim bilgilerinin,\nç) Doğrudan satıcının adı, soyadı veya ünvanı ile doğrudan satıcı numarası ve iletişim bilgisinin,\nd) Malın veya hizmetin satış tarihi ile varsa ifa ya da teslim tarihinin,\ne) Cayma hakkının bulunup bulunmadığına ve varsa bu hakkın kullanılma şartları, süresi, usulü ve iade için öngörülen yönteme ilişkin bilgilerin,\nf) Tüketici tarafından cayma hakkı bildiriminin doğrudan satış şirketine yöneltildiği durumlarda satışı gerçekleştiren doğrudan satıcının numarası, adı, soyadı veya ünvanı bilgisinin verilmesinin zorunlu olduğuna ilişkin bilginin,\ng) Tüketicinin uyuşmazlık konusundaki başvurusunu, tüketici hakem heyetine veya Kanunun 73/A maddesi uyarınca dava açılmadan önce arabulucuya başvurulması şartıyla tüketici mahkemesine yapabileceğine ilişkin bilginin, yer alması zorunludur.\n(3) Doğrudan satışa konu hizmetin, bilgilendirme formunda belirtilen tarihte ifa edilmesi zorunludur.\n(4) Doğrudan satışa konu malın teslim tarihi, bilgilendirme formunda belirtilen satış tarihinden itibaren otuz günü geçemez."
+    },
+    {
+      "madde": "14",
+      "tur": "normal",
+      "baslik": "Cayma hakkı",
+      "metin": "(1) Mal teslimine konu doğrudan satışlarda ilgili mevzuatında tüketici lehine olan hükümler saklı kalmak kaydıyla, tüketici otuz gün içinde herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin cayma hakkına sahiptir. Cayma bildirimine konu malın doğrudan satıcı veya doğrudan satış şirketine ulaştığı tarihten itibaren otuz gün içinde varsa malın tüketiciye teslim masrafları dahil olmak üzere tahsil edilen tüm ödemelerin iade edilmesi zorunludur.\n(2) Hizmet ifasına konu doğrudan satışlarda, cayma hakkının bulunup bulunmadığı, süresi ve istisnalarına ilişkin ilgili mevzuat hükümleri saklı kalmak kaydıyla, tüketici otuz gün içinde herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin cayma hakkına sahiptir. Cayma bildiriminin doğrudan satıcı veya doğrudan satış şirketine ulaştığı tarihten itibaren, cayma bedelinin iadesine ilişkin ilgili mevzuat hükümleri saklı kalmak kaydıyla, varsa diğer masraflar dahil olmak üzere tahsil edilen tüm ödemelerin otuz gün içinde iade edilmesi zorunludur.\n(3) Cayma hakkının kullanılması durumunda yapılacak tüm geri ödemeler, tüketicinin satın alma sırasında kullandığı ödeme aracına uygun şekilde ve tüketiciye herhangi bir masraf veya yükümlülük getirmeksizin, tek seferde yapılmak zorundadır.\n(4) Cayma hakkı süresi, hizmet ifasında satış tarihinden; mal tesliminde ise malın tüketici tarafından teslim alındığı tarihten itibaren başlar. Ancak, tüketici satış tarihinden malın teslimine kadar olan süre içinde de cayma hakkını kullanabilir.\n(5) Cayma hakkı süresinin belirlenmesinde, tek satış konusu olup ayrı ayrı teslim edilen mallarda son malın teslim alındığı tarih, birden fazla parçadan oluşan mallarda son parçanın teslim alındığı tarih esas alınır.\n(6) Malın satıcı tarafından taşıyıcıya teslimi, tüketiciye yapılan teslim olarak kabul edilmez.\n(7) Tüketici, cayma süresi içerisinde malı işleyişine, teknik özelliklerine ve kullanım talimatlarına uygun bir şekilde kullandığı takdirde meydana gelen değişiklik ve bozulmalardan sorumlu değildir."
+    },
+    {
+      "madde": "15",
+      "tur": "normal",
+      "baslik": "Eksik bilgilendirme",
+      "metin": "(1) Bilgilendirme formunun verilmemesi, eksik ya da yanlış verilmesi durumunda, tüketici cayma hakkını kullanmak için otuz günlük süreyle bağlı değildir. Bu durumda cayma hakkı süresi, her hâlükârda yasal cayma süresinin sona erdiği tarihten itibaren bir yıl sonra sona erer.\n(2) Bilgilendirme formunun, bir yıllık süre içinde usulüne uygun olarak, eksiksiz ve doğru şekilde tüketiciye verilmesi hâlinde, otuz günlük cayma hakkı süresi; bilgilendirme formunun verildiği tarihten itibaren işlemeye başlar."
+    },
+    {
+      "madde": "16",
+      "tur": "normal",
+      "baslik": "Cayma hakkının kullanımı",
+      "metin": "(1) Cayma hakkının kullanıldığına dair bildirimin cayma hakkı süresi dolmadan, yazılı olarak veya kalıcı veri saklayıcısı ile doğrudan satıcı veya doğrudan satış şirketine yöneltilmesi yeterlidir.\n(2) Cayma hakkının kullanılmasında tüketici EK-1’de yer alan örnek cayma formunu kullanabileceği gibi cayma kararını bildiren açık bir beyanda da bulunabilir.\n(3) Doğrudan satış şirketi, tüketicinin EK-1’de yer alan örnek cayma formuna doğrudan satıcı veya tüketici bilgilendirme sistemi vasıtasıyla erişebilmesini sağlamakla yükümlüdür.\n(4) Cayma hakkının kullanımına ilişkin ispat yükümlülüğü tüketiciye aittir.\n(5) Tüketici tarafından cayma hakkı bildiriminin doğrudan satış şirketine yöneltildiği durumlarda satışı gerçekleştiren doğrudan satıcının numarası, adı, soyadı veya ünvanı bilgisinin verilmesi zorunludur."
+    },
+    {
+      "madde": "17",
+      "tur": "normal",
+      "baslik": "etkisi",
+      "metin": "(1) Kanunun 30 uncu maddesi hükümleri saklı kalmak koşuluyla, tüketicinin cayma hakkını kullanması hâlinde, yan sözleşmeler de kendiliğinden sona erer. Bu durumda, tüketici herhangi bir masraf, tazminat veya cezai şart ödemekle yükümlü değildir.\n(2) Doğrudan satış şirketi veya doğrudan satıcı, tüketicinin cayma hakkını kullandığını, yan sözleşmenin tarafı olan üçüncü kişiye derhâl bildirir."
+    },
+    {
+      "madde": "18",
+      "tur": "normal",
+      "baslik": "Cayma hakkının istisnaları",
+      "metin": "(1) Taraflarca aksi kararlaştırılmadıkça, tüketici aşağıdaki mal veya hizmet satışlarında cayma hakkını kullanamaz:\na) Tüketicinin istekleri veya kişisel ihtiyaçları doğrultusunda hazırlanan mallar.\nb) Çabuk bozulabilen veya son kullanma tarihi geçebilecek mallar.\nc) Tesliminden sonra ambalaj, bant, mühür, paket gibi koruyucu unsurları açılmış olan; iadesi sağlık ve hijyen açısından uygun olmayan mallar.\nç) Tesliminden sonra başka ürünlerle karışan ve doğası gereği ayrıştırılması mümkün olmayan mallar.\nd) Malın tesliminden sonra ambalaj, bant, mühür, paket gibi koruyucu unsurları açılmış olması hâlinde, bilgisayar sarf malzemeleri.\ne) Abonelik sözleşmesi kapsamında sağlananlar dışında, gazete ve dergi gibi süreli yayınların teslimine ilişkin sözleşmeler.\nf) Elektronik ortamda anında ifa edilen hizmetler veya tüketiciye anında teslim edilen gayri maddi mallar.\ng) Cayma hakkı süresi sona ermeden önce, tüketicinin onayı ile ifasına başlanan hizmetler.\nğ) Tanıtma ve kullanma kılavuzunda, satıcı veya yetkili servis tarafından kurulum ya da montajının yapılacağı belirtilen mallardan, kurulum veya montajı gerçekleştirilenler."
+    },
+    {
+      "madde": "19",
+      "tur": "normal",
+      "baslik": "Telefon kullanım ücreti",
+      "metin": "(1) Tüketicilerin iletişime geçebilmesi amacıyla doğrudan satış şirketi tarafından tahsis edilen telefon hattı için olağan ücret tarifesinden daha yüksek bir tarife seçilemez."
+    },
+    {
+      "madde": "20",
+      "tur": "normal",
+      "baslik": "Tüketici bilgilendirme sistemi",
+      "metin": "(1) Doğrudan satış şirketi; posta, katalog, telefon, faks, elektronik posta, kısa mesaj, internet gibi fiziksel olarak karşı karşıya gelinmeksizin tüketicinin bilgilendirilmesini ve taleplerini iletebilmesini sağlayan bir sistem kurmakla yükümlüdür.\n(2) Bilgilendirme sisteminin, aşağıda sayılan bilgileri sağlayacak şekilde kurulması zorunludur:\na) Doğrudan satış şirketinin satışa sunduğu mal veya hizmetlerde cayma hakkının bulunup bulunmadığı ve bu hakkın hangi şartlar ile kullanılabileceğine ilişkin bilgiler.\nb) Tüketicinin cayma hakkı bildirimini doğrudan satış şirketine ilettiği durumlarda satışı gerçekleştiren doğrudan satıcı bilgisini vermesinin zorunlu olduğuna ilişkin bilgi.\nc) Cayma hakkı talebinin hangi yollarla doğrudan satış şirketine iletileceğine ilişkin bilgiler.\nç) Cayma hakkı kullanılan malların hangi doğrudan satıcıya ve adrese iade edileceğine ilişkin bilgiler.\nd) Bilgilendirme formunun tüketiciye verilmemesi halinde bahse konu formun teminine ilişkin bilgiler.\ne) Bilgilendirme formunun verilmemesi halinde, tüketicinin cayma hakkını kullanmak için otuz günlük süreyle bağlı olmadığı ve bu sürenin her hâlükârda cayma süresinin bittiği tarihten itibaren bir yıl sonra sona ereceğine ilişkin bilgi.\nf) Mal veya hizmetin kullanımına ilişkin bilgiler.\ng) Doğrudan satıcı gerçek kişinin numarası, adı, soyadı ve iletişim bilgileri; doğrudan satıcı tüzel kişinin numarası, ünvanı ve iletişim bilgileri.\nğ) EK-1’de yer alan örnek cayma formuna nasıl ulaşılabileceğine ilişkin bilgiler."
+    },
+    {
+      "madde": "1",
+      "tur": "gecici",
+      "baslik": "Geçiş hükmü",
+      "metin": "(1) Bu Yönetmeliğin yayımı tarihinden önce doğrudan satış faaliyetinde bulunan doğrudan satış şirketleri, yetki belgesi başvuruları Genel Müdürlük tarafından sonuçlandırılıncaya kadar faaliyetlerine devam ederler.\n(2) Birinci fıkra kapsamındaki doğrudan satış şirketleri, 30/1/2026 tarihine kadar şirket yapılarını ve faaliyetlerini bu Yönetmelikte düzenlenen usul ve esaslara uygun hale getirerek doğrudan satış yetki belgesi başvurusunda bulunmak zorundadır."
+    },
+    {
+      "madde": "21",
+      "tur": "normal",
+      "baslik": "Yürürlük",
+      "metin": "(1) Bu Yönetmeliğin;\na) 5 inci maddesinin beşinci ve altıncı fıkraları 1/1/2026 tarihinde,\nb) Diğer hükümleri yayımı tarihinde, yürürlüğe girer."
+    },
+    {
+      "madde": "22",
+      "tur": "normal",
+      "baslik": "Yürütme",
+      "metin": "(1) Bu Yönetmelik hükümlerini Ticaret Bakanı yürütür. Eki için tıklayınız."
+    }
+  ]
+}

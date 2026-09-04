@@ -1,0 +1,126 @@
+{
+  "id": "on-odemeli-konut",
+  "ad": "ÖN ÖDEMELİ KONUT SATIŞLARI HAKKINDA YÖNETMELİK",
+  "mevzuat_no": "20238",
+  "mevzuat_tur": "7",
+  "mevzuat_tertip": "5",
+  "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20238&MevzuatTur=7&MevzuatTertip=5",
+  "son_guncelleme": "2026-09-05T02:40:29+03:00",
+  "madde_sayisi": 19,
+  "maddeler": [
+    {
+      "madde": "1",
+      "tur": "normal",
+      "baslik": "Amaç",
+      "metin": "(1) Bu Yönetmeliğin amacı, ön ödemeli konut satışlarına ilişkin uygulama usul ve esaslarını düzenlemektir."
+    },
+    {
+      "madde": "2",
+      "tur": "normal",
+      "baslik": "Kapsam",
+      "metin": "(1) Bu Yönetmelik, ön ödemeli konut satışlarını kapsar."
+    },
+    {
+      "madde": "3",
+      "tur": "normal",
+      "baslik": "Dayanak",
+      "metin": "(1) Bu Yönetmelik, 7/11/2013 tarihli ve 6502 sayılı Tüketicinin Korunması Hakkında Kanunun 46 ncı ve 84 üncü maddelerine dayanılarak hazırlanmıştır."
+    },
+    {
+      "madde": "4",
+      "tur": "normal",
+      "baslik": "Tanımlar",
+      "metin": "(1) Bu Yönetmeliğin uygulanmasında;\na) Bağlı kredi sözleşmesi: Konut finansmanı kredisinin münhasıran belirli bir konutun satın alınması durumunda bir sözleşmenin finansmanı için verildiği ve bu iki sözleşmenin objektif açıdan ekonomik bir birlik oluşturduğu sözleşmeyi,\nb) Bakanlık: (Değişik ibare:RG-4/8/2022-31913) [[SUP]](1)[[/SUP]] Ticaret Bakanlığını ,\nc) Genel Müdürlük: Tüketicinin Korunması ve Piyasa Gözetimi Genel Müdürlüğünü,\nç) Kalıcı veri saklayıcısı: Tüketicinin gönderdiği veya kendisine gönderilen bilgiyi, bu bilginin amacına uygun olarak makul bir süre incelemesine elverecek şekilde kaydedilmesini ve değiştirilmeden kopyalanmasını sağlayan ve bu bilgiye aynen ulaşılmasına imkân veren kısa mesaj, elektronik posta, internet, disk, CD, DVD, hafıza kartı ve benzeri her türlü araç veya ortamı,\nd) Kanun: 6502 sayılı Tüketicinin Korunması Hakkında Kanunu,\ne) Konut: 23/6/1965 tarihli ve 634 sayılı Kat Mülkiyeti Kanununa tabi mesken amaçlı kullanılan ya da mesken niteliği taşımamakla birlikte tüketicilerin kullanımına sunulan her türlü bağımsız bölümü,\nf) Konut finansmanı kuruluşu: Konut finansmanı kapsamında doğrudan tüketiciye kredi kullandıran ya da finansal kiralama yapan bankalar ile Bankacılık Düzenleme ve Denetleme Kurulu tarafından konut finansmanı faaliyetinde bulunması uygun görülen finansal kiralama şirketleri ve finansman şirketlerini,\ng) Ön ödeme tutarı: Konutun tesliminden önce tüketici tarafından ödenen toplam tutarı,\nğ) Ön ödemeli konut satış sözleşmesi: Tüketicinin konut amaçlı bir taşınmazın satış bedelini önceden peşin veya taksitle ödemeyi, satıcının da bedelin tamamen veya kısmen ödenmesinden sonra taşınmazı tüketiciye devir veya teslim etmeyi üstlendiği sözleşmeyi,\nh) Satıcı: Kamu tüzel kişileri de dâhil olmak üzere ticari veya mesleki amaçlarla tüketiciye mal sunan ya da mal sunanın adına ya da hesabına hareket eden gerçek veya tüzel kişiyi,\nı) Tüketici: Ticari veya mesleki olmayan amaçlarla hareket eden gerçek veya tüzel kişiyi ifade eder."
+    },
+    {
+      "madde": "5",
+      "tur": "normal",
+      "baslik": "bilgilendirme",
+      "metin": "(1) Ön ödemeli konut satış sözleşmesi kurulmadan en az bir gün önce aşağıdaki hususları içeren, en az on iki punto büyüklüğünde, anlaşılabilir bir dilde, açık, sade ve okunabilir şekilde düzenlenen ön bilgilendirme formunun tüketiciye verilmesi zorunludur:\na) Satıcının adı veya unvanı, açık adresi, telefon numarası ve varsa MERSİS numarası ile diğer iletişim bilgileri,\nb) Sözleşme konusu konuta ilişkin bağımsız bölümün yer aldığı ada, parsel, blok, konum, kat ve benzeri temel nitelik bilgileri ile 2/11/1985 tarihli ve 18916 Mükerrer sayılı Resmî Gazete’de yayımlanan Planlı Alanlar Tip İmar Yönetmeliğine göre belirlenen bağımsız bölüm net ve brüt alanları,\nc) Konutun tüm vergiler dâhil Türk Lirası olarak peşin ve taksitli toplam satış fiyatı; varsa teslim ve diğer masraflara ilişkin bilgi,\nç) Varsa faiz miktarı ve faizin hesaplandığı yıllık oran,\nd) Tüketicinin cayma ve sözleşmeden dönme hakkına ilişkin bilgiler,\ne) Konutun teslim tarihi,\nf) Verilecek teminata ilişkin bilgiler,\ng) Yapı ruhsatının alınış tarihi,\nğ) Yönetim planına uygun olarak genel giderlere katılıma ilişkin bilgiler.\n(2) Yukarıda yer alan bilgileri içeren ön bilgilendirme formuna ek olarak tüketiciye, bağımsız bölüm planı, vaziyet planı, kat planı ve mahal listesi verilir. (Ek cümle:RG-11/3/2017-30004) Verilecek teminatın bina tamamlama sigortası olması halinde, Hazine Müsteşarlığı tarafından yürürlüğe konulan Bina Tamamlama Sigortası Genel Şartları gereği tüketiciye verilmesi zorunlu bulunan bina tamamlama sigortasına ilişkin önemli hususlar formu, ön bilgilendirme formuna ek olarak tüketiciye verilir.\n(3) Birinci ve ikinci fıkradaki bilgilerin yazılı olarak veya kalıcı veri saklayıcısı ile tüketiciye verilmesi zorunludur.\n(4) Bu madde kapsamında ön bilgilendirme yapıldığına ilişkin ispat yükü satıcıya aittir."
+    },
+    {
+      "madde": "6",
+      "tur": "normal",
+      "baslik": "Şekil şartı",
+      "metin": "(1) Ön ödemeli konut satış sözleşmesi, kat irtifakı devrinin tüketici lehine tapu siciline tescil edilmesiyle birlikte yapılacak yazılı bir sözleşme şeklinde veya noterliklerde düzenleme şeklinde yapılan satış vaadi sözleşmesi ile kurulur. Aksi hâlde sözleşme geçersizdir. Satıcı, sonradan sözleşmenin geçersizliğini tüketicinin aleyhine olacak şekilde ileri süremez.\n(2) Satıcı, geçerli bir sözleşme yapılmış olmadıkça tüketiciden herhangi bir isim altında ödeme yapmasını veya tüketiciyi borç altına sokan herhangi bir belge vermesini isteyemez.\n(3) Yapı ruhsatı alınmadan, tüketicilerle ön ödemeli konut satış sözleşmesi yapılamaz."
+    },
+    {
+      "madde": "7",
+      "tur": "normal",
+      "baslik": "zorunlu içeriği",
+      "metin": "(1) Ön ödemeli konut satış sözleşmesinin, en az on iki punto büyüklüğünde, anlaşılabilir bir dilde, açık, sade ve okunabilir bir şekilde yapılması, aşağıdaki bilgileri içermesi ve bir örneğinin tüketiciye verilmesi zorunludur:\na) Satıcının adı veya unvanı, açık adresi, telefon numarası ve varsa MERSİS numarası ile diğer iletişim bilgileri,\nb) Tüketicinin adı, soyadı, açık adresi, telefon numarası ve varsa diğer iletişim bilgileri,\nc) Sözleşmenin düzenlendiği tarih,\nç) Sözleşme konusu konuta ilişkin bağımsız bölümün yer aldığı ada, parsel, blok, konum, kat ve benzeri temel nitelik bilgileri ile Planlı Alanlar Tip İmar Yönetmeliğine göre belirlenen bağımsız bölüm net ve brüt alanları,\nd) Konutun tüm vergiler dâhil Türk Lirası olarak satış fiyatı, varsa teslim ve diğer masraflara ilişkin bilgi,\ne) Konutun tüm vergiler dâhil Türk Lirası olarak toplam taksitli satış fiyatı; varsa teslim ve diğer masraflara ilişkin bilgi,\nf) Faiz miktarı ve faizin hesaplandığı yıllık oran ve sözleşmede belirlenen faiz oranının yüzde otuz fazlasını geçmemek üzere gecikme faiz oranı,\ng) Tüketicinin temerrüde düşmesinin hukuki sonuçları,\nğ) Ön ödeme tutarı,\nh) Ödeme planı ve ödemelerin yapılacağı banka ve hesap bilgileri,\nı) Cayma hakkının kullanılma şartları, süresi ve usulüne ilişkin bilgiler,\ni) Sözleşmeden dönme hakkının kullanılma şartları, süresi, usulü ile tazminata ilişkin bilgiler,\nj) Cayma ve sözleşmeden dönme bildirimlerinin yapılacağı açık adres bilgileri,\nk) Verilen teminata ilişkin bilgiler,\nl) Konutun teslim tarihi ve şekli,\nm) Yapı ruhsatının alınış tarihi,\nn) Konutun ortak giderlerine ilişkin bilgiler,\no) Tüketicilerin uyuşmazlık konusundaki başvurularını tüketici mahkemesine veya tüketici hakem heyetine yapabileceklerine dair bilgi.\n(2) Peşin ödemede bulunulan ön ödemeli konut satış sözleşmelerinde birinci fıkranın (e), (f), (g), (ğ) ve (h) bentlerinde yer alan hükümler aranmaz."
+    },
+    {
+      "madde": "8",
+      "tur": "normal",
+      "baslik": "Cayma hakkı",
+      "metin": "– (1) Tüketici, sözleşmenin kurulduğu tarihten itibaren on dört gün içinde, herhangi bir gerekçe göstermeksizin ve cezai şart ödemeksizin sözleşmeden cayma hakkına sahiptir.\n(2) Cayma hakkının kullanıldığına dair bildirimin bu süre içinde satıcıya noterlikler aracılığıyla yöneltilmesi yeterlidir. Konut bedelinin bir kısmının bağlı kredi ile karşılanması durumunda, cayma hakkının kullanıldığı bilgisi satıcı tarafından ilgili konut finansmanı kuruluşuna derhal bildirilir.\n(3) Taşınmazın kısmen veya tamamen bağlı krediyle alınması durumunda bağlı kredi sözleşmesi, sözleşmenin kurulduğu tarihte hüküm doğurmak üzere cayma hakkı süresi sonunda yürürlüğe girer. Konut finansmanı kuruluşu cayma hakkı süresi içinde tüketiciden faiz, komisyon, yasal yükümlülük ve benzeri isimler altında hiçbir masraf talep edemez.\n(4) Taşınmaz için bina tamamlama sigortası yaptırılmış ise, sigorta teminatı, kurulduğu tarihten itibaren hüküm doğurmak üzere cayma hakkı süresi sonunda yürürlüğe girer.\n(5) Cayma hakkının kullanılması durumunda, tüketiciye iade edilmesi gereken tutar ve tüketiciyi borç altına sokan her türlü belge cayma bildiriminin satıcıya ulaştığı tarihten itibaren en geç on dört gün içinde tüketiciye geri verilir.\n(6) Satıcının aldığı bedeli ve tüketiciyi borç altına sokan her türlü belgeyi iade ettiği tarihten itibaren, tüketici on gün içinde edinimlerini iade eder.\n(7) Satıcı, cayma hakkı konusunda tüketicinin bilgilendirildiğini ispat etmekle yükümlüdür."
+    },
+    {
+      "madde": "9",
+      "tur": "normal",
+      "baslik": "dönme",
+      "metin": "(1) (Değişik:RG-11/3/2017-30004) Tüketicinin ön ödemeli konut satışında sözleşme tarihinden itibaren, bu Yönetmeliğin 8 inci maddesindeki hakları saklı kalmak kaydıyla, yirmi dört aya kadar herhangi bir gerekçe göstermeden sözleşmeden dönme hakkı vardır.\n(2) Sözleşmeden dönme bildiriminin satıcıya noterlikler aracılığıyla yöneltilmesi yeterlidir. Konut bedelinin bir kısmının bağlı kredi ile karşılanması durumunda, tüketicinin sözleşmeden dönme hakkını kullandığına ilişkin bilgi, satıcı tarafından ilgili konut finansmanı kuruluşuna derhal bildirilir.\n(3) (Değişik:RG-11/3/2017-30004) Sözleşmeden dönülmesi durumunda satıcı; konutun satışı veya satış vaadi sözleşmesi nedeniyle oluşan vergi, harç ve benzeri yasal yükümlülüklerden doğan masraflar ile sözleşme tarihinden itibaren ilk üç ay için sözleşme bedelinin yüzde ikisine, üç ila altı ay arası için yüzde dördüne, altı ila on iki ay arası için yüzde altısına ve on iki ila yirmi dört ay arası için de yüzde sekizine kadar tazminatın ödenmesini isteyebilir.\n(4) (Değişik:RG-11/3/2017-30004) Aşağıdaki hallerde tüketici sözleşmeden dönme hakkını devir veya teslime kadar vergi, harç, masraf, tazminat ve benzeri adlar altında herhangi bir bedel ödemeksizin kullanabilir:\na) Satıcının yükümlülüklerini hiç ya da gereği gibi yerine getirmemesi,\nb) Tüketicinin ölmesi,\nc) Tüketicinin kazanç elde etmekten sürekli olarak yoksun kalması sebebiyle ön ödemeleri yapamayacak duruma düşmesi,\nç) Tüketicinin kazanç elde etmekten sürekli olarak yoksun kalması sebebiyle sözleşmenin yerine olağan koşullarla yapılacak bir taksitle satış sözleşmesinin konulmasına ilişkin önerisinin satıcı tarafından kabul edilmemesi.\n(5) (Değişik:RG-11/3/2017-30004) Bir konutun birden fazla tüketiciye satılması halinde tüketici, sözleşmeden dönme hakkını devir veya teslime kadar vergi, harç, masraf, tazminat ve benzeri adlar altında herhangi bir bedel ödemeksizin kullanabilir.\n(6) Sözleşmeden dönülmesi durumunda, tüketiciye iade edilmesi gereken tutar ve tüketiciyi borç altına sokan her türlü belge, dönme bildiriminin satıcıya ulaştığı tarihten itibaren en geç (Değişik ibare:RG-11/3/2017-30004) yüz seksen gün içinde tüketiciye geri verilir.\n(7) Konut bedelinin bir kısmının bağlı kredi ile karşılanması durumunda, tüketicinin ödediği satış bedeli, satıcı tarafından dönme bildiriminin kendisine ulaştığı tarihten itibaren en geç (Değişik ibare:RG-11/3/2017-30004) yüz seksen gün içinde yalnızca üçüncü fıkrada belirtilen masraf ve tazminat tutarı düşülerek ilgili konut finansmanı kuruluşuna iade edilir. Konut finansmanı kuruluşu söz konusu tutarı, Kanunun 37 nci maddesine uygun olarak tüketiciye derhal geri öder.\n(8) Satıcıya veya konut finansmanı kuruluşuna ödenen bedel ile tüketiciyi borç altına sokan her türlü belgenin iade edildiği tarihten itibaren, tüketici on gün içinde edinimlerini iade eder."
+    },
+    {
+      "madde": "10",
+      "tur": "normal",
+      "baslik": "teslimi",
+      "metin": "(1) (Değişik:RG-4/8/2022-31913) [[SUP]](1)[[/SUP]] Ön ödemeli konutun sözleşmede taahhüt edilen süre içinde tüketiciye teslim edilmesi zorunludur. Bu süre her halükarda sözleşme tarihinden itibaren kırk sekiz ayı geçemez.\n(2) Aşağıdaki hallerde konutun tüketiciye devir veya teslim edildiği kabul edilir:\na) Kat mülkiyetine konu konutun tüketici adına tescili,\nb) Kat irtifakına konu konutun tüketici adına tapu siciline tescil edilmesiyle birlikte konutun oturmaya elverişli bir şekilde zilyetliğinin devri."
+    },
+    {
+      "madde": "11",
+      "tur": "normal",
+      "baslik": "değişiklikleri",
+      "metin": "(1) Sözleşmeye konu konutun yer aldığı projede sonradan değişiklik yapılması durumunda, bu değişikliğin tüketiciye yazılı olarak veya kalıcı veri saklayıcısı ile bildirilmesi zorunludur. Tüketici yapılan proje değişikliğini kabul etmeyerek bir ay içinde vergi, harç, masraf, tazminat ve benzeri adlar altında hiçbir bedel ödemeksizin sözleşmeden dönebilir. (Değişik cümle:RG-11/3/2017-30004) Proje değişikliğinin yasal zorunluluklardan veya mücbir sebep hallerinden kaynaklanması durumunda, satıcı tüketiciden bu Yönetmeliğin 9 uncu maddesinin üçüncü fıkrasında yer alan masraf ve tazminat tutarını dikkate alarak kesinti yapabilir."
+    },
+    {
+      "madde": "12",
+      "tur": "normal",
+      "baslik": "Teminat",
+      "metin": "(1) Satıcının konut satışına başlamadan önce, konut adedi otuz ve üzerinde olan projeler için bina tamamlama sigortası yaptırması veya aşağıda belirtilen diğer teminat ve şartlardan en az birini sağlaması zorunludur:\na) Banka teminat mektubu,\nb) Hakediş sistemi,\nc) Bağlı kredi ile teminat.\n(2) Birinci fıkrada yer alan teminatlar dışında, tüketicinin tüm ödemelerini garanti altına alacak başka bir yöntem öngörülmesi durumunda, bu yöntem Bakanlık tarafından uygun görülürse teminat olarak kabul edilebilir."
+    },
+    {
+      "madde": "13",
+      "tur": "normal",
+      "baslik": "tamamlama sigortası",
+      "metin": "(1) Bina tamamlama sigortasının kapsamı, koşulları ve uygulama esasları Hazine Müsteşarlığınca belirlenir.\n(2) Bina tamamlama sigortası kapsamında sağlanan tazminat, teminat ve benzeri güvenceler iflas veya tasfiye masasına dâhil edilemez, haczolunamaz, üzerlerine ihtiyati tedbir ve ihtiyati haciz konulamaz."
+    },
+    {
+      "madde": "14",
+      "tur": "normal",
+      "baslik": "teminat mektubu",
+      "metin": "(1) Banka teminat mektubu, satıcının tüketiciye karşı ön ödemeli konut satışına ilişkin 10 uncu maddede yer alan yükümlülüklerini yerine getirmemesi halinde, tüketicinin ödediği bedeli, ilk talebinde ona derhal ödemeyi kabul ve taahhüt ettiğine dair banka tarafından verilen kesin ve süresiz mektuptur.\n(2) Ön ödemeli konut satışının banka teminat mektubu verilmesi suretiyle teminat altına alınması durumunda, satıcı 10 uncu maddede yer alan yükümlülüklerini yerine getirmezse tüketiciler, kendilerine verilmiş olan banka teminat mektubunu bankadan tazmin edebilirler."
+    },
+    {
+      "madde": "15",
+      "tur": "normal",
+      "baslik": "sistemi",
+      "metin": "(1) Tüketicinin ödemelerinin hakediş sistemi ile teminat altına alınması durumunda, tüketici, ödemeleri sözleşmede belirtilen bir bankada satıcı adına açılacak bir hesaba yatırmakla yükümlüdür. Bu hesapta toplanan tüketici ödemeleri konutun devir veya teslimine kadar bloke altında olup, yalnızca hakediş karşılığında serbest bırakılabilir.\n(2) Konutun tamamlanma oranına göre belirlenecek hakediş sisteminde, ödemelerin doğrudan bankaya yapılmış olması ve bankaların sorumluluğu altında inşaatın ilerleme seviyesi oranında şirkete aktarılması esastır. Bu şekilde yapılacak ödemelerde tüketicinin rızası aranmaz. Bu işlemlerle ilgili olarak banka, tüketiciden komisyon ve benzeri isim altında herhangi bir bedel talep edemez.\n(3) Satıcı, 10 uncu maddede yer alan yükümlülüklerini yerine getirmezse, hesap üzerindeki haklarını kaybeder. Bu durumda, tüketicinin yapmış olduğu ödemelerin hakediş usulüne göre satıcıya ödenmemiş kısmı banka tarafından tüketiciye iade edilir. Tüketicinin o ana kadar yapmış olduğu ödemelerin satıcıya ödenen kısmı üzerinde ise tüketicinin hakları saklıdır.\n(4) Banka, hakedişlerin kontrolünün sağlanması amacıyla yapı denetim, müşavirlik veya danışmanlık firmalarından da hizmet alabilir."
+    },
+    {
+      "madde": "16",
+      "tur": "normal",
+      "baslik": "ile teminat",
+      "metin": "(1) Ön ödemeli konut satışının bağlı kredi ile yapılması halinde, kullandırılan kredi tutarında teminat sağlanmış olur. Ancak, satıcı kullanılan bağlı kredi tutarının üzerinde kalan tutarı, ayrıca teminat altına almak zorundadır."
+    },
+    {
+      "madde": "17",
+      "tur": "normal",
+      "baslik": "kaldırılan yönetmelik",
+      "metin": "(1) 13/6/2003 tarihli ve 25137 sayılı Resmî Gazete’de yayımlanan Kampanyalı Satışlara İlişkin Uygulama Usul ve Esasları Hakkında Yönetmelik yürürlükten kaldırılmıştır. Geçiş hükmü GEÇİCİ MADDE 1 – (Ek:RG-11/3/2017-30004) (1) Ön ödemeli konut satış sözleşmelerine, sözleşmenin akdedildiği zaman yürürlükte bulunan yönetmelik hükümleri uygulanır."
+    },
+    {
+      "madde": "18",
+      "tur": "normal",
+      "baslik": "Yürürlük",
+      "metin": "(1) Bu Yönetmelik yayımı tarihinde yürürlüğe girer."
+    },
+    {
+      "madde": "19",
+      "tur": "normal",
+      "baslik": "Yürütme",
+      "metin": "(1) Bu Yönetmelik hükümlerini (Değişik ibare:RG-4/8/2022-31913) [[SUP]](1)[[/SUP]] Ticaret Bakanı Bakanı yürütür. ______________________ (1) Bu değişiklik 1/10/2022 tarihinde yürürlüğe girer. Yönetmeliğin Yayımlandığı Resmî Gazete’nin Tarihi Sayısı 27/11/2014 29188 Yönetmelikte Değişiklik Yapan Yönetmeliklerin Yayımlandığı Resmî Gazetelerin Tarihi Sayısı 1 11/3/2017 30004 2 4/8/2022 31913 3"
+    }
+  ]
+}
