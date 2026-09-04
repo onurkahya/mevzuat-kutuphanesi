@@ -1,13 +1,13 @@
 {
-  "son_guncelleme": "2026-09-05T02:03:42+03:00",
+  "son_guncelleme": "2026-09-05T02:07:13+03:00",
   "mevzuatlar": [
     {
       "id": "mesafeli-sozlesmeler",
       "ad": "MESAFELİ SÖZLEŞMELER YÖNETMELİĞİ",
       "dosya": "data/mesafeli-sozlesmeler.json",
       "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20237&MevzuatTur=7&MevzuatTertip=5",
-      "madde_sayisi": 22,
-      "son_guncelleme": "2026-09-05T02:03:37+03:00"
+      "madde_sayisi": 25,
+      "son_guncelleme": "2026-09-05T02:07:07+03:00"
     },
     {
       "id": "fiyat-etiketi",
@@ -15,7 +15,7 @@
       "dosya": "data/fiyat-etiketi.json",
       "kaynak": "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=19819&MevzuatTur=7&MevzuatTertip=5",
       "madde_sayisi": 16,
-      "son_guncelleme": "2026-09-05T02:03:40+03:00"
+      "son_guncelleme": "2026-09-05T02:07:11+03:00"
     }
   ],
   "hatalar": []
