@@ -8,19 +8,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: DNS ve HTTPS testi
+      - name: SSL dogrulamasi olmadan mevzuat.gov.tr testi
         run: |
-          echo "1 - www.mevzuat.gov.tr"
-          getent hosts www.mevzuat.gov.tr || true
+          echo "======================================"
+          echo "MEVZUAT.GOV.TR BAGLANTI TESTI"
+          echo "======================================"
+
+          curl -k -L --max-time 30 \
+          -o /tmp/mevzuat.html \
+          -w "HTTP KODU: %{http_code}\nBOYUT: %{size_download} byte\n" \
+          "https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20237&MevzuatTur=7&MevzuatTertip=5"
 
           echo ""
-          echo "2 - mevzuat.gov.tr"
-          getent hosts mevzuat.gov.tr || true
+          echo "======================================"
+          echo "INDIRILEN DOSYA"
+          echo "======================================"
+
+          ls -lh /tmp/mevzuat.html
 
           echo ""
-          echo "3 - www HTTPS"
-          curl -I -L --max-time 20 https://www.mevzuat.gov.tr/ || true
-
-          echo ""
-          echo "4 - www olmadan HTTPS"
-          curl -I -L --max-time 20 https://mevzuat.gov.tr/ || true
+          echo "ILK 500 KARAKTER:"
+          head -c 500 /tmp/mevzuat.html
