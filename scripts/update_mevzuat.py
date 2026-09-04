@@ -195,22 +195,91 @@ def normalize_article_heading(value):
     return value
 
 def heading_block_before(lines, article_index):
+    """
+    MADDE satırından hemen önceki gerçek madde başlığını bulur.
+
+    Mevzuat.gov.tr bazı başlıkları iki parçaya bölebilir:
+        Ön bilgilendirmeye ilişkin
+        diğer yükümlülükler
+        MADDE 8 -
+
+    Böyle bir durumda iki parça birleştirilir.
+
+    Ancak:
+        İKİNCİ BÖLÜM
+        Ön Bilgilendirme Yükümlülüğü
+        Ön bilgilendirme
+        MADDE 5 -
+
+    yapısında bölüm satırı alınmaz ve birleşmiş üst başlık + madde
+    başlığı normalize_article_heading() ile "Ön bilgilendirme"ye çevrilir.
+    """
     candidates = []
     pos = article_index - 1
 
     while pos >= 0 and len(candidates) < 4:
         line = lines[pos]
+
+        # BÖLÜM / KISIM sınırının ötesine geçme.
+        if SECTION_RE.match(line):
+            break
+
         if not looks_like_heading(line):
             break
+
         candidates.append((pos, line))
         pos -= 1
 
     if not candidates:
         return "", article_index
 
-    nearest_index, nearest_line = candidates[0]
-    title = normalize_article_heading(nearest_line)
-    block_start = min(x[0] for x in candidates)
+    nearest = candidates[0][1]
+
+    # Varsayılan olarak en yakın satır madde başlığıdır.
+    raw_title = nearest
+
+    if len(candidates) >= 2:
+        previous = candidates[1][1]
+
+        nearest_first = re.search(
+            r"[A-Za-zÇĞİÖŞÜçğıöşü]+",
+            nearest
+        )
+        previous_first = re.search(
+            r"[A-Za-zÇĞİÖŞÜçğıöşü]+",
+            previous
+        )
+
+        nearest_starts_lower = bool(
+            nearest and nearest[0].islower()
+        )
+
+        same_first_word = bool(
+            nearest_first
+            and previous_first
+            and nearest_first.group(0).casefold()
+                == previous_first.group(0).casefold()
+        )
+
+        # 1) Başlığın ikinci parçası küçük harfle başlıyorsa:
+        #    "Ön bilgilendirmeye ilişkin" + "diğer yükümlülükler"
+        #    kesinlikle aynı başlığın devamıdır.
+        #
+        # 2) İki satır aynı kelimeyle başlıyorsa:
+        #    "Ön Bilgilendirme Yükümlülüğü" + "Ön bilgilendirme"
+        #    birleşmiş üst başlık / madde başlığı yapısıdır.
+        if nearest_starts_lower or same_first_word:
+            raw_title = previous + " " + nearest
+
+    title = normalize_article_heading(raw_title)
+
+    # Önceki maddenin metninden çıkarılacak başlık bloğu.
+    # Kullanılan ikinci başlık parçası varsa onu da blok başlangıcına dahil et.
+    if raw_title != nearest and len(candidates) >= 2:
+        block_start = candidates[1][0]
+    else:
+        block_start = candidates[0][0]
+
     return title, block_start
 
 def format_article_text(body_lines):
