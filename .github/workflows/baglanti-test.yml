@@ -1,0 +1,26 @@
+name: Mevzuat Baglanti Testi
+
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: DNS ve HTTPS testi
+        run: |
+          echo "1 - www.mevzuat.gov.tr"
+          getent hosts www.mevzuat.gov.tr || true
+
+          echo ""
+          echo "2 - mevzuat.gov.tr"
+          getent hosts mevzuat.gov.tr || true
+
+          echo ""
+          echo "3 - www HTTPS"
+          curl -I -L --max-time 20 https://www.mevzuat.gov.tr/ || true
+
+          echo ""
+          echo "4 - www olmadan HTTPS"
+          curl -I -L --max-time 20 https://mevzuat.gov.tr/ || true
