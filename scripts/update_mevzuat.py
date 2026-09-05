@@ -1,5 +1,14 @@
 import json
 import re
+
+def clean_sup_artifacts(value):
+    """Başlık/etiket alanlarına sızan [[SUP]], [[/SUP]], SUP]] vb. artıkları temizler."""
+    s = str(value or "")
+    s = re.sub(r"\[\[\s*/?\s*SUP\s*\]\]", "", s, flags=re.I)
+    s = re.sub(r"(?i)(?:\[\[/?SUP|\[/?SUP|/?SUP\]\]|/?SUP\]\])", "", s)
+    s = re.sub(r"\s+", " ", s).strip(" -–—")
+    return s
+
 import time
 from datetime import datetime
 from pathlib import Path
@@ -280,6 +289,7 @@ def heading_block_before(lines, article_index):
     else:
         block_start = candidates[0][0]
 
+    title = clean_sup_artifacts(title)
     return title, block_start
 
 def format_article_text(body_lines):
@@ -393,7 +403,7 @@ def parse_articles(soup):
         articles.append({
             "madde": match.group("num"),
             "tur": "gecici" if kind == "GEÇİCİ" else ("ek" if kind == "EK" else "normal"),
-            "baslik": info["title"],
+            "baslik": clean_sup_artifacts(info["title"]),
             "metin": format_article_text(cleaned),
         })
 
