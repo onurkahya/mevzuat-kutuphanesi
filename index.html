@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mevzuat Kütüphanesi</title>
 <style>
-:root{--bg:#0d174f;--card:#21368f;--yellow:#f4c833;--white:#fff;--font-delta:0px}
+:root{--bg:#0d174f;--card:#21368f;--yellow:#f4c833;--white:#fff}
 *{box-sizing:border-box}
 body{margin:0;background:linear-gradient(180deg,#0c154c,#111d63);color:#fff;font-family:"Arial Narrow",Arial,sans-serif}
-header{text-align:center;padding:20px 12px 16px}
+header{text-align:center;padding:0 12px 16px}
 .header-logo{display:block;width:min(560px,88vw);height:auto;margin:0 auto}
 main{width:min(1040px,94%);margin:0 auto 26px}
 .card{background:var(--card);border:1px solid rgba(255,255,255,.28);border-radius:16px;padding:20px;margin:0 0 18px}
@@ -55,17 +55,24 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
 </style>
 </head>
 <body>
+
 <header>
-  <img class="header-logo" src="assets/ticaret_bakanligi_header.png" alt="Türkiye Cumhuriyeti Ticaret Bakanlığı">
+  <img class="header-logo"
+       src="assets/ticaret_bakanligi_header.png"
+       alt="Türkiye Cumhuriyeti Ticaret Bakanlığı">
 </header>
 
 <main>
+
 <section class="card query">
-  <div>
-    <label>MEVZUAT</label>
-    <input id="lawSearch" list="lawList" autocomplete="off" placeholder="Lütfen Mevzuat Seçin"><datalist id="lawList"></datalist>
-    <div id="updateInfo" class="status"></div>
-  </div>
+  <label>MEVZUAT</label>
+  <input
+    id="lawSearch"
+    list="lawList"
+    autocomplete="off"
+    placeholder="Lütfen Mevzuat Seçin">
+  <datalist id="lawList"></datalist>
+  <div id="updateInfo" class="status"></div>
 </section>
 
 <section class="card mode-card hidden" id="modeCard">
@@ -77,7 +84,9 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
   <div class="controls hidden" id="articleControls">
     <div>
       <label>MADDE NUMARASI</label>
-      <select id="article"><option value="">Madde seçin</option></select>
+      <select id="article">
+        <option value="">Madde seçin</option>
+      </select>
     </div>
     <div class="fonts">
       <button type="button" onclick="fontChange(-1)">A−</button>
@@ -110,15 +119,20 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
 <section class="card print-card hidden" id="printCard">
   <button onclick="window.print()">PDF / Yazdır</button>
 </section>
+
 </main>
 
 <footer>© Bu sayfa Onur KAHYA tarafından bilgilendirme amacıyla hazırlanmıştır 2026.</footer>
 
 <script>
-let catalog=null,current=null,mode=null,fontDelta=0;
+let catalog = null;
+let current = null;
+let mode = null;
+let fontDelta = 0;
+let searchTimer = null;
 
 function esc(s){
-  return (s||"").replace(/[&<>"']/g,c=>({
+  return (s || "").replace(/[&<>"']/g, c => ({
     "&":"&amp;",
     "<":"&lt;",
     ">":"&gt;",
@@ -128,176 +142,291 @@ function esc(s){
 }
 
 function officialHtml(s){
-  return esc(s||"")
-    .replace(/\[\[SUP\]\](.*?)\[\[\/SUP\]\]/g,"<sup>$1</sup>")
-    .replace(/\n/g,"<br>");
+  return esc(s || "")
+    .replace(/\[\[SUP\]\](.*?)\[\[\/SUP\]\]/g, "<sup>$1</sup>")
+    .replace(/\n/g, "<br>");
 }
 
 function plain(s){
-  return (s||"").replace(/\[\[SUP\]\](.*?)\[\[\/SUP\]\]/g,"$1");
+  return (s || "")
+    .replace(/\[\[SUP\]\](.*?)\[\[\/SUP\]\]/g, "$1");
 }
 
 function label(a){
-  const kind=a.tur==="gecici"
-    ? "Geçici Madde"
-    : (a.tur==="ek" ? "Ek Madde" : "Madde");
+  const kind =
+    a.tur === "gecici" ? "Geçici Madde" :
+    a.tur === "ek" ? "Ek Madde" :
+    "Madde";
 
-  return kind+" "+a.madde+(a.baslik ? " - "+plain(a.baslik) : "");
+  return kind + " " + a.madde +
+    (a.baslik ? " - " + plain(a.baslik) : "");
+}
+
+function normalizeTR(value){
+  return (value || "")
+    .toLocaleLowerCase("tr-TR")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/ı/g, "i")
+    .replace(/ş/g, "s")
+    .replace(/ğ/g, "g")
+    .replace(/ü/g, "u")
+    .replace(/ö/g, "o")
+    .replace(/ç/g, "c")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function resetResult(){
-  mode=null;
+  mode = null;
   document.getElementById("resultCard").classList.add("hidden");
   document.getElementById("printCard").classList.add("hidden");
   document.getElementById("articleControls").classList.add("hidden");
   document.getElementById("fullControls").classList.add("hidden");
 }
 
+function resetLawView(){
+  current = null;
+  document.getElementById("modeCard").classList.add("hidden");
+  resetResult();
+
+  const article = document.getElementById("article");
+  article.innerHTML = '<option value="">Madde seçin</option>';
+}
+
 function fontChange(d){
-  fontDelta=Math.max(-2,Math.min(6,fontDelta+d));
-  document.getElementById("result").style.setProperty("--rfd",fontDelta+"px");
+  fontDelta = Math.max(-2, Math.min(6, fontDelta + d));
+  document.getElementById("result")
+    .style.setProperty("--rfd", fontDelta + "px");
 }
 
 async function loadCatalog(){
-  const r=await fetch("data/mevzuatlar.json?ts="+Date.now());
-  catalog=await r.json();
+  const r = await fetch("data/mevzuatlar.json?ts=" + Date.now());
 
-  const sel=document.getElementById("law");
-  sel.innerHTML='<option value="">Lütfen Mevzuat Seçin</option>';
+  if(!r.ok){
+    throw new Error("mevzuatlar.json alınamadı.");
+  }
 
-  (catalog.mevzuatlar||[]).forEach(x=>{
-    const o=document.createElement("option");
-    o.value=x.id;
-    o.textContent=x.ad;
-    sel.appendChild(o);
+  catalog = await r.json();
+
+  const list = document.getElementById("lawList");
+  list.innerHTML = "";
+
+  (catalog.mevzuatlar || []).forEach(x => {
+    const o = document.createElement("option");
+    o.value = x.ad;
+    list.appendChild(o);
   });
 
   if(catalog.son_guncelleme){
-    document.getElementById("updateInfo").textContent=
-      "Son güncelleme: "+
+    document.getElementById("updateInfo").textContent =
+      "Son güncelleme: " +
       new Date(catalog.son_guncelleme).toLocaleString("tr-TR");
   }
 }
 
-async function loadSelectedLaw(){
-  const id=document.getElementById("law").value;
+async function loadLaw(item){
+  if(!item) return;
 
-  current=null;
-  document.getElementById("modeCard").classList.add("hidden");
-  resetResult();
+  resetLawView();
 
-  const aSel=document.getElementById("article");
-  aSel.innerHTML='<option value="">Madde seçin</option>';
+  const r = await fetch(
+    "data/" + item.id + ".json?ts=" + Date.now()
+  );
 
-  if(!id){
+  if(!r.ok){
+    throw new Error("Mevzuat dosyası bulunamadı.");
+  }
+
+  current = await r.json();
+
+  const article = document.getElementById("article");
+  article.innerHTML = '<option value="">Madde seçin</option>';
+
+  current.maddeler.forEach((a, i) => {
+    const o = document.createElement("option");
+    o.value = i;
+    o.textContent = label(a);
+    article.appendChild(o);
+  });
+
+  document.getElementById("modeCard").classList.remove("hidden");
+}
+
+function findLawByTypedText(text){
+  if(!catalog) return null;
+
+  const q = normalizeTR(text);
+
+  if(!q) return null;
+
+  const laws = catalog.mevzuatlar || [];
+
+  // Tam eşleşme
+  let found = laws.find(x => normalizeTR(x.ad) === q);
+  if(found) return found;
+
+  // Başlangıç eşleşmesi:
+  // "mesa" -> MESAFELİ SÖZLEŞMELER YÖNETMELİĞİ
+  const starts = laws.filter(
+    x => normalizeTR(x.ad).startsWith(q)
+  );
+
+  if(starts.length === 1){
+    return starts[0];
+  }
+
+  // Tek bir içerme eşleşmesi varsa onu da kabul et.
+  const contains = laws.filter(
+    x => normalizeTR(x.ad).includes(q)
+  );
+
+  if(contains.length === 1){
+    return contains[0];
+  }
+
+  return null;
+}
+
+document.getElementById("lawSearch").addEventListener("input", () => {
+  clearTimeout(searchTimer);
+
+  const input = document.getElementById("lawSearch");
+  const typed = input.value.trim();
+
+  resetLawView();
+
+  if(!typed){
     return;
   }
 
-  try{
-    const r=await fetch("data/"+id+".json?ts="+Date.now());
+  searchTimer = setTimeout(async () => {
+    const item = findLawByTypedText(typed);
 
-    if(!r.ok){
-      throw new Error("Mevzuat dosyası bulunamadı.");
+    if(!item){
+      return;
     }
 
-    current=await r.json();
+    try{
+      // Otomatik seçildiğini kullanıcı da görsün.
+      input.value = item.ad;
+      await loadLaw(item);
+    }catch(e){
+      alert("Mevzuat yüklenemedi: " + e.message);
+    }
+  }, 250);
+});
 
-    current.maddeler.forEach((a,i)=>{
-      const o=document.createElement("option");
-      o.value=i;
-      o.textContent=label(a);
-      aSel.appendChild(o);
-    });
+// Datalist'ten fare/klavye ile tam seçim yapılması için ek güvence.
+document.getElementById("lawSearch").addEventListener("change", async () => {
+  const input = document.getElementById("lawSearch");
+  const item = findLawByTypedText(input.value);
 
-    document.getElementById("modeCard").classList.remove("hidden");
+  if(!item) return;
 
+  try{
+    input.value = item.ad;
+    await loadLaw(item);
   }catch(e){
-    alert("Mevzuat yüklenemedi: "+e.message);
+    alert("Mevzuat yüklenemedi: " + e.message);
   }
-}
+});
 
-document.getElementById("articleMode").onclick=()=>{
-  mode="article";
+document.getElementById("articleMode").onclick = () => {
+  if(!current) return;
+
   resetResult();
-  mode="article";
-  document.getElementById("articleControls").classList.remove("hidden");
+  mode = "article";
+
+  document.getElementById("articleControls")
+    .classList.remove("hidden");
 };
 
-document.getElementById("fullMode").onclick=()=>{
-  if(!current)return;
+document.getElementById("fullMode").onclick = () => {
+  if(!current) return;
 
-  mode="full";
   resetResult();
-  mode="full";
+  mode = "full";
 
-  document.getElementById("fullControls").classList.remove("hidden");
+  document.getElementById("fullControls")
+    .classList.remove("hidden");
 
-  const res=document.getElementById("result");
-  res.querySelector("h2").textContent=current.ad;
+  const result = document.getElementById("result");
+  result.querySelector("h2").textContent = current.ad;
 
-  document.getElementById("articleTitle").innerHTML="";
+  document.getElementById("articleTitle").innerHTML = "";
 
-  let h="";
+  let h = "";
 
-  current.maddeler.forEach(a=>{
-    const kind=a.tur==="gecici"
-      ? "GEÇİCİ MADDE"
-      : (a.tur==="ek" ? "EK MADDE" : "MADDE");
+  current.maddeler.forEach(a => {
+    const kind =
+      a.tur === "gecici" ? "GEÇİCİ MADDE" :
+      a.tur === "ek" ? "EK MADDE" :
+      "MADDE";
 
-    h+='<div class="full-article">';
+    h += '<div class="full-article">';
 
     if(a.baslik){
-      h+='<div class="full-title">'+officialHtml(a.baslik)+'</div>';
+      h += '<div class="full-title">' +
+        officialHtml(a.baslik) +
+        '</div>';
     }
 
-    h+='<div class="full-body"><strong>'+
-      kind+" "+esc(a.madde)+" –</strong> "+
-      officialHtml(a.metin)+
+    h += '<div class="full-body"><strong>' +
+      kind + " " + esc(a.madde) +
+      " –</strong> " +
+      officialHtml(a.metin) +
       '</div></div>';
   });
 
-  document.getElementById("body").innerHTML=h;
+  document.getElementById("body").innerHTML = h;
   document.getElementById("resultCard").classList.remove("hidden");
 
-  // Tam mevzuat görüntüsünde PDF/Yazdır gösterilmez.
+  // Tam mevzuatta PDF düğmesi görünmez.
   document.getElementById("printCard").classList.add("hidden");
 };
 
-document.getElementById("article").onchange=()=>{
-  if(!current)return;
+document.getElementById("article").onchange = () => {
+  if(!current) return;
 
-  const v=document.getElementById("article").value;
+  const value = document.getElementById("article").value;
 
-  if(v===""){
+  if(value === ""){
     document.getElementById("resultCard").classList.add("hidden");
     document.getElementById("printCard").classList.add("hidden");
     return;
   }
 
-  const a=current.maddeler[Number(v)];
+  const a = current.maddeler[Number(value)];
 
-  const kind=a.tur==="gecici"
-    ? "GEÇİCİ MADDE"
-    : (a.tur==="ek" ? "EK MADDE" : "MADDE");
+  const kind =
+    a.tur === "gecici" ? "GEÇİCİ MADDE" :
+    a.tur === "ek" ? "EK MADDE" :
+    "MADDE";
 
-  const res=document.getElementById("result");
+  const result = document.getElementById("result");
 
-  res.querySelector("h2").textContent=current.ad;
-  document.getElementById("articleTitle").innerHTML=officialHtml(a.baslik||"");
+  result.querySelector("h2").textContent = current.ad;
 
-  document.getElementById("body").innerHTML=
-    '<strong>'+kind+" "+esc(a.madde)+" –</strong> "+
+  document.getElementById("articleTitle").innerHTML =
+    officialHtml(a.baslik || "");
+
+  document.getElementById("body").innerHTML =
+    '<strong>' +
+    kind + " " + esc(a.madde) +
+    " –</strong> " +
     officialHtml(a.metin);
 
   document.getElementById("resultCard").classList.remove("hidden");
   document.getElementById("printCard").classList.remove("hidden");
 };
 
-document.getElementById("law").addEventListener("change",loadSelectedLaw);
-
-loadCatalog().catch(e=>{
-  alert("Mevzuat kataloğu yüklenemedi: "+e.message);
+loadCatalog().catch(e => {
+  document.getElementById("updateInfo").textContent =
+    "Mevzuat listesi yüklenemedi.";
+  alert("Mevzuat kataloğu yüklenemedi: " + e.message);
 });
 </script>
+
 </body>
 </html>
