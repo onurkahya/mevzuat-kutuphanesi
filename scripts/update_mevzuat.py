@@ -54,6 +54,12 @@ MEVZUATLAR = [
     {"id": '6563-elektronik-ticaret', "ad": '6563 SAYILI ELEKTRONİK TİCARETİN DÜZENLENMESİ HAKKINDA KANUN', "no": '6563', "tur": '1', "tertip": '5'}
 ]
 
+# Kaynak HTML'deki dipnot yapısı nedeniyle başlığı güvenli biçimde
+# sabit tutulması gereken maddeler.
+TITLE_OVERRIDES = {
+    ("6502", "77"): "Yaptırım hükümleri",
+}
+
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/140 Safari/537.36",
     "Accept-Language": "tr-TR,tr;q=0.9,en;q=0.7",
@@ -449,6 +455,24 @@ def parse_articles(soup):
 def save_mevzuat(item):
     soup = fetch_mevzuat(item)
     articles = parse_articles(soup)
+
+    # Son güvenlik katmanı:
+    # Salt dipnot işaretleri madde başlığı olarak kalmasın.
+    for article in articles:
+        title = str(article.get("baslik") or "").strip()
+        title_clean = clean_sup_artifacts(title)
+
+        if is_footnote_only(title_clean):
+            article["baslik"] = ""
+        else:
+            article["baslik"] = strip_trailing_title_footnotes(title_clean)
+
+        override = TITLE_OVERRIDES.get(
+            (str(item["no"]), str(article.get("madde")))
+        )
+        if override:
+            article["baslik"] = override
+
     if not articles:
         raise RuntimeError(f"{item['ad']} için hiçbir MADDE bulunamadı.")
 
