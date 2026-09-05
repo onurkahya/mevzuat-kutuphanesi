@@ -14,8 +14,8 @@ header .sub{font-size:18px;margin-top:7px;font-weight:800;color:#e6b85c;letter-s
 main{width:min(1040px,94%);margin:0 auto 26px}
 .card{background:var(--card);border:1px solid rgba(255,255,255,.28);border-radius:16px;padding:20px;margin:0 0 18px}
 label{display:block;color:#ffd629;font-size:12px;font-weight:900;margin:0 0 7px}
-select,button{font:inherit;border-radius:10px;border:0}
-select{width:100%;padding:14px 16px;background:#fff;color:#111;font-size:16px;font-weight:700}
+select,input,button{font:inherit;border-radius:10px;border:0}
+select,input{width:100%;padding:14px 16px;background:#fff;color:#111;font-size:16px;font-weight:400}
 button{padding:14px 18px;font-weight:900;cursor:pointer}
 .secondary{background:var(--yellow);color:#111;box-shadow:0 5px 12px rgba(0,0,0,.2)}
 .query{display:block}
@@ -65,7 +65,7 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
 <section class="card query">
   <div>
     <label>MEVZUAT</label>
-    <select id="law"><option value="">Lütfen Mevzuat Seçin</option></select>
+    <input id="lawSearch" list="lawList" autocomplete="off" placeholder="Lütfen Mevzuat Seçin"><datalist id="lawList"></datalist>
     <div id="updateInfo" class="status"></div>
   </div>
 </section>
