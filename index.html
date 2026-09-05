@@ -33,6 +33,36 @@ button{padding:14px 18px;font-weight:900;cursor:pointer}
 .print-card{max-width:330px;margin-left:auto;margin-right:auto;text-align:center}
 .print-card button{width:100%;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
 .status{font-size:12px;color:#dce3ff;text-align:right;margin-top:8px}
+
+.law-search-wrap{position:relative}
+.law-results{
+  position:absolute;
+  top:calc(100% + 6px);
+  left:0;
+  right:0;
+  z-index:50;
+  background:#fff;
+  color:#111;
+  border:1px solid rgba(0,0,0,.22);
+  border-radius:10px;
+  box-shadow:0 8px 22px rgba(0,0,0,.28);
+  max-height:320px;
+  overflow-y:auto;
+}
+.law-result-item{
+  padding:11px 14px;
+  font-size:15px;
+  font-weight:400;
+  line-height:1.25;
+  cursor:pointer;
+  border-bottom:1px solid #ececec;
+}
+.law-result-item:last-child{border-bottom:0}
+.law-result-item:hover,
+.law-result-item.active{
+  background:#f4f6fb;
+}
+
 footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
 .print-header{display:none}
 @page{size:A4 portrait;margin:1.5cm 2cm 2cm}
@@ -66,12 +96,13 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
 
 <section class="card query">
   <label>MEVZUAT</label>
-  <input
-    id="lawSearch"
-    list="lawList"
-    autocomplete="off"
-    placeholder="Lütfen Mevzuat Seçin">
-  <datalist id="lawList"></datalist>
+  <div class="law-search-wrap">
+    <input
+      id="lawSearch"
+      autocomplete="off"
+      placeholder="Lütfen Mevzuat Seçin">
+    <div id="lawResults" class="law-results hidden"></div>
+  </div>
   <div id="updateInfo" class="status"></div>
 </section>
 
@@ -209,14 +240,7 @@ async function loadCatalog(){
 
   catalog = await r.json();
 
-  const list = document.getElementById("lawList");
-  list.innerHTML = "";
 
-  (catalog.mevzuatlar || []).forEach(x => {
-    const o = document.createElement("option");
-    o.value = x.ad;
-    list.appendChild(o);
-  });
 
   if(catalog.son_guncelleme){
     document.getElementById("updateInfo").textContent =
@@ -253,39 +277,61 @@ async function loadLaw(item){
   document.getElementById("modeCard").classList.remove("hidden");
 }
 
-function findLawByTypedText(text){
-  if(!catalog) return null;
+function getLawMatches(text){
+  if(!catalog) return [];
 
   const q = normalizeTR(text);
-
-  if(!q) return null;
+  if(!q) return [];
 
   const laws = catalog.mevzuatlar || [];
 
-  // Tam eşleşme
-  let found = laws.find(x => normalizeTR(x.ad) === q);
-  if(found) return found;
-
-  // Başlangıç eşleşmesi:
-  // "mesa" -> MESAFELİ SÖZLEŞMELER YÖNETMELİĞİ
-  const starts = laws.filter(
-    x => normalizeTR(x.ad).startsWith(q)
-  );
-
-  if(starts.length === 1){
-    return starts[0];
-  }
-
-  // Tek bir içerme eşleşmesi varsa onu da kabul et.
+  const starts = laws.filter(x => normalizeTR(x.ad).startsWith(q));
   const contains = laws.filter(
-    x => normalizeTR(x.ad).includes(q)
+    x => !normalizeTR(x.ad).startsWith(q) && normalizeTR(x.ad).includes(q)
   );
 
-  if(contains.length === 1){
-    return contains[0];
+  return [...starts, ...contains].slice(0, 20);
+}
+
+function closeLawResults(){
+  const box = document.getElementById("lawResults");
+  box.innerHTML = "";
+  box.classList.add("hidden");
+}
+
+function showLawResults(matches){
+  const box = document.getElementById("lawResults");
+  box.innerHTML = "";
+
+  if(!matches.length){
+    box.classList.add("hidden");
+    return;
   }
 
-  return null;
+  matches.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "law-result-item";
+    div.textContent = item.ad;
+
+    div.addEventListener("mousedown", async (e) => {
+      e.preventDefault();
+
+      const input = document.getElementById("lawSearch");
+      input.value = item.ad;
+
+      closeLawResults();
+
+      try{
+        await loadLaw(item);
+      }catch(err){
+        alert("Mevzuat yüklenemedi: " + err.message);
+      }
+    });
+
+    box.appendChild(div);
+  });
+
+  box.classList.remove("hidden");
 }
 
 document.getElementById("lawSearch").addEventListener("input", () => {
@@ -297,38 +343,44 @@ document.getElementById("lawSearch").addEventListener("input", () => {
   resetLawView();
 
   if(!typed){
+    closeLawResults();
     return;
   }
 
   searchTimer = setTimeout(async () => {
-    const item = findLawByTypedText(typed);
+    const matches = getLawMatches(typed);
 
-    if(!item){
+    // Tek ve güçlü eşleşme varsa otomatik seç
+    if(matches.length === 1){
+      const item = matches[0];
+      input.value = item.ad;
+      closeLawResults();
+
+      try{
+        await loadLaw(item);
+      }catch(err){
+        alert("Mevzuat yüklenemedi: " + err.message);
+      }
       return;
     }
 
-    try{
-      // Otomatik seçildiğini kullanıcı da görsün.
-      input.value = item.ad;
-      await loadLaw(item);
-    }catch(e){
-      alert("Mevzuat yüklenemedi: " + e.message);
-    }
-  }, 250);
+    showLawResults(matches);
+  }, 180);
 });
 
-// Datalist'ten fare/klavye ile tam seçim yapılması için ek güvence.
-document.getElementById("lawSearch").addEventListener("change", async () => {
-  const input = document.getElementById("lawSearch");
-  const item = findLawByTypedText(input.value);
+document.getElementById("lawSearch").addEventListener("focus", () => {
+  const typed = document.getElementById("lawSearch").value.trim();
 
-  if(!item) return;
+  if(typed){
+    showLawResults(getLawMatches(typed));
+  }
+});
 
-  try{
-    input.value = item.ad;
-    await loadLaw(item);
-  }catch(e){
-    alert("Mevzuat yüklenemedi: " + e.message);
+document.addEventListener("click", (e) => {
+  const wrap = document.querySelector(".law-search-wrap");
+
+  if(!wrap.contains(e.target)){
+    closeLawResults();
   }
 });
 
