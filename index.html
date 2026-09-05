@@ -5,16 +5,17 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mevzuat Kütüphanesi</title>
 <style>
-:root{--bg:#0d174f;--card:#21368f;--yellow:#f4c833;--white:#fff}
+:root{--bg:#0d174f;--card:#21368f;--yellow:#f4c833;--white:#fff;--font-delta:0px}
 *{box-sizing:border-box}
 body{margin:0;background:linear-gradient(180deg,#0c154c,#111d63);color:#fff;font-family:"Arial Narrow",Arial,sans-serif}
-header{text-align:center;padding:0 12px 16px}
+header{text-align:center;padding:20px 12px 16px}
 .header-logo{display:block;width:min(560px,88vw);height:auto;margin:0 auto}
+header .sub{font-size:18px;margin-top:7px;font-weight:800;color:#e6b85c;letter-spacing:.2px}
 main{width:min(1040px,94%);margin:0 auto 26px}
 .card{background:var(--card);border:1px solid rgba(255,255,255,.28);border-radius:16px;padding:20px;margin:0 0 18px}
 label{display:block;color:#ffd629;font-size:12px;font-weight:900;margin:0 0 7px}
-select,input,button{font:inherit;border-radius:10px;border:0}
-select,input{width:100%;padding:14px 16px;background:#fff;color:#111;font-size:16px;font-weight:400}
+select,button{font:inherit;border-radius:10px;border:0}
+select{width:100%;padding:14px 16px;background:#fff;color:#111;font-size:16px;font-weight:700}
 button{padding:14px 18px;font-weight:900;cursor:pointer}
 .secondary{background:var(--yellow);color:#111;box-shadow:0 5px 12px rgba(0,0,0,.2)}
 .query{display:block}
@@ -55,24 +56,18 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
 </style>
 </head>
 <body>
-
 <header>
-  <img class="header-logo"
-       src="assets/ticaret_bakanligi_header.png"
-       alt="Türkiye Cumhuriyeti Ticaret Bakanlığı">
+  <img class="header-logo" src="assets/ticaret_bakanligi_header.png" alt="Türkiye Cumhuriyeti Ticaret Bakanlığı">
+  <div class="sub">Mevzuat Kütüphanesi</div>
 </header>
 
 <main>
-
 <section class="card query">
-  <label>MEVZUAT</label>
-  <input
-    id="law"
-    list="law"
-    autocomplete="off"
-    placeholder="Lütfen Mevzuat Seçin">
-  <datalist id="law"></datalist>
-  <div id="updateInfo" class="status"></div>
+  <div>
+    <label>MEVZUAT</label>
+    <select id="law"><option value="">Lütfen Mevzuat Seçin</option></select>
+    <div id="updateInfo" class="status"></div>
+  </div>
 </section>
 
 <section class="card mode-card hidden" id="modeCard">
@@ -84,9 +79,7 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
   <div class="controls hidden" id="articleControls">
     <div>
       <label>MADDE NUMARASI</label>
-      <select id="article">
-        <option value="">Madde seçin</option>
-      </select>
+      <select id="article"><option value="">Madde seçin</option></select>
     </div>
     <div class="fonts">
       <button type="button" onclick="fontChange(-1)">A−</button>
@@ -119,19 +112,15 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
 <section class="card print-card hidden" id="printCard">
   <button onclick="window.print()">PDF / Yazdır</button>
 </section>
-
 </main>
 
 <footer>© Bu sayfa Onur KAHYA tarafından bilgilendirme amacıyla hazırlanmıştır 2026.</footer>
 
 <script>
-let catalog = null;
-let current = null;
-let mode = null;
-let fontDelta = 0;
+let catalog=null,current=null,mode=null,fontDelta=0;
 
 function esc(s){
-  return (s || "").replace(/[&<>"']/g, c => ({
+  return (s||"").replace(/[&<>"']/g,c=>({
     "&":"&amp;",
     "<":"&lt;",
     ">":"&gt;",
@@ -141,221 +130,176 @@ function esc(s){
 }
 
 function officialHtml(s){
-  return esc(s || "")
-    .replace(/\[\[SUP\]\](.*?)\[\[\/SUP\]\]/g, "<sup>$1</sup>")
-    .replace(/\n/g, "<br>");
+  return esc(s||"")
+    .replace(/\[\[SUP\]\](.*?)\[\[\/SUP\]\]/g,"<sup>$1</sup>")
+    .replace(/\n/g,"<br>");
 }
 
 function plain(s){
-  return (s || "")
-    .replace(/\[\[SUP\]\](.*?)\[\[\/SUP\]\]/g, "$1");
+  return (s||"").replace(/\[\[SUP\]\](.*?)\[\[\/SUP\]\]/g,"$1");
 }
 
 function label(a){
-  const kind =
-    a.tur === "gecici" ? "Geçici Madde" :
-    a.tur === "ek" ? "Ek Madde" :
-    "Madde";
+  const kind=a.tur==="gecici"
+    ? "Geçici Madde"
+    : (a.tur==="ek" ? "Ek Madde" : "Madde");
 
-  return kind + " " + a.madde +
-    (a.baslik ? " - " + plain(a.baslik) : "");
+  return kind+" "+a.madde+(a.baslik ? " - "+plain(a.baslik) : "");
 }
 
-
 function resetResult(){
-  mode = null;
+  mode=null;
   document.getElementById("resultCard").classList.add("hidden");
   document.getElementById("printCard").classList.add("hidden");
   document.getElementById("articleControls").classList.add("hidden");
   document.getElementById("fullControls").classList.add("hidden");
 }
 
-function resetLawView(){
-  current = null;
-  document.getElementById("modeCard").classList.add("hidden");
-  resetResult();
-
-  const article = document.getElementById("article");
-  article.innerHTML = '<option value="">Madde seçin</option>';
-}
-
 function fontChange(d){
-  fontDelta = Math.max(-2, Math.min(6, fontDelta + d));
-  document.getElementById("result")
-    .style.setProperty("--rfd", fontDelta + "px");
+  fontDelta=Math.max(-2,Math.min(6,fontDelta+d));
+  document.getElementById("result").style.setProperty("--rfd",fontDelta+"px");
 }
 
 async function loadCatalog(){
-  const r = await fetch("data/mevzuatlar.json?ts=" + Date.now());
+  const r=await fetch("data/mevzuatlar.json?ts="+Date.now());
+  catalog=await r.json();
 
-  if(!r.ok){
-    throw new Error("mevzuatlar.json alınamadı.");
-  }
+  const sel=document.getElementById("law");
+  sel.innerHTML='<option value="">Lütfen Mevzuat Seçin</option>';
 
-  catalog = await r.json();
-
-  const sel = document.getElementById("law");
-  sel.innerHTML = '<option value="">Lütfen Mevzuat Seçin</option>';
-
-  (catalog.mevzuatlar || []).forEach(x => {
-    const o = document.createElement("option");
-    o.value = x.id;
-    o.textContent = x.ad;
+  (catalog.mevzuatlar||[]).forEach(x=>{
+    const o=document.createElement("option");
+    o.value=x.id;
+    o.textContent=x.ad;
     sel.appendChild(o);
   });
 
   if(catalog.son_guncelleme){
-    document.getElementById("updateInfo").textContent =
-      "Son güncelleme: " +
+    document.getElementById("updateInfo").textContent=
+      "Son güncelleme: "+
       new Date(catalog.son_guncelleme).toLocaleString("tr-TR");
   }
 }
 
-async function loadLaw(item){
-  if(!item) return;
+async function loadSelectedLaw(){
+  const id=document.getElementById("law").value;
 
-  resetLawView();
+  current=null;
+  document.getElementById("modeCard").classList.add("hidden");
+  resetResult();
 
-  const r = await fetch(
-    "data/" + item.id + ".json?ts=" + Date.now()
-  );
-
-  if(!r.ok){
-    throw new Error("Mevzuat dosyası bulunamadı.");
-  }
-
-  current = await r.json();
-
-  const article = document.getElementById("article");
-  article.innerHTML = '<option value="">Madde seçin</option>';
-
-  current.maddeler.forEach((a, i) => {
-    const o = document.createElement("option");
-    o.value = i;
-    o.textContent = label(a);
-    article.appendChild(o);
-  });
-
-  document.getElementById("modeCard").classList.remove("hidden");
-}
-
-document.getElementById("law").addEventListener("change", async () => {
-  const id = document.getElementById("law").value;
-
-  resetLawView();
+  const aSel=document.getElementById("article");
+  aSel.innerHTML='<option value="">Madde seçin</option>';
 
   if(!id){
     return;
   }
 
-  const item = (catalog?.mevzuatlar || []).find(x => x.id === id);
-
-  if(!item){
-    return;
-  }
-
   try{
-    await loadLaw(item);
-  }catch(e){
-    alert("Mevzuat yüklenemedi: " + e.message);
-  }
-});
+    const r=await fetch("data/"+id+".json?ts="+Date.now());
 
-document.getElementById("articleMode").onclick = () => {
-  if(!current) return;
-
-  resetResult();
-  mode = "article";
-
-  document.getElementById("articleControls")
-    .classList.remove("hidden");
-};
-
-document.getElementById("fullMode").onclick = () => {
-  if(!current) return;
-
-  resetResult();
-  mode = "full";
-
-  document.getElementById("fullControls")
-    .classList.remove("hidden");
-
-  const result = document.getElementById("result");
-  result.querySelector("h2").textContent = current.ad;
-
-  document.getElementById("articleTitle").innerHTML = "";
-
-  let h = "";
-
-  current.maddeler.forEach(a => {
-    const kind =
-      a.tur === "gecici" ? "GEÇİCİ MADDE" :
-      a.tur === "ek" ? "EK MADDE" :
-      "MADDE";
-
-    h += '<div class="full-article">';
-
-    if(a.baslik){
-      h += '<div class="full-title">' +
-        officialHtml(a.baslik) +
-        '</div>';
+    if(!r.ok){
+      throw new Error("Mevzuat dosyası bulunamadı.");
     }
 
-    h += '<div class="full-body"><strong>' +
-      kind + " " + esc(a.madde) +
-      " –</strong> " +
-      officialHtml(a.metin) +
+    current=await r.json();
+
+    current.maddeler.forEach((a,i)=>{
+      const o=document.createElement("option");
+      o.value=i;
+      o.textContent=label(a);
+      aSel.appendChild(o);
+    });
+
+    document.getElementById("modeCard").classList.remove("hidden");
+
+  }catch(e){
+    alert("Mevzuat yüklenemedi: "+e.message);
+  }
+}
+
+document.getElementById("articleMode").onclick=()=>{
+  mode="article";
+  resetResult();
+  mode="article";
+  document.getElementById("articleControls").classList.remove("hidden");
+};
+
+document.getElementById("fullMode").onclick=()=>{
+  if(!current)return;
+
+  mode="full";
+  resetResult();
+  mode="full";
+
+  document.getElementById("fullControls").classList.remove("hidden");
+
+  const res=document.getElementById("result");
+  res.querySelector("h2").textContent=current.ad;
+
+  document.getElementById("articleTitle").innerHTML="";
+
+  let h="";
+
+  current.maddeler.forEach(a=>{
+    const kind=a.tur==="gecici"
+      ? "GEÇİCİ MADDE"
+      : (a.tur==="ek" ? "EK MADDE" : "MADDE");
+
+    h+='<div class="full-article">';
+
+    if(a.baslik){
+      h+='<div class="full-title">'+officialHtml(a.baslik)+'</div>';
+    }
+
+    h+='<div class="full-body"><strong>'+
+      kind+" "+esc(a.madde)+" –</strong> "+
+      officialHtml(a.metin)+
       '</div></div>';
   });
 
-  document.getElementById("body").innerHTML = h;
+  document.getElementById("body").innerHTML=h;
   document.getElementById("resultCard").classList.remove("hidden");
 
-  // Tam mevzuatta PDF düğmesi görünmez.
+  // Tam mevzuat görüntüsünde PDF/Yazdır gösterilmez.
   document.getElementById("printCard").classList.add("hidden");
 };
 
-document.getElementById("article").onchange = () => {
-  if(!current) return;
+document.getElementById("article").onchange=()=>{
+  if(!current)return;
 
-  const value = document.getElementById("article").value;
+  const v=document.getElementById("article").value;
 
-  if(value === ""){
+  if(v===""){
     document.getElementById("resultCard").classList.add("hidden");
     document.getElementById("printCard").classList.add("hidden");
     return;
   }
 
-  const a = current.maddeler[Number(value)];
+  const a=current.maddeler[Number(v)];
 
-  const kind =
-    a.tur === "gecici" ? "GEÇİCİ MADDE" :
-    a.tur === "ek" ? "EK MADDE" :
-    "MADDE";
+  const kind=a.tur==="gecici"
+    ? "GEÇİCİ MADDE"
+    : (a.tur==="ek" ? "EK MADDE" : "MADDE");
 
-  const result = document.getElementById("result");
+  const res=document.getElementById("result");
 
-  result.querySelector("h2").textContent = current.ad;
+  res.querySelector("h2").textContent=current.ad;
+  document.getElementById("articleTitle").innerHTML=officialHtml(a.baslik||"");
 
-  document.getElementById("articleTitle").innerHTML =
-    officialHtml(a.baslik || "");
-
-  document.getElementById("body").innerHTML =
-    '<strong>' +
-    kind + " " + esc(a.madde) +
-    " –</strong> " +
+  document.getElementById("body").innerHTML=
+    '<strong>'+kind+" "+esc(a.madde)+" –</strong> "+
     officialHtml(a.metin);
 
   document.getElementById("resultCard").classList.remove("hidden");
   document.getElementById("printCard").classList.remove("hidden");
 };
 
-loadCatalog().catch(e => {
-  document.getElementById("updateInfo").textContent =
-    "Mevzuat listesi yüklenemedi.";
-  alert("Mevzuat kataloğu yüklenemedi: " + e.message);
+document.getElementById("law").addEventListener("change",loadSelectedLaw);
+
+loadCatalog().catch(e=>{
+  alert("Mevzuat kataloğu yüklenemedi: "+e.message);
 });
 </script>
-
 </body>
 </html>
