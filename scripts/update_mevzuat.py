@@ -137,6 +137,46 @@ def is_body_line(line):
         or len(line) > 180
     )
 
+
+FOOTNOTE_ONLY_RE = re.compile(
+    r"^(?:"
+    r"(?:\[\[SUP\]\])?"
+    r"(?:\[\d+\]|\(\d+\)|\d+)"
+    r"(?:\[\[/SUP\]\])?"
+    r")+$",
+    re.IGNORECASE,
+)
+
+def is_footnote_only(line):
+    """
+    Madde başlığının hemen önünde ayrı satıra düşen [25], [26], [27]
+    gibi dipnot işaretlerini başlık sanmamak için kullanılır.
+    """
+    value = clean_sup_artifacts(line)
+    value = re.sub(r"\s+", "", value)
+
+    if not value:
+        return True
+
+    # [25][26][27] veya (25)(26) gibi salt dipnot dizileri
+    if re.fullmatch(r"(?:\[\d+\]|\(\d+\)|\d+)+", value):
+        return True
+
+    return bool(FOOTNOTE_ONLY_RE.fullmatch(line.strip()))
+
+def strip_trailing_title_footnotes(title):
+    """
+    Başlığın sonuna yapışmış dipnot numaralarını temizler:
+      'Yaptırım hükümleri [25][26][27]' -> 'Yaptırım hükümleri'
+    """
+    value = clean_sup_artifacts(title)
+    value = re.sub(
+        r"(?:\s*(?:\[\d+\]|\(\d+\)))+\s*$",
+        "",
+        value
+    )
+    return re.sub(r"\s+", " ", value).strip()
+
 def looks_like_heading(line):
     if not line or ARTICLE_RE.match(line) or is_body_line(line):
         return False
@@ -205,31 +245,31 @@ def normalize_article_heading(value):
 
 def heading_block_before(lines, article_index):
     """
-    MADDE satırından hemen önceki gerçek madde başlığını bulur.
+    MADDE satırından önceki gerçek başlığı bulur.
 
-    Mevzuat.gov.tr bazı başlıkları iki parçaya bölebilir:
-        Ön bilgilendirmeye ilişkin
-        diğer yükümlülükler
-        MADDE 8 -
+    Özellikle kanunlarda başlık dipnotları ayrı satırlara düşebilir:
+        Yaptırım hükümleri
+        [25]
+        [26]
+        [27]
+        MADDE 77 -
 
-    Böyle bir durumda iki parça birleştirilir.
-
-    Ancak:
-        İKİNCİ BÖLÜM
-        Ön Bilgilendirme Yükümlülüğü
-        Ön bilgilendirme
-        MADDE 5 -
-
-    yapısında bölüm satırı alınmaz ve birleşmiş üst başlık + madde
-    başlığı normalize_article_heading() ile "Ön bilgilendirme"ye çevrilir.
+    Bu durumda [27] başlık olarak alınmaz; gerçek başlık
+    "Yaptırım hükümleri" olur.
     """
     candidates = []
+    skipped_footnotes = []
     pos = article_index - 1
 
     while pos >= 0 and len(candidates) < 4:
         line = lines[pos]
 
-        # BÖLÜM / KISIM sınırının ötesine geçme.
+        # Ayrı satıra düşmüş dipnotları atla ama blok sınırına dahil et.
+        if is_footnote_only(line):
+            skipped_footnotes.append(pos)
+            pos -= 1
+            continue
+
         if SECTION_RE.match(line):
             break
 
@@ -240,11 +280,12 @@ def heading_block_before(lines, article_index):
         pos -= 1
 
     if not candidates:
+        # Salt dipnot varsa başlık boş; blok başlangıcını dipnotların başına al.
+        if skipped_footnotes:
+            return "", min(skipped_footnotes)
         return "", article_index
 
     nearest = candidates[0][1]
-
-    # Varsayılan olarak en yakın satır madde başlığıdır.
     raw_title = nearest
 
     if len(candidates) >= 2:
@@ -270,26 +311,22 @@ def heading_block_before(lines, article_index):
                 == previous_first.group(0).casefold()
         )
 
-        # 1) Başlığın ikinci parçası küçük harfle başlıyorsa:
-        #    "Ön bilgilendirmeye ilişkin" + "diğer yükümlülükler"
-        #    kesinlikle aynı başlığın devamıdır.
-        #
-        # 2) İki satır aynı kelimeyle başlıyorsa:
-        #    "Ön Bilgilendirme Yükümlülüğü" + "Ön bilgilendirme"
-        #    birleşmiş üst başlık / madde başlığı yapısıdır.
         if nearest_starts_lower or same_first_word:
             raw_title = previous + " " + nearest
 
     title = normalize_article_heading(raw_title)
+    title = strip_trailing_title_footnotes(title)
 
-    # Önceki maddenin metninden çıkarılacak başlık bloğu.
-    # Kullanılan ikinci başlık parçası varsa onu da blok başlangıcına dahil et.
     if raw_title != nearest and len(candidates) >= 2:
         block_start = candidates[1][0]
     else:
         block_start = candidates[0][0]
 
-    title = clean_sup_artifacts(title)
+    # Başlığın hemen arkasındaki ayrı dipnot satırlarını da önceki
+    # maddenin gövdesine bırakma.
+    if skipped_footnotes:
+        block_start = min(block_start, min(skipped_footnotes))
+
     return title, block_start
 
 def format_article_text(body_lines):
