@@ -21,8 +21,8 @@ button{padding:14px 18px;font-weight:900;cursor:pointer}
 .hidden{display:none!important}
 .mode-row{display:flex;align-items:center;gap:12px;flex-wrap:nowrap;overflow-x:auto;color:#ffd629;font-size:12px;font-weight:900}
 .mode-label{flex:none;white-space:nowrap}
-.mode-row button{flex:none;background:transparent;color:inherit;font:inherit;padding:8px 10px;white-space:nowrap;border:1px solid rgba(255,214,41,.45);border-radius:8px}
-.mode-row button:hover{background:rgba(255,214,41,.12)}
+.mode-row button{flex:none;min-width:192px;background:var(--yellow);color:#000;font:inherit;font-size:16px;font-weight:900;padding:16px 24px;white-space:nowrap;border:0;border-radius:11px}
+.mode-row button:hover{background:#ffda49}
 .mode-row button:focus-visible{outline:2px solid #ffd629;outline-offset:2px}
 .controls{display:grid;grid-template-columns:minmax(0,1fr) 170px;gap:14px;align-items:end;margin-top:14px}
 .fonts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -56,7 +56,7 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
 @media(max-width:700px){
   .controls{grid-template-columns:1fr}
   .mode-row{gap:6px;font-size:clamp(9px,2.6vw,12px)}
-  .mode-row button{padding:8px 6px}
+  .mode-row button{min-width:0;padding:14px 10px;font-size:12px}
 }
 </style>
 </head>
@@ -78,7 +78,7 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
   <div class="mode-row" role="group" aria-labelledby="modeLabel">
     <span class="mode-label" id="modeLabel">MEVZUATI GÖRÜNTÜLEME ŞEKLİ:</span>
     <button type="button" id="articleMode">Madde Madde</button>
-    <button type="button" id="fullMode">Tamamı</button>
+    <button type="button" id="fullMode">Tamamını</button>
   </div>
 
   <div class="controls hidden" id="articleControls">
