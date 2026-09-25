@@ -19,21 +19,21 @@ button{padding:14px 18px;font-weight:900;cursor:pointer}
 .secondary{background:var(--yellow);color:#111;box-shadow:0 5px 12px rgba(0,0,0,.2)}
 .query{display:block}
 .hidden{display:none!important}
-.mode-row{display:flex;align-items:center;gap:12px;width:100%;padding:4px 0;color:var(--yellow);font-size:16px;font-weight:900}
-.mode-label{flex:0 0 36%;text-align:center;white-space:nowrap}
-.mode-row button{flex:1 1 0;min-width:0;min-height:52px;background:var(--yellow);color:#111;font:inherit;font-size:16px;font-weight:900;padding:14px 20px;white-space:nowrap;border:1px solid rgba(255,255,255,.16);border-radius:12px;box-shadow:0 3px 8px rgba(0,0,0,.16);transition:background .15s,box-shadow .15s}
-.mode-row button:hover{background:#ffda49;box-shadow:0 4px 12px rgba(0,0,0,.22)}
-.mode-row button:focus-visible{outline:2px solid #ffd629;outline-offset:2px}
+.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .controls{display:grid;grid-template-columns:minmax(0,1fr) 170px;gap:14px;align-items:end;margin-top:14px}
 .fonts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .fonts button{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45);font-size:18px}
 .result{background:#fff;color:#111;border-radius:14px;padding:22px;--rfd:0px}
-.result h2{margin:0 0 8px;color:#071960;font-size:calc(20px + var(--rfd));font-weight:900}
+.result h2{margin:0 0 8px;color:#071960;font-size:calc(21px + var(--rfd));font-weight:900}
 .article-title{font-weight:900;font-size:calc(17px + var(--rfd));margin:0 0 7px}
 .body,.full-body{font-size:calc(15px + var(--rfd));line-height:1.42;text-align:justify}
 .full-article{margin-bottom:20px}
 .full-title{font-weight:900;font-size:calc(16px + var(--rfd));margin-bottom:5px}
 .result sup{font-size:.72em;line-height:0;vertical-align:super;font-weight:700}
+.penalty-box{margin-top:22px;padding-top:18px;border-top:2px solid #e1b91f}
+.penalty-heading{font-size:calc(17px + var(--rfd));font-weight:900;color:#071960;margin-bottom:12px}
+.penalty-text{font-size:calc(15px + var(--rfd));line-height:1.42;text-align:justify;margin-bottom:12px}
+.penalty-amount{font-size:calc(19px + var(--rfd));font-weight:900;line-height:1.42;text-align:justify}
 .print-card{max-width:330px;margin-left:auto;margin-right:auto;text-align:center}
 .print-card button{width:100%;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
 .status{font-size:12px;color:#dce3ff;text-align:right;margin-top:8px}
@@ -49,14 +49,15 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
   .print-header .m{font-size:15pt;font-weight:900}
   .print-header .k{font-size:10pt;font-weight:700;margin-top:2px}
   .result{border:1px solid #999;border-radius:10px;padding:12px 14px}
-  .result h2{color:#000}
-  .body,.full-body{line-height:1.38}
+  .result h2{color:#000;font-size:11pt}
+  .article-title{font-size:10.5pt}
+  .body,.full-body{font-size:10pt;line-height:1.38}
+  .penalty-heading{font-size:11pt}
+  .penalty-text{font-size:10pt}
+  .penalty-amount{font-size:12pt}
 }
 @media(max-width:700px){
-  .controls{grid-template-columns:1fr}
-  .mode-row{gap:8px;font-size:clamp(9px,2.2vw,14px)}
-  .mode-label{flex:0 0 auto}
-  .mode-row button{flex:1 1 0;min-width:0;min-height:44px;padding:10px 4px;font-size:clamp(10px,2.6vw,12px)}
+  .controls,.mode-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -75,10 +76,9 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
 </section>
 
 <section class="card mode-card hidden" id="modeCard">
-  <div class="mode-row" role="group" aria-labelledby="modeLabel">
-    <span class="mode-label" id="modeLabel">MEVZUATI GÖRÜNTÜLEME ŞEKLİ:</span>
-    <button type="button" id="articleMode">Madde Madde</button>
-    <button type="button" id="fullMode">Bütün Maddeler</button>
+  <div class="mode-grid">
+    <button class="secondary" id="articleMode">Mevzuatı Madde Madde Görüntüle</button>
+    <button class="secondary" id="fullMode">Mevzuatın Tamamını Görüntüle</button>
   </div>
 
   <div class="controls hidden" id="articleControls">
@@ -302,9 +302,25 @@ document.getElementById("article").onchange=()=>{
   res.querySelector("h2").textContent=current.ad;
   document.getElementById("articleTitle").innerHTML=officialHtml(a.baslik||"");
 
-  document.getElementById("body").innerHTML=
+  let articleHtml=
     '<strong>'+kind+" "+esc(a.madde)+" –</strong> "+
     officialHtml(a.metin);
+
+  // DENEME: 6502 sayılı Kanun Madde 54 için 2026 idari para cezası
+  const is6502 = /6502/.test(String(current.ad||""));
+  const isMadde54 = String(a.madde||"").trim()==="54";
+
+  if(is6502 && isMadde54){
+    articleHtml += `
+      <div class="penalty-box">
+        <div class="penalty-heading">2026 YILINDA UYGULANACAK OLAN İDARİ PARA CEZASI</div>
+        <div class="penalty-text"><strong>MADDE 77- (1)</strong> (Değişik:23/5/2024-7511/19 md.) Bu Kanunun;</div>
+        <div class="penalty-text"><strong>a)</strong> 4 üncü, 7 nci, 18 inci, 19 uncu, 20 nci, 21 inci, 26 ncı, 30 uncu, 35 inci, 49 uncu, 51 inci, 52 nci, 54 üncü, 57 nci maddeleri ve 48 inci maddesinin ikinci, üçüncü, dördüncü, altıncı ve yedinci fıkralarında belirtilen yükümlülüklere aykırı hareket edenler ile 8 inci maddesinin üçüncü fıkrası uyarınca malları süresinde teslim veya monte etmeyenler hakkında aykırılığı tespit edilen her bir işlem veya sözleşme için iki bin iki yüz Türk Lirası,</div>
+        <div class="penalty-amount">23/12/2025 tarihli ve 33116 sayılı Resmî Gazete’de yayımlanan 6502 Sayılı Tüketicinin Korunması Hakkında Kanunun 77'nci Maddesine Göre 2026 Yılında Uygulanacak Olan İdari Para Cezalarına İlişkin Tebliğine göre 1/1/2026 tarihinden itibaren uygulanacak idari para cezası <strong>3.973 Türk Lirasıdır.</strong></div>
+      </div>`;
+  }
+
+  document.getElementById("body").innerHTML=articleHtml;
 
   document.getElementById("resultCard").classList.remove("hidden");
   document.getElementById("printCard").classList.remove("hidden");
