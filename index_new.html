@@ -10,7 +10,6 @@
 body{margin:0;background:linear-gradient(180deg,#0c154c,#111d63);color:#fff;font-family:"Arial Narrow",Arial,sans-serif}
 header{text-align:center;padding:20px 12px 16px}
 .header-logo{display:block;width:min(560px,88vw);height:auto;margin:0 auto}
-header .sub{font-size:18px;margin-top:7px;font-weight:800;color:#e6b85c;letter-spacing:.2px}
 main{width:min(1040px,94%);margin:0 auto 26px}
 .card{background:var(--card);border:1px solid rgba(255,255,255,.28);border-radius:16px;padding:20px;margin:0 0 18px}
 label{display:block;color:#ffd629;font-size:12px;font-weight:900;margin:0 0 7px}
@@ -20,12 +19,16 @@ button{padding:14px 18px;font-weight:900;cursor:pointer}
 .secondary{background:var(--yellow);color:#111;box-shadow:0 5px 12px rgba(0,0,0,.2)}
 .query{display:block}
 .hidden{display:none!important}
-.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mode-row{display:flex;align-items:center;gap:12px;width:100%;padding:4px 0;color:var(--yellow);font-size:16px;font-weight:900}
+.mode-label{flex:0 0 36%;text-align:center;white-space:nowrap}
+.mode-row button{flex:1 1 0;min-width:0;min-height:52px;background:var(--yellow);color:#111;font:inherit;font-size:16px;font-weight:900;padding:14px 20px;white-space:nowrap;border:1px solid rgba(255,255,255,.16);border-radius:12px;box-shadow:0 3px 8px rgba(0,0,0,.16);transition:background .15s,box-shadow .15s}
+.mode-row button:hover{background:#ffda49;box-shadow:0 4px 12px rgba(0,0,0,.22)}
+.mode-row button:focus-visible{outline:2px solid #ffd629;outline-offset:2px}
 .controls{display:grid;grid-template-columns:minmax(0,1fr) 170px;gap:14px;align-items:end;margin-top:14px}
 .fonts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .fonts button{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45);font-size:18px}
 .result{background:#fff;color:#111;border-radius:14px;padding:22px;--rfd:0px}
-.result h2{margin:0 0 8px;color:#071960;font-size:calc(21px + var(--rfd));font-weight:900}
+.result h2{margin:0 0 8px;color:#071960;font-size:calc(20px + var(--rfd));font-weight:900}
 .article-title{font-weight:900;font-size:calc(17px + var(--rfd));margin:0 0 7px}
 .body,.full-body{font-size:calc(15px + var(--rfd));line-height:1.42;text-align:justify}
 .full-article{margin-bottom:20px}
@@ -46,23 +49,24 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
   .print-header .m{font-size:15pt;font-weight:900}
   .print-header .k{font-size:10pt;font-weight:700;margin-top:2px}
   .result{border:1px solid #999;border-radius:10px;padding:12px 14px}
-  .result h2{color:#000;font-size:11pt}
-  .article-title{font-size:10.5pt}
-  .body,.full-body{font-size:10pt;line-height:1.38}
+  .result h2{color:#000}
+  .body,.full-body{line-height:1.38}
 }
 @media(max-width:700px){
-  .controls,.mode-grid{grid-template-columns:1fr}
+  .controls{grid-template-columns:1fr}
+  .mode-row{gap:8px;font-size:clamp(9px,2.2vw,14px)}
+  .mode-label{flex:0 0 auto}
+  .mode-row button{flex:1 1 0;min-width:0;min-height:44px;padding:10px 4px;font-size:clamp(10px,2.6vw,12px)}
 }
 
-.penalty-box{margin-top:32px;padding-top:2px}
-.penalty-heading{color:#071960;font-size:calc(20px + var(--rfd));font-weight:900;margin:0 0 12px}
-.penalty-subtitle{font-size:calc(16px + var(--rfd));font-weight:900;margin:0 0 4px}
-.penalty-text{font-size:calc(15px + var(--rfd));line-height:1.42;text-align:justify;margin:0 0 7px}
+.penalty-section{margin-top:34px}
+.penalty-heading{color:#071960;font-size:calc(19px + var(--rfd));font-weight:900;margin:0 0 12px}
+.penalty-subtitle{font-size:calc(16px + var(--rfd));font-weight:900;margin:0 0 3px}
+.penalty-line{font-size:calc(15px + var(--rfd));line-height:1.42;text-align:justify;margin:0 0 5px}
 .penalty-notice{font-size:calc(15px + var(--rfd));line-height:1.42;text-align:justify;margin-top:20px}
 .penalty-amount{font-size:calc(19px + var(--rfd));font-weight:900;white-space:nowrap}
 @media print{
-  .penalty-heading{color:#000;font-size:12pt}
-  .penalty-subtitle,.penalty-text,.penalty-notice{font-size:10pt}
+  .penalty-heading{color:#000}
   .penalty-amount{font-size:12pt}
 }
 
@@ -71,7 +75,6 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
 <body>
 <header>
   <img class="header-logo" src="assets/ticaret_bakanligi_header.png" alt="Türkiye Cumhuriyeti Ticaret Bakanlığı">
-  <div class="sub">Mevzuat Kütüphanesi</div>
 </header>
 
 <main>
@@ -84,9 +87,10 @@ footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
 </section>
 
 <section class="card mode-card hidden" id="modeCard">
-  <div class="mode-grid">
-    <button class="secondary" id="articleMode">Mevzuatı Madde Madde Görüntüle</button>
-    <button class="secondary" id="fullMode">Mevzuatın Tamamını Görüntüle</button>
+  <div class="mode-row" role="group" aria-labelledby="modeLabel">
+    <span class="mode-label" id="modeLabel">MEVZUATI GÖRÜNTÜLEME ŞEKLİ:</span>
+    <button type="button" id="articleMode">Madde Madde</button>
+    <button type="button" id="fullMode">Bütün Maddeler</button>
   </div>
 
   <div class="controls hidden" id="articleControls">
@@ -161,25 +165,39 @@ function label(a){
 }
 
 
+function penaltyAmountHtml(text){
+  return esc(text||"").replace(
+    /(2026 Yılı için\s+)([\d.]+)(-TL)/g,
+    '$1<span class="penalty-amount">$2 TL</span>'
+  );
+}
+
 function penaltyHtml(articleNo){
   if(!penalties || !penalties.maddeler)return "";
-  const p=penalties.maddeler[String(articleNo).toUpperCase()];
+
+  const key=String(articleNo||"").trim().toUpperCase();
+  const p=penalties.maddeler[key];
+
   if(!p || !Array.isArray(p.yaptirim) || !p.yaptirim.length)return "";
 
-  let out='<div class="penalty-box">';
+  let out='<div class="penalty-section">';
   out+='<div class="penalty-heading">2026 YILINDA UYGULANACAK OLAN İDARİ PARA CEZASI</div>';
   out+='<div class="penalty-subtitle">Yaptırım hükümleri</div>';
 
-  p.yaptirim.forEach(x=>{
-    out+='<div class="penalty-text">'+officialHtml(x)+'</div>';
+  p.yaptirim.forEach(line=>{
+    out+='<div class="penalty-line">'+penaltyAmountHtml(line)+'</div>';
   });
 
   if(Array.isArray(p.tutarlar) && p.tutarlar.length){
-    const tutarText=p.tutarlar.map(x=>x+" Türk Lirası").join(" / ");
-    out+='<div class="penalty-notice">23/12/2025 tarihli ve 33116 sayılı Resmî Gazete’de yayımlanan '+
+    const amounts=p.tutarlar.map(x=>
+      '<span class="penalty-amount">'+esc(x)+' Türk Lirası</span>'
+    ).join(" / ");
+
+    out+='<div class="penalty-notice">'+
+      '23/12/2025 tarihli ve 33116 sayılı Resmî Gazete’de yayımlanan '+
       '6502 Sayılı Tüketicinin Korunması Hakkında Kanunun 77\\'nci Maddesine Göre 2026 Yılında Uygulanacak Olan '+
       'İdari Para Cezalarına İlişkin Tebliğine göre 1/1/2026 tarihinden itibaren uygulanacak idari para cezası; '+
-      '<span class="penalty-amount">'+esc(tutarText)+'dır.</span></div>';
+      amounts+'dır.</div>';
   }
 
   out+='</div>';
@@ -192,6 +210,14 @@ function resetResult(){
   document.getElementById("printCard").classList.add("hidden");
   document.getElementById("articleControls").classList.add("hidden");
   document.getElementById("fullControls").classList.add("hidden");
+}
+
+
+function scrollToElement(id, offset=12){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const top=el.getBoundingClientRect().top+window.pageYOffset-offset;
+  window.scrollTo({top,behavior:"smooth"});
 }
 
 function fontChange(d){
@@ -244,14 +270,18 @@ async function loadSelectedLaw(){
     current=await r.json();
 
     penalties=null;
-    if(id==="6502-tuketici-kanunu"){
+    const is6502 =
+      String(current.ad||"").includes("6502") &&
+      String(current.ad||"").toLocaleUpperCase("tr-TR").includes("TÜKETİCİNİN KORUNMASI");
+
+    if(is6502){
       try{
         const pr=await fetch("data/6502-cezalar.json?ts="+Date.now());
         if(pr.ok) penalties=await pr.json();
       }catch(_e){
         penalties=null;
       }
-
+    }
 
     current.maddeler.forEach((a,i)=>{
       const o=document.createElement("option");
@@ -272,6 +302,7 @@ document.getElementById("articleMode").onclick=()=>{
   resetResult();
   mode="article";
   document.getElementById("articleControls").classList.remove("hidden");
+  setTimeout(()=>scrollToElement("articleControls",10),60);
 };
 
 document.getElementById("fullMode").onclick=()=>{
@@ -309,6 +340,7 @@ document.getElementById("fullMode").onclick=()=>{
 
   document.getElementById("body").innerHTML=h;
   document.getElementById("resultCard").classList.remove("hidden");
+  setTimeout(()=>scrollToElement("resultCard",10),60);
 
   // Tam mevzuat görüntüsünde PDF/Yazdır gösterilmez.
   document.getElementById("printCard").classList.add("hidden");
@@ -343,6 +375,7 @@ document.getElementById("article").onchange=()=>{
 
   document.getElementById("resultCard").classList.remove("hidden");
   document.getElementById("printCard").classList.remove("hidden");
+  setTimeout(()=>scrollToElement("resultCard",10),60);
 };
 
 document.getElementById("law").addEventListener("change",loadSelectedLaw);
