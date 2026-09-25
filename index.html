@@ -1,1546 +1,321 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Araç İhtiyacı Sorgulama</title>
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mevzuat Kütüphanesi</title>
 <style>
-:root {
-    --navy-dark: #050e3a;
-    --navy:      #0b1e6d;
-    --navy-mid:  #0f2580;
-    --navy-card: #1a3190;
-    --navy-input:#0d1f70;
-    --gold:      #c9a227;
-    --gold-light:#f4c430;
-    --red-bar:   #c0392b;
-    --text:      #e8edf8;
-    --text-dim:  #8fa4d8;
-    --border:    rgba(255,255,255,0.10);
+:root{--bg:#0d174f;--card:#21368f;--yellow:#f4c833;--white:#fff;--font-delta:0px}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#0c154c,#111d63);color:#fff;font-family:"Arial Narrow",Arial,sans-serif}
+header{text-align:center;padding:20px 12px 16px}
+.header-logo{display:block;width:min(560px,88vw);height:auto;margin:0 auto}
+main{width:min(1040px,94%);margin:0 auto 26px}
+.card{background:var(--card);border:1px solid rgba(255,255,255,.28);border-radius:16px;padding:20px;margin:0 0 18px}
+label{display:block;color:#ffd629;font-size:12px;font-weight:900;margin:0 0 7px}
+select,button{font:inherit;border-radius:10px;border:0}
+select{width:100%;padding:14px 16px;background:#fff;color:#111;font-size:16px;font-weight:700}
+button{padding:14px 18px;font-weight:900;cursor:pointer}
+.secondary{background:var(--yellow);color:#111;box-shadow:0 5px 12px rgba(0,0,0,.2)}
+.query{display:block}
+.hidden{display:none!important}
+.mode-row{display:flex;align-items:center;gap:12px;width:100%;padding:4px 0;color:var(--yellow);font-size:16px;font-weight:900}
+.mode-label{flex:0 0 36%;text-align:center;white-space:nowrap}
+.mode-row button{flex:1 1 0;min-width:0;min-height:52px;background:var(--yellow);color:#111;font:inherit;font-size:16px;font-weight:900;padding:14px 20px;white-space:nowrap;border:1px solid rgba(255,255,255,.16);border-radius:12px;box-shadow:0 3px 8px rgba(0,0,0,.16);transition:background .15s,box-shadow .15s}
+.mode-row button:hover{background:#ffda49;box-shadow:0 4px 12px rgba(0,0,0,.22)}
+.mode-row button:focus-visible{outline:2px solid #ffd629;outline-offset:2px}
+.controls{display:grid;grid-template-columns:minmax(0,1fr) 170px;gap:14px;align-items:end;margin-top:14px}
+.fonts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fonts button{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45);font-size:18px}
+.result{background:#fff;color:#111;border-radius:14px;padding:22px;--rfd:0px}
+.result h2{margin:0 0 8px;color:#071960;font-size:calc(20px + var(--rfd));font-weight:900}
+.article-title{font-weight:900;font-size:calc(17px + var(--rfd));margin:0 0 7px}
+.body,.full-body{font-size:calc(15px + var(--rfd));line-height:1.42;text-align:justify}
+.full-article{margin-bottom:20px}
+.full-title{font-weight:900;font-size:calc(16px + var(--rfd));margin-bottom:5px}
+.result sup{font-size:.72em;line-height:0;vertical-align:super;font-weight:700}
+.print-card{max-width:330px;margin-left:auto;margin-right:auto;text-align:center}
+.print-card button{width:100%;background:transparent;color:#fff;border:1px solid rgba(255,255,255,.45)}
+.status{font-size:12px;color:#dce3ff;text-align:right;margin-top:8px}
+footer{text-align:center;color:#cbd4f3;font-size:12px;padding:4px 10px 26px}
+.print-header{display:none}
+@page{size:A4 portrait;margin:1.5cm 2cm 2cm}
+@media print{
+  body{background:#fff;color:#000}
+  header,.query,.mode-card,.print-card,footer{display:none!important}
+  main{width:100%;margin:0}
+  .card{background:#fff;border:0;padding:0;margin:0}
+  .print-header{display:block;border:1px solid #999;border-radius:10px;text-align:center;padding:10px 14px;margin-bottom:12px}
+  .print-header .m{font-size:15pt;font-weight:900}
+  .print-header .k{font-size:10pt;font-weight:700;margin-top:2px}
+  .result{border:1px solid #999;border-radius:10px;padding:12px 14px}
+  .result h2{color:#000}
+  .body,.full-body{line-height:1.38}
 }
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-
-body {
-    font-family: 'Nunito', Arial, sans-serif;
-    background: var(--navy-dark);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-image:
-        radial-gradient(ellipse at 20% 50%, rgba(11,30,109,0.6) 0%, transparent 60%),
-        radial-gradient(ellipse at 80% 20%, rgba(15,37,128,0.4) 0%, transparent 50%),
-        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'%3E%3Ccircle cx='30' cy='30' r='20'/%3E%3Ccircle cx='30' cy='30' r='10'/%3E%3Cline x1='10' y1='30' x2='50' y2='30'/%3E%3Cline x1='30' y1='10' x2='30' y2='50'/%3E%3C/g%3E%3C/svg%3E");
+@media(max-width:700px){
+  .controls{grid-template-columns:1fr}
+  .mode-row{gap:8px;font-size:clamp(9px,2.2vw,14px)}
+  .mode-label{flex:0 0 auto}
+  .mode-row button{flex:1 1 0;min-width:0;min-height:44px;padding:10px 4px;font-size:clamp(10px,2.6vw,12px)}
 }
-
-/* ── HEADER ── */
-header {
-    width: 100%;
-    background: linear-gradient(135deg, #050e3a 0%, #0b1e6d 100%);
-    border-bottom: 3px solid var(--red-bar);
-    text-align: center;
-    padding: 20px 20px 16px;
-    position: relative;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-}
-header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='40' cy='40' r='35' fill='none' stroke='rgba(201,162,39,0.06)' stroke-width='1'/%3E%3Ccircle cx='40' cy='40' r='20' fill='none' stroke='rgba(201,162,39,0.04)' stroke-width='1'/%3E%3C/svg%3E");
-    pointer-events: none;
-}
-header h2 {
-    color: var(--gold-light);
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    text-shadow: 0 0 20px rgba(201,162,39,0.4);
-}
-header p {
-    color: var(--text-dim);
-    font-size: 12.5px;
-    margin-top: 4px;
-    letter-spacing: 0.5px;
-}
-
-/* ── MAIN ── */
-main {
-    width: 100%;
-    max-width: 700px;
-    padding: 28px 16px 20px;
-    flex: 1;
-}
-
-/* ── CARD ── */
-.card {
-    background: linear-gradient(160deg, rgba(26,49,144,0.85) 0%, rgba(11,30,109,0.95) 100%);
-    border: 1px solid rgba(201,162,39,0.2);
-    border-radius: 18px;
-    padding: 28px 24px;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.07);
-    backdrop-filter: blur(10px);
-}
-
-.card-title {
-    text-align: center;
-    color: var(--gold-light);
-    font-size: 18px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    margin-bottom: 22px;
-    text-transform: uppercase;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-.card-title::before,
-.card-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(201,162,39,0.4));
-}
-.card-title::after {
-    background: linear-gradient(90deg, rgba(201,162,39,0.4), transparent);
-}
-
-/* ── LABELS ── */
-label {
-    display: block;
-    color: var(--text-dim);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-    margin-top: 12px;
-}
-
-/* ── SELECTS ── */
-.select-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-}
-select {
-    width: 100%;
-    padding: 7px 10px;
-    border-radius: 8px;
-    border: 1px solid rgba(201,162,39,0.25);
-    font-size: 15px;
-    font-family: 'Nunito', Arial, sans-serif;
-    font-weight: 600;
-    background: rgba(5,14,58,0.8);
-    color: var(--text);
-    outline: none;
-    appearance: none;
-    -webkit-appearance: none;
-    cursor: pointer;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' viewBox='0 0 12 7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a227' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 10px center;
-    padding-right: 28px;
-    transition: border-color 0.2s, box-shadow 0.2s;
-}
-select:focus {
-    border-color: rgba(201,162,39,0.6);
-    box-shadow: 0 0 0 3px rgba(201,162,39,0.1);
-}
-
-/* ── TYPE BUTTONS ── */
-.section-label {
-    color: var(--text-dim);
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-top: 18px;
-    margin-bottom: 8px;
-}
-.grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
-.btn {
-    background: rgba(5,14,58,0.7);
-    color: var(--text-dim);
-    border: 1px solid rgba(255,255,255,0.1);
-    cursor: pointer;
-    font-weight: 700;
-    font-family: 'Nunito', Arial, sans-serif;
-    font-size: 11.5px;
-    letter-spacing: 0.3px;
-    padding: 14px 8px;
-    border-radius: 10px;
-    transition: all 0.2s ease;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-    width: 100%;
-    line-height: 1.3;
-    text-align: center;
-}
-.btn svg { opacity: 0.5; transition: opacity 0.2s; }
-.btn:hover {
-    background: rgba(26,49,144,0.8);
-    border-color: rgba(201,162,39,0.3);
-    color: var(--text);
-}
-.btn.active {
-    background: linear-gradient(135deg, #c9a227, #f4c430);
-    color: #050e3a;
-    border-color: transparent;
-    box-shadow: 0 4px 16px rgba(201,162,39,0.35);
-}
-.btn.active svg { opacity: 1; }
-
-/* ── RESULT ── */
-.result {
-    margin-top: 22px;
-    background: rgba(5,14,58,0.55);
-    border: 1px solid rgba(201,162,39,0.18);
-    border-radius: 12px;
-    overflow: hidden;
-    animation: fadeIn 0.3s ease;
-}
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(6px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-/* Büyükşehir / Nüfus paneli */
-.bilgi-panel {
-    padding: 6px 18px 4px;
-}
-.info-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    font-size: 14px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.info-row:last-child { border-bottom: none; }
-.info-key {
-    color: var(--text-dim);
-    font-weight: 600;
-}
-.info-val {
-    color: var(--text);
-    font-weight: 700;
-}
-
-/* Açıklama metni kutusu */
-.info-text-box {
-    margin: 4px 14px 0;
-    padding: 11px 14px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 8px;
-    color: var(--text-dim);
-    font-size: 12px;
-    line-height: 1.65;
-    text-align: justify;
-}
-.info-text-box a {
-    color: var(--gold-light);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-}
-
-/* Fiyat bölümü */
-.price-section {
-    padding: 4px 18px 22px;
-    text-align: center;
-}
-.price-label {
-    color: var(--text-dim);
-    font-size: 13px;
-    font-weight: 800;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-top: 16px;
-    margin-bottom: 4px;
-}
-.price {
-    font-size: 56px;
-    font-weight: 800;
-    color: var(--gold-light);
-    text-shadow: 0 0 28px rgba(244,196,48,0.45);
-    letter-spacing: 1px;
-    line-height: 1.15;
-}
-
-/* ── HEADER RESET BTN ── */
-.header-inner {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    gap: 10px;
-}
-.reset-btn {
-    position: absolute;
-    right: 0;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(201,162,39,0.35);
-    border-radius: 8px;
-    color: var(--gold-light);
-    cursor: pointer;
-    padding: 6px 10px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 12px;
-    font-family: 'Nunito', Arial, sans-serif;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    transition: all 0.2s ease;
-}
-.reset-btn:hover {
-    background: rgba(201,162,39,0.18);
-    border-color: var(--gold-light);
-}
-.reset-btn svg {
-    transition: transform 0.4s ease;
-}
-.reset-btn:hover svg {
-    transform: rotate(180deg);
-}
-
-/* ── FOOTER ── */
-footer {
-    width: 100%;
-    background: rgba(5,14,58,0.95);
-    border-top: 1px solid rgba(201,162,39,0.15);
-    text-align: center;
-    padding: 14px 20px;
-    color: var(--text-dim);
-    font-size: 12px;
-    line-height: 1.7;
-}
-
-/* ── ARAÇ GEREKLİLİKLERİ ── */
-.requirements {
-    margin: 14px;
-    display: grid;
-    gap: 8px;
-}
-.req-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 9px;
-    padding: 12px 14px;
-}
-.req-card-title {
-    color: var(--text-dim);
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-}
-.req-card-value {
-    color: var(--gold-light);
-    font-size: 24px;
-    font-weight: 800;
-}
-.req-card-note {
-    color: var(--text-dim);
-    font-size: 11.5px;
-    line-height: 1.5;
-    margin-top: 4px;
-}
-.req-highlight {
-    border-color: rgba(201,162,39,0.28);
-}
-
 </style>
 </head>
-
 <body>
-
-<!-- HEADER -->
 <header>
-    <div class="header-inner">
-        <div>
-            <h2>T.C. TİCARET BAKANLIĞI</h2>
-            <p>Yetki Belgesi Harç Bedeli Sorgulama Sistemi (2026)</p>
-        </div>
-        <button class="reset-btn" onclick="sifirla()" title="Sıfırla">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
-                <path d="M3 3v5h5"/>
-            </svg>
-            Sıfırla
-        </button>
-    </div>
+  <img class="header-logo" src="assets/ticaret_bakanligi_header.png" alt="Türkiye Cumhuriyeti Ticaret Bakanlığı">
 </header>
 
-<!-- MAIN -->
 <main>
-<div class="card">
+<section class="card query">
+  <div>
+    <label>MEVZUAT</label>
+    <select id="law"><option value="">Lütfen Mevzuat Seçin</option></select>
+    <div id="updateInfo" class="status"></div>
+  </div>
+</section>
 
-    <div class="card-title">Araç İhtiyacı Sorgulama</div>
+<section class="card mode-card hidden" id="modeCard">
+  <div class="mode-row" role="group" aria-labelledby="modeLabel">
+    <span class="mode-label" id="modeLabel">MEVZUATI GÖRÜNTÜLEME ŞEKLİ:</span>
+    <button type="button" id="articleMode">Madde Madde</button>
+    <button type="button" id="fullMode">Bütün Maddeler</button>
+  </div>
 
-    <!-- İL / İLÇE -->
-    <div class="select-row">
-        <div>
-            <label for="il">İl</label>
-            <select id="il"></select>
-        </div>
-        <div>
-            <label for="ilce">İlçe</label>
-            <select id="ilce"></select>
-        </div>
+  <div class="controls hidden" id="articleControls">
+    <div>
+      <label>MADDE NUMARASI</label>
+      <select id="article"><option value="">Madde seçin</option></select>
     </div>
+    <div class="fonts">
+      <button type="button" onclick="fontChange(-1)">A−</button>
+      <button type="button" onclick="fontChange(1)">A+</button>
+    </div>
+  </div>
 
-    <!-- SONUÇ -->
-    <div class="result" id="sonuc" style="display:none;">
-        <div class="bilgi-panel" id="bilgi"></div>
+  <div class="controls hidden" id="fullControls">
+    <div></div>
+    <div class="fonts">
+      <button type="button" onclick="fontChange(-1)">A−</button>
+      <button type="button" onclick="fontChange(1)">A+</button>
+    </div>
+  </div>
+</section>
 
-        <div class="info-text-box">
-            Seçilen il ve ilçenin büyükşehir belediyesi durumu ile nüfusu esas alınarak
-            Motorlu Kara Taşıtlarının Kiralanması Hakkında Yönetmelik kapsamında
-            bulundurulması gereken asgari araç sayısı hesaplanır.
-        </div>
+<div class="print-header">
+  <div class="m">T.C. Ticaret Bakanlığı</div>
+  <div class="k">Mevzuat Kütüphanesi</div>
+</div>
 
-        <div class="requirements" id="requirements"></div></div>
+<section class="card hidden" id="resultCard">
+  <div class="result" id="result">
+    <h2></h2>
+    <div class="article-title" id="articleTitle"></div>
+    <div class="body" id="body"></div>
+  </div>
+</section>
+
+<section class="card print-card hidden" id="printCard">
+  <button onclick="window.print()">PDF / Yazdır</button>
+</section>
 </main>
 
-<!-- FOOTER -->
-<footer>
-    © 2026 Bu sayfa Onur KAHYA tarafından bilgilendirme amacıyla hazırlanmıştır.<br>
-    Motorlu Kara Taşıtlarının Kiralanması Hakkında Yönetmelik kapsamında araç ihtiyacı sorgulaması.
-</footer>
+<footer>© Bu sayfa Onur KAHYA tarafından bilgilendirme amacıyla hazırlanmıştır 2026.</footer>
 
 <script>
-const data = [
-    {il:"ADANA",     ilce:"ALADAĞ", n:15839},
-    {il:"ADANA",     ilce:"CEYHAN", n:156081},
-    {il:"ADANA",     ilce:"ÇUKUROVA", n:380653},
-    {il:"ADANA",     ilce:"FEKE", n:15586},
-    {il:"ADANA",     ilce:"İMAMOĞLU", n:27196},
-    {il:"ADANA",     ilce:"KARAİSALI", n:22872},
-    {il:"ADANA",     ilce:"KARATAŞ", n:24005},
-    {il:"ADANA",     ilce:"KOZAN", n:132572},
-    {il:"ADANA",     ilce:"POZANTI", n:19983},
-    {il:"ADANA",     ilce:"SAİMBEYLİ", n:13133},
-    {il:"ADANA",     ilce:"SARIÇAM", n:263080},
-    {il:"ADANA",     ilce:"SEYHAN", n:782204},
-    {il:"ADANA",     ilce:"TUFANBEYLİ", n:16027},
-    {il:"ADANA",     ilce:"YUMURTALIK", n:17806},
-    {il:"ADANA",     ilce:"YÜREĞİR", n:396572},
-    {il:"ADIYAMAN",     ilce:"BESNİ", n:75398},
-    {il:"ADIYAMAN",     ilce:"ÇELİKHAN", n:14530},
-    {il:"ADIYAMAN",     ilce:"GERGER", n:14497},
-    {il:"ADIYAMAN",     ilce:"GÖLBAŞI", n:47917},
-    {il:"ADIYAMAN",     ilce:"KAHTA", n:136769},
-    {il:"ADIYAMAN",     ilce:"MERKEZ", n:296876},
-    {il:"ADIYAMAN",     ilce:"SAMSAT", n:6834},
-    {il:"ADIYAMAN",     ilce:"SİNCİK", n:15801},
-    {il:"ADIYAMAN",     ilce:"TUT", n:9199},
-    {il:"AFYONKARAHİSAR",     ilce:"BAŞMAKÇI", n:9089},
-    {il:"AFYONKARAHİSAR",     ilce:"BAYAT", n:7580},
-    {il:"AFYONKARAHİSAR",     ilce:"BOLVADİN", n:45906},
-    {il:"AFYONKARAHİSAR",     ilce:"ÇAY", n:29140},
-    {il:"AFYONKARAHİSAR",     ilce:"ÇOBANLAR", n:14457},
-    {il:"AFYONKARAHİSAR",     ilce:"DAZKIRI", n:11723},
-    {il:"AFYONKARAHİSAR",     ilce:"DİNAR", n:46878},
-    {il:"AFYONKARAHİSAR",     ilce:"EMİRDAĞ", n:43350},
-    {il:"AFYONKARAHİSAR",     ilce:"EVCİLER", n:7038},
-    {il:"AFYONKARAHİSAR",     ilce:"HOCALAR", n:8220},
-    {il:"AFYONKARAHİSAR",     ilce:"İHSANİYE", n:27636},
-    {il:"AFYONKARAHİSAR",     ilce:"İSCEHİSAR", n:25220},
-    {il:"AFYONKARAHİSAR",     ilce:"KIZILÖREN", n:1977},
-    {il:"AFYONKARAHİSAR",     ilce:"MERKEZ", n:331982},
-    {il:"AFYONKARAHİSAR",     ilce:"SANDIKLI", n:54376},
-    {il:"AFYONKARAHİSAR",     ilce:"SİNANPAŞA", n:38292},
-    {il:"AFYONKARAHİSAR",     ilce:"SULTANDAĞI", n:13641},
-    {il:"AFYONKARAHİSAR",     ilce:"ŞUHUT", n:35303},
-    {il:"AĞRI",     ilce:"DİYADİN", n:35439},
-    {il:"AĞRI",     ilce:"DOĞUBAYAZIT", n:113699},
-    {il:"AĞRI",     ilce:"ELEŞKİRT", n:28661},
-    {il:"AĞRI",     ilce:"HAMUR", n:14336},
-    {il:"AĞRI",     ilce:"MERKEZ", n:150035},
-    {il:"AĞRI",     ilce:"PATNOS", n:105968},
-    {il:"AĞRI",     ilce:"TAŞLIÇAY", n:17431},
-    {il:"AĞRI",     ilce:"TUTAK", n:25920},
-    {il:"AKSARAY",     ilce:"AĞAÇÖREN", n:7480},
-    {il:"AKSARAY",     ilce:"ESKİL", n:27946},
-    {il:"AKSARAY",     ilce:"GÜLAĞAÇ", n:19099},
-    {il:"AKSARAY",     ilce:"GÜZELYURT", n:10419},
-    {il:"AKSARAY",     ilce:"MERKEZ", n:327575},
-    {il:"AKSARAY",     ilce:"ORTAKÖY", n:31089},
-    {il:"AKSARAY",     ilce:"SARIYAHŞİ", n:4717},
-    {il:"AKSARAY",     ilce:"SULTANHANI", n:12811},
-    {il:"AMASYA",     ilce:"GÖYNÜCEK", n:10823},
-    {il:"AMASYA",     ilce:"GÜMÜŞHACIKÖY", n:22319},
-    {il:"AMASYA",     ilce:"HAMAMÖZÜ", n:3628},
-    {il:"AMASYA",     ilce:"MERKEZ", n:151433},
-    {il:"AMASYA",     ilce:"MERZİFON", n:77077},
-    {il:"AMASYA",     ilce:"SULUOVA", n:46928},
-    {il:"AMASYA",     ilce:"TAŞOVA", n:30034},
-    {il:"ANKARA",     ilce:"AKYURT", n:46956},
-    {il:"ANKARA",     ilce:"ALTINDAĞ", n:418072},
-    {il:"ANKARA",     ilce:"AYAŞ", n:13136},
-    {il:"ANKARA",     ilce:"BALA", n:20109},
-    {il:"ANKARA",     ilce:"BEYPAZARI", n:48359},
-    {il:"ANKARA",     ilce:"ÇAMLIDERE", n:10203},
-    {il:"ANKARA",     ilce:"ÇANKAYA", n:952198},
-    {il:"ANKARA",     ilce:"ÇUBUK", n:101437},
-    {il:"ANKARA",     ilce:"ELMADAĞ", n:45644},
-    {il:"ANKARA",     ilce:"ETİMESGUT", n:632458},
-    {il:"ANKARA",     ilce:"EVREN", n:2927},
-    {il:"ANKARA",     ilce:"GÖLBAŞI", n:172810},
-    {il:"ANKARA",     ilce:"GÜDÜL", n:8028},
-    {il:"ANKARA",     ilce:"HAYMANA", n:25798},
-    {il:"ANKARA",     ilce:"KAHRAMANKAZAN", n:63143},
-    {il:"ANKARA",     ilce:"KALECİK", n:12564},
-    {il:"ANKARA",     ilce:"KEÇİÖREN", n:931722},
-    {il:"ANKARA",     ilce:"KIZILCAHAMAM", n:27841},
-    {il:"ANKARA",     ilce:"MAMAK", n:690329},
-    {il:"ANKARA",     ilce:"NALLIHAN", n:26083},
-    {il:"ANKARA",     ilce:"POLATLI", n:131894},
-    {il:"ANKARA",     ilce:"PURSAKLAR", n:168881},
-    {il:"ANKARA",     ilce:"SİNCAN", n:605366},
-    {il:"ANKARA",     ilce:"ŞEREFLİKOÇHİSAR", n:32831},
-    {il:"ANKARA",     ilce:"YENİMAHALLE", n:721531},
-    {il:"ANTALYA",     ilce:"AKSEKİ", n:10609},
-    {il:"ANTALYA",     ilce:"AKSU", n:87070},
-    {il:"ANTALYA",     ilce:"ALANYA", n:371547},
-    {il:"ANTALYA",     ilce:"DEMRE", n:28075},
-    {il:"ANTALYA",     ilce:"DÖŞEMEALTI", n:97121},
-    {il:"ANTALYA",     ilce:"ELMALI", n:41550},
-    {il:"ANTALYA",     ilce:"FİNİKE", n:52436},
-    {il:"ANTALYA",     ilce:"GAZİPAŞA", n:55850},
-    {il:"ANTALYA",     ilce:"GÜNDOĞMUŞ", n:6953},
-    {il:"ANTALYA",     ilce:"İBRADI", n:3256},
-    {il:"ANTALYA",     ilce:"KAŞ", n:63957},
-    {il:"ANTALYA",     ilce:"KEMER", n:52339},
-    {il:"ANTALYA",     ilce:"KEPEZ", n:649102},
-    {il:"ANTALYA",     ilce:"KONYAALTI", n:199414},
-    {il:"ANTALYA",     ilce:"KORKUTELİ", n:58381},
-    {il:"ANTALYA",     ilce:"KUMLUCA", n:75588},
-    {il:"ANTALYA",     ilce:"MANAVGAT", n:266480},
-    {il:"ANTALYA",     ilce:"MURATPAŞA", n:510887},
-    {il:"ANTALYA",     ilce:"SERİK", n:147062},
-    {il:"ARDAHAN",     ilce:"ÇILDIR", n:8048},
-    {il:"ARDAHAN",     ilce:"DAMAL", n:4526},
-    {il:"ARDAHAN",     ilce:"GÖLE", n:22038},
-    {il:"ARDAHAN",     ilce:"HANAK", n:7668},
-    {il:"ARDAHAN",     ilce:"MERKEZ", n:42136},
-    {il:"ARDAHAN",     ilce:"POSOF", n:5976},
-    {il:"ARTVİN",     ilce:"ARDANUÇ", n:10889},
-    {il:"ARTVİN",     ilce:"ARHAVİ", n:22025},
-    {il:"ARTVİN",     ilce:"BORÇKA", n:21628},
-    {il:"ARTVİN",     ilce:"HOPA", n:27844},
-    {il:"ARTVİN",     ilce:"KEMALPAŞA", n:9263},
-    {il:"ARTVİN",     ilce:"MERKEZ", n:35710},
-    {il:"ARTVİN",     ilce:"MURGUL", n:6457},
-    {il:"ARTVİN",     ilce:"ŞAVŞAT", n:16151},
-    {il:"ARTVİN",     ilce:"YUSUFELİ", n:17564},
-    {il:"AYDIN",     ilce:"BOZDOĞAN", n:31624},
-    {il:"AYDIN",     ilce:"BUHARKENT", n:13137},
-    {il:"AYDIN",     ilce:"ÇİNE", n:47906},
-    {il:"AYDIN",     ilce:"DİDİM", n:103141},
-    {il:"AYDIN",     ilce:"EFELER", n:310241},
-    {il:"AYDIN",     ilce:"GERMENCİK", n:44697},
-    {il:"AYDIN",     ilce:"İNCİRLİOVA", n:58230},
-    {il:"AYDIN",     ilce:"KARACASU", n:17225},
-    {il:"AYDIN",     ilce:"KARPUZLU", n:10352},
-    {il:"AYDIN",     ilce:"KOÇARLI", n:22234},
-    {il:"AYDIN",     ilce:"KÖŞK", n:28307},
-    {il:"AYDIN",     ilce:"KUŞADASI", n:141431},
-    {il:"AYDIN",     ilce:"KUYUCAK", n:26196},
-    {il:"AYDIN",     ilce:"NAZİLLİ", n:162156},
-    {il:"AYDIN",     ilce:"SÖKE", n:123843},
-    {il:"AYDIN",     ilce:"SULTANHİSAR", n:19791},
-    {il:"AYDIN",     ilce:"YENİPAZAR", n:11596},
-    {il:"BALIKESİR",     ilce:"ALTIEYLÜL", n:188858},
-    {il:"BALIKESİR",     ilce:"AYVALIK", n:75815},
-    {il:"BALIKESİR",     ilce:"BALYA", n:12296},
-    {il:"BALIKESİR",     ilce:"BANDIRMA", n:169476},
-    {il:"BALIKESİR",     ilce:"BİGADİÇ", n:49275},
-    {il:"BALIKESİR",     ilce:"BURHANİYE", n:68370},
-    {il:"BALIKESİR",     ilce:"DURSUNBEY", n:32168},
-    {il:"BALIKESİR",     ilce:"EDREMİT", n:176251},
-    {il:"BALIKESİR",     ilce:"ERDEK", n:32080},
-    {il:"BALIKESİR",     ilce:"GÖMEÇ", n:19020},
-    {il:"BALIKESİR",     ilce:"GÖNEN", n:75730},
-    {il:"BALIKESİR",     ilce:"HAVRAN", n:28152},
-    {il:"BALIKESİR",     ilce:"İVRİNDİ", n:31295},
-    {il:"BALIKESİR",     ilce:"KARESİ", n:189444},
-    {il:"BALIKESİR",     ilce:"KEPSUT", n:21386},
-    {il:"BALIKESİR",     ilce:"MANYAS", n:17650},
-    {il:"BALIKESİR",     ilce:"MARMARA", n:11827},
-    {il:"BALIKESİR",     ilce:"SAVAŞTEPE", n:16266},
-    {il:"BALIKESİR",     ilce:"SINDIRGI", n:31482},
-    {il:"BALIKESİR",     ilce:"SUSURLUK", n:37676},
-    {il:"BARTIN",     ilce:"AMASRA", n:13705},
-    {il:"BARTIN",     ilce:"KURUCAŞİLE", n:6316},
-    {il:"BARTIN",     ilce:"MERKEZ", n:163766},
-    {il:"BARTIN",     ilce:"ULUS", n:22876},
-    {il:"BATMAN",     ilce:"BEŞİRİ", n:31864},
-    {il:"BATMAN",     ilce:"GERCÜŞ", n:18894},
-    {il:"BATMAN",     ilce:"HASANKEYF", n:7152},
-    {il:"BATMAN",     ilce:"KOZLUK", n:58781},
-    {il:"BATMAN",     ilce:"MERKEZ", n:517785},
-    {il:"BATMAN",     ilce:"SASON", n:28150},
-    {il:"BAYBURT",     ilce:"AYDINTEPE", n:5982},
-    {il:"BAYBURT",     ilce:"DEMİRÖZÜ", n:8139},
-    {il:"BAYBURT",     ilce:"MERKEZ", n:68715},
-    {il:"BİLECİK",     ilce:"BOZÜYÜK", n:81332},
-    {il:"BİLECİK",     ilce:"GÖLPAZARI", n:10049},
-    {il:"BİLECİK",     ilce:"İNHİSAR", n:2079},
-    {il:"BİLECİK",     ilce:"MERKEZ", n:82863},
-    {il:"BİLECİK",     ilce:"OSMANELİ", n:22025},
-    {il:"BİLECİK",     ilce:"PAZARYERİ", n:9671},
-    {il:"BİLECİK",     ilce:"SÖĞÜT", n:18284},
-    {il:"BİLECİK",     ilce:"YENİPAZAR", n:2692},
-    {il:"BİNGÖL",     ilce:"ADAKLI", n:7491},
-    {il:"BİNGÖL",     ilce:"GENÇ", n:31654},
-    {il:"BİNGÖL",     ilce:"KARLIOVA", n:25265},
-    {il:"BİNGÖL",     ilce:"KİĞI", n:4487},
-    {il:"BİNGÖL",     ilce:"MERKEZ", n:175438},
-    {il:"BİNGÖL",     ilce:"SOLHAN", n:33233},
-    {il:"BİNGÖL",     ilce:"YAYLADERE", n:1889},
-    {il:"BİNGÖL",     ilce:"YEDİSU", n:2842},
-    {il:"BİTLİS",     ilce:"ADİLCEVAZ", n:28769},
-    {il:"BİTLİS",     ilce:"AHLAT", n:45637},
-    {il:"BİTLİS",     ilce:"GÜROYMAK", n:49372},
-    {il:"BİTLİS",     ilce:"HİZAN", n:29948},
-    {il:"BİTLİS",     ilce:"MERKEZ", n:74904},
-    {il:"BİTLİS",     ilce:"MUTKİ", n:26748},
-    {il:"BİTLİS",     ilce:"TATVAN", n:105045},
-    {il:"BOLU",     ilce:"DÖRTDİVAN", n:6214},
-    {il:"BOLU",     ilce:"GEREDE", n:37196},
-    {il:"BOLU",     ilce:"GÖYNÜK", n:14257},
-    {il:"BOLU",     ilce:"KIBRISCIK", n:3783},
-    {il:"BOLU",     ilce:"MENGEN", n:14152},
-    {il:"BOLU",     ilce:"MERKEZ", n:222589},
-    {il:"BOLU",     ilce:"MUDURNU", n:18101},
-    {il:"BOLU",     ilce:"SEBEN", n:4438},
-    {il:"BOLU",     ilce:"YENİÇAĞA", n:6443},
-    {il:"BURDUR",     ilce:"AĞLASUN", n:7347},
-    {il:"BURDUR",     ilce:"ALTINYAYLA", n:5060},
-    {il:"BURDUR",     ilce:"BUCAK", n:68312},
-    {il:"BURDUR",     ilce:"ÇAVDIR", n:12539},
-    {il:"BURDUR",     ilce:"ÇELTİKÇİ", n:4914},
-    {il:"BURDUR",     ilce:"GÖLHİSAR", n:23969},
-    {il:"BURDUR",     ilce:"KARAMANLI", n:8097},
-    {il:"BURDUR",     ilce:"KEMER", n:2727},
-    {il:"BURDUR",     ilce:"MERKEZ", n:120832},
-    {il:"BURDUR",     ilce:"TEFENNİ", n:9514},
-    {il:"BURDUR",     ilce:"YEŞİLOVA", n:13915},
-    {il:"BURSA",     ilce:"BÜYÜKORHAN", n:9148},
-    {il:"BURSA",     ilce:"GEMLİK", n:124400},
-    {il:"BURSA",     ilce:"GÜRSU", n:105799},
-    {il:"BURSA",     ilce:"HARMANCIK", n:6089},
-    {il:"BURSA",     ilce:"İNEGÖL", n:306004},
-    {il:"BURSA",     ilce:"İZNİK", n:45510},
-    {il:"BURSA",     ilce:"KARACABEY", n:86543},
-    {il:"BURSA",     ilce:"KELES", n:10939},
-    {il:"BURSA",     ilce:"KESTEL", n:77374},
-    {il:"BURSA",     ilce:"MUDANYA", n:112225},
-    {il:"BURSA",     ilce:"MUSTAFAKEMALPAŞA", n:103652},
-    {il:"BURSA",     ilce:"NİLÜFER", n:578059},
-    {il:"BURSA",     ilce:"ORHANELİ", n:18963},
-    {il:"BURSA",     ilce:"ORHANGAZİ", n:81997},
-    {il:"BURSA",     ilce:"OSMANGAZİ", n:886111},
-    {il:"BURSA",     ilce:"YENİŞEHİR", n:55609},
-    {il:"BURSA",     ilce:"YILDIRIM", n:654589},
-    {il:"ÇANAKKALE",     ilce:"AYVACIK", n:35411},
-    {il:"ÇANAKKALE",     ilce:"BAYRAMİÇ", n:28480},
-    {il:"ÇANAKKALE",     ilce:"BİGA", n:94526},
-    {il:"ÇANAKKALE",     ilce:"BOZCAADA", n:3384},
-    {il:"ÇANAKKALE",     ilce:"ÇAN", n:46612},
-    {il:"ÇANAKKALE",     ilce:"ECEABAT", n:8746},
-    {il:"ÇANAKKALE",     ilce:"EZİNE", n:31894},
-    {il:"ÇANAKKALE",     ilce:"GELİBOLU", n:44689},
-    {il:"ÇANAKKALE",     ilce:"GÖKÇEADA", n:11331},
-    {il:"ÇANAKKALE",     ilce:"LAPSEKİ", n:30654},
-    {il:"ÇANAKKALE",     ilce:"MERKEZ", n:208613},
-    {il:"ÇANAKKALE",     ilce:"YENİCE", n:29636},
-    {il:"ÇANKIRI",     ilce:"ATKARACALAR", n:5063},
-    {il:"ÇANKIRI",     ilce:"BAYRAMÖREN", n:2209},
-    {il:"ÇANKIRI",     ilce:"ÇERKEŞ", n:16927},
-    {il:"ÇANKIRI",     ilce:"ELDİVAN", n:6198},
-    {il:"ÇANKIRI",     ilce:"ILGAZ", n:13948},
-    {il:"ÇANKIRI",     ilce:"KIZILIRMAK", n:6830},
-    {il:"ÇANKIRI",     ilce:"KORGUN", n:4239},
-    {il:"ÇANKIRI",     ilce:"KURŞUNLU", n:9130},
-    {il:"ÇANKIRI",     ilce:"MERKEZ", n:99287},
-    {il:"ÇANKIRI",     ilce:"ORTA", n:17223},
-    {il:"ÇANKIRI",     ilce:"ŞABANÖZÜ", n:12493},
-    {il:"ÇANKIRI",     ilce:"YAPRAKLI", n:7002},
-    {il:"ÇORUM",     ilce:"ALACA", n:28989},
-    {il:"ÇORUM",     ilce:"BAYAT", n:13312},
-    {il:"ÇORUM",     ilce:"BOĞAZKALE", n:3587},
-    {il:"ÇORUM",     ilce:"DODURGA", n:5036},
-    {il:"ÇORUM",     ilce:"İSKİLİP", n:28132},
-    {il:"ÇORUM",     ilce:"KARGI", n:15119},
-    {il:"ÇORUM",     ilce:"LAÇİN", n:4094},
-    {il:"ÇORUM",     ilce:"MECİTÖZÜ", n:12911},
-    {il:"ÇORUM",     ilce:"MERKEZ", n:299565},
-    {il:"ÇORUM",     ilce:"OĞUZLAR", n:4610},
-    {il:"ÇORUM",     ilce:"ORTAKÖY", n:6491},
-    {il:"ÇORUM",     ilce:"OSMANCIK", n:42673},
-    {il:"ÇORUM",     ilce:"SUNGURLU", n:49079},
-    {il:"ÇORUM",     ilce:"UĞURLUDAĞ", n:5992},
-    {il:"DENİZLİ",     ilce:"ACIPAYAM", n:54769},
-    {il:"DENİZLİ",     ilce:"BABADAĞ", n:6199},
-    {il:"DENİZLİ",     ilce:"BAKLAN", n:5266},
-    {il:"DENİZLİ",     ilce:"BEKİLLİ", n:6243},
-    {il:"DENİZLİ",     ilce:"BEYAĞAÇ", n:6011},
-    {il:"DENİZLİ",     ilce:"BOZKURT", n:11176},
-    {il:"DENİZLİ",     ilce:"BULDAN", n:26231},
-    {il:"DENİZLİ",     ilce:"ÇAL", n:17277},
-    {il:"DENİZLİ",     ilce:"ÇAMELİ", n:17447},
-    {il:"DENİZLİ",     ilce:"ÇARDAK", n:8497},
-    {il:"DENİZLİ",     ilce:"ÇİVRİL", n:59689},
-    {il:"DENİZLİ",     ilce:"GÜNEY", n:9043},
-    {il:"DENİZLİ",     ilce:"HONAZ", n:34468},
-    {il:"DENİZLİ",     ilce:"KALE", n:18855},
-    {il:"DENİZLİ",     ilce:"MERKEZEFENDİ", n:351085},
-    {il:"DENİZLİ",     ilce:"PAMUKKALE", n:343071},
-    {il:"DENİZLİ",     ilce:"SARAYKÖY", n:30883},
-    {il:"DENİZLİ",     ilce:"SERİNHİSAR", n:14661},
-    {il:"DENİZLİ",     ilce:"TAVAS", n:40104},
-    {il:"DİYARBAKIR",     ilce:"BAĞLAR", n:402275},
-    {il:"DİYARBAKIR",     ilce:"BİSMİL", n:119815},
-    {il:"DİYARBAKIR",     ilce:"ÇERMİK", n:49299},
-    {il:"DİYARBAKIR",     ilce:"ÇINAR", n:79114},
-    {il:"DİYARBAKIR",     ilce:"ÇÜNGÜŞ", n:10057},
-    {il:"DİYARBAKIR",     ilce:"DİCLE", n:35948},
-    {il:"DİYARBAKIR",     ilce:"EĞİL", n:21674},
-    {il:"DİYARBAKIR",     ilce:"ERGANİ", n:141098},
-    {il:"DİYARBAKIR",     ilce:"HANİ", n:32285},
-    {il:"DİYARBAKIR",     ilce:"HAZRO", n:16024},
-    {il:"DİYARBAKIR",     ilce:"KAYAPINAR", n:454311},
-    {il:"DİYARBAKIR",     ilce:"KOCAKÖY", n:15088},
-    {il:"DİYARBAKIR",     ilce:"KULP", n:33973},
-    {il:"DİYARBAKIR",     ilce:"LİCE", n:24060},
-    {il:"DİYARBAKIR",     ilce:"SİLVAN", n:86752},
-    {il:"DİYARBAKIR",     ilce:"SUR", n:97961},
-    {il:"DİYARBAKIR",     ilce:"YENİŞEHİR", n:232622},
-    {il:"DÜZCE",     ilce:"AKÇAKOCA", n:41134},
-    {il:"DÜZCE",     ilce:"CUMAYERİ", n:16162},
-    {il:"DÜZCE",     ilce:"ÇİLİMLİ", n:19022},
-    {il:"DÜZCE",     ilce:"GÖLYAKA", n:20840},
-    {il:"DÜZCE",     ilce:"GÜMÜŞOVA", n:17344},
-    {il:"DÜZCE",     ilce:"KAYNAŞLI", n:20379},
-    {il:"DÜZCE",     ilce:"MERKEZ", n:267249},
-    {il:"DÜZCE",     ilce:"YIĞILCA", n:13492},
-    {il:"EDİRNE",     ilce:"ENEZ", n:10399},
-    {il:"EDİRNE",     ilce:"HAVSA", n:17302},
-    {il:"EDİRNE",     ilce:"İPSALA", n:25278},
-    {il:"EDİRNE",     ilce:"KEŞAN", n:85259},
-    {il:"EDİRNE",     ilce:"LALAPAŞA", n:5932},
-    {il:"EDİRNE",     ilce:"MERİÇ", n:12329},
-    {il:"EDİRNE",     ilce:"MERKEZ", n:200753},
-    {il:"EDİRNE",     ilce:"SÜLOĞLU", n:6101},
-    {il:"EDİRNE",     ilce:"UZUNKÖPRÜ", n:59085},
-    {il:"ELAZIĞ",     ilce:"AĞIN", n:2532},
-    {il:"ELAZIĞ",     ilce:"ALACAKAYA", n:5336},
-    {il:"ELAZIĞ",     ilce:"ARICAK", n:12340},
-    {il:"ELAZIĞ",     ilce:"BASKİL", n:13397},
-    {il:"ELAZIĞ",     ilce:"KARAKOÇAN", n:28320},
-    {il:"ELAZIĞ",     ilce:"KEBAN", n:7112},
-    {il:"ELAZIĞ",     ilce:"KOVANCILAR", n:37874},
-    {il:"ELAZIĞ",     ilce:"MADEN", n:9139},
-    {il:"ELAZIĞ",     ilce:"MERKEZ", n:463686},
-    {il:"ELAZIĞ",     ilce:"PALU", n:17872},
-    {il:"ELAZIĞ",     ilce:"SİVRİCE", n:8070},
-    {il:"ERZİNCAN",     ilce:"ÇAYIRLI", n:7491},
-    {il:"ERZİNCAN",     ilce:"İLİÇ", n:8543},
-    {il:"ERZİNCAN",     ilce:"KEMAH", n:6419},
-    {il:"ERZİNCAN",     ilce:"KEMALİYE", n:4484},
-    {il:"ERZİNCAN",     ilce:"MERKEZ", n:169506},
-    {il:"ERZİNCAN",     ilce:"OTLUKBELİ", n:2123},
-    {il:"ERZİNCAN",     ilce:"REFAHİYE", n:10954},
-    {il:"ERZİNCAN",     ilce:"TERCAN", n:16145},
-    {il:"ERZİNCAN",     ilce:"ÜZÜMLÜ", n:13960},
-    {il:"ERZURUM",     ilce:"AŞKALE", n:19983},
-    {il:"ERZURUM",     ilce:"AZİZİYE", n:71827},
-    {il:"ERZURUM",     ilce:"ÇAT", n:14015},
-    {il:"ERZURUM",     ilce:"HINIS", n:23011},
-    {il:"ERZURUM",     ilce:"HORASAN", n:34896},
-    {il:"ERZURUM",     ilce:"İSPİR", n:13984},
-    {il:"ERZURUM",     ilce:"KARAÇOBAN", n:19922},
-    {il:"ERZURUM",     ilce:"KARAYAZI", n:22570},
-    {il:"ERZURUM",     ilce:"KÖPRÜKÖY", n:12903},
-    {il:"ERZURUM",     ilce:"NARMAN", n:11119},
-    {il:"ERZURUM",     ilce:"OLTU", n:29765},
-    {il:"ERZURUM",     ilce:"OLUR", n:5985},
-    {il:"ERZURUM",     ilce:"PALANDÖKEN", n:181922},
-    {il:"ERZURUM",     ilce:"PASİNLER", n:25401},
-    {il:"ERZURUM",     ilce:"PAZARYOLU", n:3537},
-    {il:"ERZURUM",     ilce:"ŞENKAYA", n:14918},
-    {il:"ERZURUM",     ilce:"TEKMAN", n:20826},
-    {il:"ERZURUM",     ilce:"TORTUM", n:12881},
-    {il:"ERZURUM",     ilce:"UZUNDERE", n:8263},
-    {il:"ERZURUM",     ilce:"YAKUTİYE", n:189149},
-    {il:"ESKİŞEHİR",     ilce:"ALPU", n:9725},
-    {il:"ESKİŞEHİR",     ilce:"BEYLİKOVA", n:5611},
-    {il:"ESKİŞEHİR",     ilce:"ÇİFTELER", n:14487},
-    {il:"ESKİŞEHİR",     ilce:"GÜNYÜZÜ", n:5008},
-    {il:"ESKİŞEHİR",     ilce:"HAN", n:2126},
-    {il:"ESKİŞEHİR",     ilce:"İNÖNÜ", n:6114},
-    {il:"ESKİŞEHİR",     ilce:"MAHMUDİYE", n:7407},
-    {il:"ESKİŞEHİR",     ilce:"MİHALGAZİ", n:2861},
-    {il:"ESKİŞEHİR",     ilce:"MİHALIÇÇIK", n:7605},
-    {il:"ESKİŞEHİR",     ilce:"ODUNPAZARI", n:431652},
-    {il:"ESKİŞEHİR",     ilce:"SARICAKAYA", n:4477},
-    {il:"ESKİŞEHİR",     ilce:"SEYİTGAZİ", n:12565},
-    {il:"ESKİŞEHİR",     ilce:"SİVRİHİSAR", n:20189},
-    {il:"ESKİŞEHİR",     ilce:"TEPEBAŞI", n:398129},
-    {il:"GAZİANTEP",     ilce:"ARABAN", n:32540},
-    {il:"GAZİANTEP",     ilce:"İSLAHİYE", n:66107},
-    {il:"GAZİANTEP",     ilce:"KARKAMIŞ", n:9087},
-    {il:"GAZİANTEP",     ilce:"NİZİP", n:152660},
-    {il:"GAZİANTEP",     ilce:"NURDAĞI", n:38269},
-    {il:"GAZİANTEP",     ilce:"OĞUZELİ", n:36644},
-    {il:"GAZİANTEP",     ilce:"ŞAHİNBEY", n:957792},
-    {il:"GAZİANTEP",     ilce:"ŞEHİTKAMİL", n:905880},
-    {il:"GAZİANTEP",     ilce:"YAVUZELİ", n:23436},
-    {il:"GİRESUN",     ilce:"ALUCRA", n:8473},
-    {il:"GİRESUN",     ilce:"BULANCAK", n:70397},
-    {il:"GİRESUN",     ilce:"ÇAMOLUK", n:5709},
-    {il:"GİRESUN",     ilce:"ÇANAKÇI", n:5783},
-    {il:"GİRESUN",     ilce:"DERELİ", n:20100},
-    {il:"GİRESUN",     ilce:"DOĞANKENT", n:7327},
-    {il:"GİRESUN",     ilce:"ESPİYE", n:39182},
-    {il:"GİRESUN",     ilce:"EYNESİL", n:12548},
-    {il:"GİRESUN",     ilce:"GÖRELE", n:31536},
-    {il:"GİRESUN",     ilce:"GÜCE", n:8194},
-    {il:"GİRESUN",     ilce:"KEŞAP", n:20859},
-    {il:"GİRESUN",     ilce:"MERKEZ", n:143915},
-    {il:"GİRESUN",     ilce:"PİRAZİZ", n:15109},
-    {il:"GİRESUN",     ilce:"ŞEBİNKARAHİSAR", n:19130},
-    {il:"GİRESUN",     ilce:"TİREBOLU", n:32124},
-    {il:"GİRESUN",     ilce:"YAĞLIDERE", n:14688},
-    {il:"GÜMÜŞHANE",     ilce:"KELKİT", n:38520},
-    {il:"GÜMÜŞHANE",     ilce:"KÖSE", n:6107},
-    {il:"GÜMÜŞHANE",     ilce:"KÜRTÜN", n:11327},
-    {il:"GÜMÜŞHANE",     ilce:"MERKEZ", n:54697},
-    {il:"GÜMÜŞHANE",     ilce:"ŞİRAN", n:18377},
-    {il:"GÜMÜŞHANE",     ilce:"TORUL", n:9779},
-    {il:"HAKKARİ",     ilce:"ÇUKURCA", n:14299},
-    {il:"HAKKARİ",     ilce:"DERECİK", n:24869},
-    {il:"HAKKARİ",     ilce:"MERKEZ", n:76165},
-    {il:"HAKKARİ",     ilce:"ŞEMDİNLİ", n:43034},
-    {il:"HAKKARİ",     ilce:"YÜKSEKOVA", n:121314},
-    {il:"HATAY",     ilce:"ALTINÖZÜ", n:69834},
-    {il:"HATAY",     ilce:"ANTAKYA", n:301855},
-    {il:"HATAY",     ilce:"ARSUZ", n:115077},
-    {il:"HATAY",     ilce:"BELEN", n:37876},
-    {il:"HATAY",     ilce:"DEFNE", n:139605},
-    {il:"HATAY",     ilce:"DÖRTYOL", n:132987},
-    {il:"HATAY",     ilce:"ERZİN", n:43103},
-    {il:"HATAY",     ilce:"HASSA", n:57457},
-    {il:"HATAY",     ilce:"İSKENDERUN", n:228149},
-    {il:"HATAY",     ilce:"KIRIKHAN", n:108200},
-    {il:"HATAY",     ilce:"KUMLU", n:16242},
-    {il:"HATAY",     ilce:"PAYAS", n:44530},
-    {il:"HATAY",     ilce:"REYHANLI", n:117645},
-    {il:"HATAY",     ilce:"SAMANDAĞ", n:122952},
-    {il:"HATAY",     ilce:"YAYLADAĞI", n:42019},
-    {il:"IĞDIR",     ilce:"ARALIK", n:18477},
-    {il:"IĞDIR",     ilce:"KARAKOYUNLU", n:12614},
-    {il:"IĞDIR",     ilce:"MERKEZ", n:152455},
-    {il:"IĞDIR",     ilce:"TUZLUCA", n:21525},
-    {il:"ISPARTA",     ilce:"AKSU", n:4073},
-    {il:"ISPARTA",     ilce:"ATABEY", n:6204},
-    {il:"ISPARTA",     ilce:"EĞİRDİR", n:29200},
-    {il:"ISPARTA",     ilce:"GELENDOST", n:13985},
-    {il:"ISPARTA",     ilce:"GÖNEN", n:7065},
-    {il:"ISPARTA",     ilce:"KEÇİBORLU", n:14033},
-    {il:"ISPARTA",     ilce:"MERKEZ", n:273638},
-    {il:"ISPARTA",     ilce:"SENİRKENT", n:10331},
-    {il:"ISPARTA",     ilce:"SÜTÇÜLER", n:9228},
-    {il:"ISPARTA",     ilce:"ŞARKİKARAAĞAÇ", n:24310},
-    {il:"ISPARTA",     ilce:"ULUBORLU", n:6287},
-    {il:"ISPARTA",     ilce:"YALVAÇ", n:44596},
-    {il:"ISPARTA",     ilce:"YENİŞARBADEMLİ", n:2353},
-    {il:"İSTANBUL",     ilce:"ADALAR", n:17489},
-    {il:"İSTANBUL",     ilce:"ARNAVUTKÖY", n:358469},
-    {il:"İSTANBUL",     ilce:"ATAŞEHİR", n:412125},
-    {il:"İSTANBUL",     ilce:"AVCILAR", n:440663},
-    {il:"İSTANBUL",     ilce:"BAĞCILAR", n:707635},
-    {il:"İSTANBUL",     ilce:"BAHÇELİEVLER", n:539035},
-    {il:"İSTANBUL",     ilce:"BAKIRKÖY", n:218204},
-    {il:"İSTANBUL",     ilce:"BAŞAKŞEHİR", n:536797},
-    {il:"İSTANBUL",     ilce:"BAYRAMPAŞA", n:272978},
-    {il:"İSTANBUL",     ilce:"BEŞİKTAŞ", n:165895},
-    {il:"İSTANBUL",     ilce:"BEYKOZ", n:246833},
-    {il:"İSTANBUL",     ilce:"BEYLİKDÜZÜ", n:422988},
-    {il:"İSTANBUL",     ilce:"BEYOĞLU", n:215991},
-    {il:"İSTANBUL",     ilce:"BÜYÜKÇEKMECE", n:283239},
-    {il:"İSTANBUL",     ilce:"ÇATALCA", n:81143},
-    {il:"İSTANBUL",     ilce:"ÇEKMEKÖY", n:315959},
-    {il:"İSTANBUL",     ilce:"ESENLER", n:419878},
-    {il:"İSTANBUL",     ilce:"ESENYURT", n:1003905},
-    {il:"İSTANBUL",     ilce:"EYÜPSULTAN", n:425216},
-    {il:"İSTANBUL",     ilce:"FATİH", n:351786},
-    {il:"İSTANBUL",     ilce:"GAZİOSMANPAŞA", n:478395},
-    {il:"İSTANBUL",     ilce:"GÜNGÖREN", n:251242},
-    {il:"İSTANBUL",     ilce:"KADIKÖY", n:458573},
-    {il:"İSTANBUL",     ilce:"KAĞITHANE", n:446420},
-    {il:"İSTANBUL",     ilce:"KARTAL", n:475630},
-    {il:"İSTANBUL",     ilce:"KÜÇÜKÇEKMECE", n:785270},
-    {il:"İSTANBUL",     ilce:"MALTEPE", n:525044},
-    {il:"İSTANBUL",     ilce:"PENDİK", n:752033},
-    {il:"İSTANBUL",     ilce:"SANCAKTEPE", n:507500},
-    {il:"İSTANBUL",     ilce:"SARIYER", n:344883},
-    {il:"İSTANBUL",     ilce:"SİLİVRİ", n:240029},
-    {il:"İSTANBUL",     ilce:"SULTANBEYLİ", n:378908},
-    {il:"İSTANBUL",     ilce:"SULTANGAZİ", n:529306},
-    {il:"İSTANBUL",     ilce:"ŞİLE", n:50090},
-    {il:"İSTANBUL",     ilce:"ŞİŞLİ", n:261959},
-    {il:"İSTANBUL",     ilce:"TUZLA", n:313865},
-    {il:"İSTANBUL",     ilce:"ÜMRANİYE", n:728913},
-    {il:"İSTANBUL",     ilce:"ÜSKÜDAR", n:514294},
-    {il:"İSTANBUL",     ilce:"ZEYTİNBURNU", n:275471},
-    {il:"İZMİR",     ilce:"ALİAĞA", n:110892},
-    {il:"İZMİR",     ilce:"BALÇOVA", n:75743},
-    {il:"İZMİR",     ilce:"BAYINDIR", n:39971},
-    {il:"İZMİR",     ilce:"BAYRAKLI", n:296481},
-    {il:"İZMİR",     ilce:"BERGAMA", n:107549},
-    {il:"İZMİR",     ilce:"BEYDAĞ", n:11904},
-    {il:"İZMİR",     ilce:"BORNOVA", n:452479},
-    {il:"İZMİR",     ilce:"BUCA", n:520941},
-    {il:"İZMİR",     ilce:"ÇEŞME", n:51902},
-    {il:"İZMİR",     ilce:"ÇİĞLİ", n:216430},
-    {il:"İZMİR",     ilce:"DİKİLİ", n:49138},
-    {il:"İZMİR",     ilce:"FOÇA", n:37711},
-    {il:"İZMİR",     ilce:"GAZİEMİR", n:137220},
-    {il:"İZMİR",     ilce:"GÜZELBAHÇE", n:39474},
-    {il:"İZMİR",     ilce:"KARABAĞLAR", n:467572},
-    {il:"İZMİR",     ilce:"KARABURUN", n:13725},
-    {il:"İZMİR",     ilce:"KARŞIYAKA", n:339624},
-    {il:"İZMİR",     ilce:"KEMALPAŞA", n:122840},
-    {il:"İZMİR",     ilce:"KINIK", n:28604},
-    {il:"İZMİR",     ilce:"KİRAZ", n:43340},
-    {il:"İZMİR",     ilce:"KONAK", n:317399},
-    {il:"İZMİR",     ilce:"MENDERES", n:112853},
-    {il:"İZMİR",     ilce:"MENEMEN", n:220510},
-    {il:"İZMİR",     ilce:"NARLIDERE", n:61320},
-    {il:"İZMİR",     ilce:"ÖDEMİŞ", n:132548},
-    {il:"İZMİR",     ilce:"SEFERİHİSAR", n:63712},
-    {il:"İZMİR",     ilce:"SELÇUK", n:38578},
-    {il:"İZMİR",     ilce:"TİRE", n:87571},
-    {il:"İZMİR",     ilce:"TORBALI", n:224133},
-    {il:"İZMİR",     ilce:"URLA", n:82021},
-    {il:"KAHRAMANMARAŞ",     ilce:"AFŞİN", n:80124},
-    {il:"KAHRAMANMARAŞ",     ilce:"ANDIRIN", n:31609},
-    {il:"KAHRAMANMARAŞ",     ilce:"ÇAĞLAYANCERİT", n:22440},
-    {il:"KAHRAMANMARAŞ",     ilce:"DULKADİROĞLU", n:213930},
-    {il:"KAHRAMANMARAŞ",     ilce:"EKİNÖZÜ", n:9896},
-    {il:"KAHRAMANMARAŞ",     ilce:"ELBİSTAN", n:132036},
-    {il:"KAHRAMANMARAŞ",     ilce:"GÖKSUN", n:49145},
-    {il:"KAHRAMANMARAŞ",     ilce:"NURHAK", n:11675},
-    {il:"KAHRAMANMARAŞ",     ilce:"ONİKİŞUBAT", n:447591},
-    {il:"KAHRAMANMARAŞ",     ilce:"PAZARCIK", n:66777},
-    {il:"KAHRAMANMARAŞ",     ilce:"TÜRKOĞLU", n:81055},
-    {il:"KARABÜK",     ilce:"EFLANİ", n:8663},
-    {il:"KARABÜK",     ilce:"ESKİPAZAR", n:12570},
-    {il:"KARABÜK",     ilce:"MERKEZ", n:135819},
-    {il:"KARABÜK",     ilce:"OVACIK", n:3986},
-    {il:"KARABÜK",     ilce:"SAFRANBOLU", n:69592},
-    {il:"KARABÜK",     ilce:"YENİCE", n:18984},
-    {il:"KARAMAN",     ilce:"AYRANCI", n:7127},
-    {il:"KARAMAN",     ilce:"BAŞYAYLA", n:3353},
-    {il:"KARAMAN",     ilce:"ERMENEK", n:27629},
-    {il:"KARAMAN",     ilce:"KAZIMKARABEKİR", n:4679},
-    {il:"KARAMAN",     ilce:"MERKEZ", n:207973},
-    {il:"KARAMAN",     ilce:"SARIVELİLER", n:11594},
-    {il:"KARS",     ilce:"AKYAKA", n:9382},
-    {il:"KARS",     ilce:"ARPAÇAY", n:13770},
-    {il:"KARS",     ilce:"DİGOR", n:17557},
-    {il:"KARS",     ilce:"KAĞIZMAN", n:42717},
-    {il:"KARS",     ilce:"MERKEZ", n:121154},
-    {il:"KARS",     ilce:"SARIKAMIŞ", n:35518},
-    {il:"KARS",     ilce:"SELİM", n:20476},
-    {il:"KARS",     ilce:"SUSUZ", n:8417},
-    {il:"KASTAMONU",     ilce:"ABANA", n:4474},
-    {il:"KASTAMONU",     ilce:"AĞLI", n:3176},
-    {il:"KASTAMONU",     ilce:"ARAÇ", n:18121},
-    {il:"KASTAMONU",     ilce:"AZDAVAY", n:7266},
-    {il:"KASTAMONU",     ilce:"BOZKURT", n:9250},
-    {il:"KASTAMONU",     ilce:"CİDE", n:22496},
-    {il:"KASTAMONU",     ilce:"ÇATALZEYTİN", n:7185},
-    {il:"KASTAMONU",     ilce:"DADAY", n:7736},
-    {il:"KASTAMONU",     ilce:"DEVREKANİ", n:12033},
-    {il:"KASTAMONU",     ilce:"DOĞANYURT", n:5057},
-    {il:"KASTAMONU",     ilce:"HANÖNÜ", n:4286},
-    {il:"KASTAMONU",     ilce:"İHSANGAZİ", n:4976},
-    {il:"KASTAMONU",     ilce:"İNEBOLU", n:19678},
-    {il:"KASTAMONU",     ilce:"KÜRE", n:5108},
-    {il:"KASTAMONU",     ilce:"MERKEZ", n:158953},
-    {il:"KASTAMONU",     ilce:"PINARBAŞI", n:5782},
-    {il:"KASTAMONU",     ilce:"SEYDİLER", n:4639},
-    {il:"KASTAMONU",     ilce:"ŞENPAZAR", n:4083},
-    {il:"KASTAMONU",     ilce:"TAŞKÖPRÜ", n:36544},
-    {il:"KASTAMONU",     ilce:"TOSYA", n:39091},
-    {il:"KAYSERİ",     ilce:"AKKIŞLA", n:5440},
-    {il:"KAYSERİ",     ilce:"BÜNYAN", n:30362},
-    {il:"KAYSERİ",     ilce:"DEVELİ", n:67818},
-    {il:"KAYSERİ",     ilce:"FELAHİYE", n:5529},
-    {il:"KAYSERİ",     ilce:"HACILAR", n:13701},
-    {il:"KAYSERİ",     ilce:"İNCESU", n:29780},
-    {il:"KAYSERİ",     ilce:"KOCASİNAN", n:421472},
-    {il:"KAYSERİ",     ilce:"MELİKGAZİ", n:593262},
-    {il:"KAYSERİ",     ilce:"ÖZVATAN", n:3877},
-    {il:"KAYSERİ",     ilce:"PINARBAŞI", n:20598},
-    {il:"KAYSERİ",     ilce:"SARIOĞLAN", n:13510},
-    {il:"KAYSERİ",     ilce:"SARIZ", n:9213},
-    {il:"KAYSERİ",     ilce:"TALAS", n:173657},
-    {il:"KAYSERİ",     ilce:"TOMARZA", n:20156},
-    {il:"KAYSERİ",     ilce:"YAHYALI", n:35207},
-    {il:"KAYSERİ",     ilce:"YEŞİLHİSAR", n:15409},
-    {il:"KIRIKKALE",     ilce:"BAHŞILI", n:7353},
-    {il:"KIRIKKALE",     ilce:"BALIŞEYH", n:5888},
-    {il:"KIRIKKALE",     ilce:"ÇELEBİ", n:2587},
-    {il:"KIRIKKALE",     ilce:"DELİCE", n:10577},
-    {il:"KIRIKKALE",     ilce:"KARAKEÇİLİ", n:3062},
-    {il:"KIRIKKALE",     ilce:"KESKİN", n:15841},
-    {il:"KIRIKKALE",     ilce:"MERKEZ", n:192821},
-    {il:"KIRIKKALE",     ilce:"SULAKYURT", n:5564},
-    {il:"KIRIKKALE",     ilce:"YAHŞİHAN", n:39137},
-    {il:"KIRKLARELİ",     ilce:"BABAESKİ", n:46355},
-    {il:"KIRKLARELİ",     ilce:"DEMİRKÖY", n:9364},
-    {il:"KIRKLARELİ",     ilce:"KOFÇAZ", n:2291},
-    {il:"KIRKLARELİ",     ilce:"LÜLEBURGAZ", n:157136},
-    {il:"KIRKLARELİ",     ilce:"MERKEZ", n:114710},
-    {il:"KIRKLARELİ",     ilce:"PEHLİVANKÖY", n:3276},
-    {il:"KIRKLARELİ",     ilce:"PINARHİSAR", n:17694},
-    {il:"KIRKLARELİ",     ilce:"VİZE", n:28769},
-    {il:"KIRŞEHİR",     ilce:"AKÇAKENT", n:3301},
-    {il:"KIRŞEHİR",     ilce:"AKPINAR", n:6435},
-    {il:"KIRŞEHİR",     ilce:"BOZTEPE", n:5049},
-    {il:"KIRŞEHİR",     ilce:"ÇİÇEKDAĞI", n:13350},
-    {il:"KIRŞEHİR",     ilce:"KAMAN", n:33354},
-    {il:"KIRŞEHİR",     ilce:"MERKEZ", n:163368},
-    {il:"KIRŞEHİR",     ilce:"MUCUR", n:17920},
-    {il:"KİLİS",     ilce:"ELBEYLİ", n:5273},
-    {il:"KİLİS",     ilce:"MERKEZ", n:135430},
-    {il:"KİLİS",     ilce:"MUSABEYLİ", n:11692},
-    {il:"KİLİS",     ilce:"POLATELİ", n:4968},
-    {il:"KOCAELİ",     ilce:"BAŞİSKELE", n:131387},
-    {il:"KOCAELİ",     ilce:"ÇAYIROVA", n:162262},
-    {il:"KOCAELİ",     ilce:"DARICA", n:235632},
-    {il:"KOCAELİ",     ilce:"DERİNCE", n:147892},
-    {il:"KOCAELİ",     ilce:"DİLOVASI", n:55355},
-    {il:"KOCAELİ",     ilce:"GEBZE", n:414960},
-    {il:"KOCAELİ",     ilce:"GÖLCÜK", n:181227},
-    {il:"KOCAELİ",     ilce:"İZMİT", n:381254},
-    {il:"KOCAELİ",     ilce:"KANDIRA", n:54260},
-    {il:"KOCAELİ",     ilce:"KARAMÜRSEL", n:59488},
-    {il:"KOCAELİ",     ilce:"KARTEPE", n:154377},
-    {il:"KOCAELİ",     ilce:"KÖRFEZ", n:183077},
-    {il:"KONYA",     ilce:"AHIRLI", n:4536},
-    {il:"KONYA",     ilce:"AKÖREN", n:5744},
-    {il:"KONYA",     ilce:"AKŞEHİR", n:93613},
-    {il:"KONYA",     ilce:"ALTINEKİN", n:14374},
-    {il:"KONYA",     ilce:"BEYŞEHİR", n:80353},
-    {il:"KONYA",     ilce:"BOZKIR", n:24704},
-    {il:"KONYA",     ilce:"CİHANBEYLİ", n:49126},
-    {il:"KONYA",     ilce:"ÇELTİK", n:9482},
-    {il:"KONYA",     ilce:"ÇUMRA", n:68803},
-    {il:"KONYA",     ilce:"DERBENT", n:3954},
-    {il:"KONYA",     ilce:"DEREBUCAK", n:5353},
-    {il:"KONYA",     ilce:"DOĞANHİSAR", n:14097},
-    {il:"KONYA",     ilce:"EMİRGAZİ", n:7647},
-    {il:"KONYA",     ilce:"EREĞLİ", n:158010},
-    {il:"KONYA",     ilce:"GÜNEYSINIR", n:9237},
-    {il:"KONYA",     ilce:"HADİM", n:10621},
-    {il:"KONYA",     ilce:"HALKAPINAR", n:3947},
-    {il:"KONYA",     ilce:"HÜYÜK", n:14878},
-    {il:"KONYA",     ilce:"ILGIN", n:53167},
-    {il:"KONYA",     ilce:"KADINHANI", n:31478},
-    {il:"KONYA",     ilce:"KARAPINAR", n:51756},
-    {il:"KONYA",     ilce:"KARATAY", n:395499},
-    {il:"KONYA",     ilce:"KULU", n:51732},
-    {il:"KONYA",     ilce:"MERAM", n:349685},
-    {il:"KONYA",     ilce:"SARAYÖNÜ", n:28401},
-    {il:"KONYA",     ilce:"SELÇUKLU", n:703449},
-    {il:"KONYA",     ilce:"SEYDİŞEHİR", n:66079},
-    {il:"KONYA",     ilce:"TAŞKENT", n:5669},
-    {il:"KONYA",     ilce:"TUZLUKÇU", n:6052},
-    {il:"KONYA",     ilce:"YALIHÜYÜK", n:1704},
-    {il:"KONYA",     ilce:"YUNAK", n:20259},
-    {il:"KÜTAHYA",     ilce:"ALTINTAŞ", n:14739},
-    {il:"KÜTAHYA",     ilce:"ASLANAPA", n:7813},
-    {il:"KÜTAHYA",     ilce:"ÇAVDARHİSAR", n:5503},
-    {il:"KÜTAHYA",     ilce:"DOMANİÇ", n:13900},
-    {il:"KÜTAHYA",     ilce:"DUMLUPINAR", n:2812},
-    {il:"KÜTAHYA",     ilce:"EMET", n:17352},
-    {il:"KÜTAHYA",     ilce:"GEDİZ", n:48539},
-    {il:"KÜTAHYA",     ilce:"HİSARCIK", n:10799},
-    {il:"KÜTAHYA",     ilce:"MERKEZ", n:277000},
-    {il:"KÜTAHYA",     ilce:"PAZARLAR", n:4713},
-    {il:"KÜTAHYA",     ilce:"SİMAV", n:60886},
-    {il:"KÜTAHYA",     ilce:"ŞAPHANE", n:5540},
-    {il:"KÜTAHYA",     ilce:"TAVŞANLI", n:100882},
-    {il:"MALATYA",     ilce:"AKÇADAĞ", n:31479},
-    {il:"MALATYA",     ilce:"ARAPGİR", n:9917},
-    {il:"MALATYA",     ilce:"ARGUVAN", n:6859},
-    {il:"MALATYA",     ilce:"BATTALGAZİ", n:274563},
-    {il:"MALATYA",     ilce:"DARENDE", n:24806},
-    {il:"MALATYA",     ilce:"DOĞANŞEHİR", n:36037},
-    {il:"MALATYA",     ilce:"DOĞANYOL", n:4002},
-    {il:"MALATYA",     ilce:"HEKİMHAN", n:17116},
-    {il:"MALATYA",     ilce:"KALE", n:7462},
-    {il:"MALATYA",     ilce:"KULUNCAK", n:7414},
-    {il:"MALATYA",     ilce:"PÜTÜRGE", n:12372},
-    {il:"MALATYA",     ilce:"YAZIHAN", n:13937},
-    {il:"MALATYA",     ilce:"YEŞİLYURT", n:309890},
-    {il:"MANİSA",     ilce:"AHMETLİ", n:17612},
-    {il:"MANİSA",     ilce:"AKHİSAR", n:181472},
-    {il:"MANİSA",     ilce:"ALAŞEHİR", n:104565},
-    {il:"MANİSA",     ilce:"DEMİRCİ", n:35629},
-    {il:"MANİSA",     ilce:"GÖLMARMARA", n:15140},
-    {il:"MANİSA",     ilce:"GÖRDES", n:25456},
-    {il:"MANİSA",     ilce:"KIRKAĞAÇ", n:37363},
-    {il:"MANİSA",     ilce:"KÖPRÜBAŞI", n:12217},
-    {il:"MANİSA",     ilce:"KULA", n:43015},
-    {il:"MANİSA",     ilce:"SALİHLİ", n:165007},
-    {il:"MANİSA",     ilce:"SARIGÖL", n:34786},
-    {il:"MANİSA",     ilce:"SARUHANLI", n:58475},
-    {il:"MANİSA",     ilce:"SELENDİ", n:18568},
-    {il:"MANİSA",     ilce:"SOMA", n:110188},
-    {il:"MANİSA",     ilce:"ŞEHZADELER", n:168582},
-    {il:"MANİSA",     ilce:"TURGUTLU", n:179326},
-    {il:"MANİSA",     ilce:"YUNUSEMRE", n:270355},
-    {il:"MARDİN",     ilce:"ARTUKLU", n:198718},
-    {il:"MARDİN",     ilce:"DARGEÇİT", n:26675},
-    {il:"MARDİN",     ilce:"DERİK", n:61553},
-    {il:"MARDİN",     ilce:"KIZILTEPE", n:275217},
-    {il:"MARDİN",     ilce:"MAZIDAĞI", n:37381},
-    {il:"MARDİN",     ilce:"MİDYAT", n:125791},
-    {il:"MARDİN",     ilce:"NUSAYBİN", n:119559},
-    {il:"MARDİN",     ilce:"ÖMERLİ", n:14112},
-    {il:"MARDİN",     ilce:"SAVUR", n:23404},
-    {il:"MARDİN",     ilce:"YEŞİLLİ", n:21166},
-    {il:"MERSİN",     ilce:"AKDENİZ", n:254292},
-    {il:"MERSİN",     ilce:"ANAMUR", n:66952},
-    {il:"MERSİN",     ilce:"AYDINCIK", n:11271},
-    {il:"MERSİN",     ilce:"BOZYAZI", n:26832},
-    {il:"MERSİN",     ilce:"ÇAMLIYAYLA", n:8383},
-    {il:"MERSİN",     ilce:"ERDEMLİ", n:157566},
-    {il:"MERSİN",     ilce:"GÜLNAR", n:32785},
-    {il:"MERSİN",     ilce:"MEZİTLİ", n:233140},
-    {il:"MERSİN",     ilce:"MUT", n:62758},
-    {il:"MERSİN",     ilce:"SİLİFKE", n:139610},
-    {il:"MERSİN",     ilce:"TARSUS", n:358510},
-    {il:"MERSİN",     ilce:"TOROSLAR", n:322971},
-    {il:"MERSİN",     ilce:"YENİŞEHİR", n:281358},
-    {il:"MUĞLA",     ilce:"BODRUM", n:207196},
-    {il:"MUĞLA",     ilce:"DALAMAN", n:53327},
-    {il:"MUĞLA",     ilce:"DATÇA", n:26067},
-    {il:"MUĞLA",     ilce:"FETHİYE", n:187332},
-    {il:"MUĞLA",     ilce:"KAVAKLIDERE", n:10854},
-    {il:"MUĞLA",     ilce:"KÖYCEĞİZ", n:41810},
-    {il:"MUĞLA",     ilce:"MARMARİS", n:97373},
-    {il:"MUĞLA",     ilce:"MENTEŞE", n:126288},
-    {il:"MUĞLA",     ilce:"MİLAS", n:152275},
-    {il:"MUĞLA",     ilce:"ORTACA", n:58704},
-    {il:"MUĞLA",     ilce:"SEYDİKEMER", n:65648},
-    {il:"MUĞLA",     ilce:"ULA", n:27649},
-    {il:"MUĞLA",     ilce:"YATAĞAN", n:45024},
-    {il:"MUŞ",     ilce:"BULANIK", n:68983},
-    {il:"MUŞ",     ilce:"HASKÖY", n:27684},
-    {il:"MUŞ",     ilce:"KORKUT", n:19251},
-    {il:"MUŞ",     ilce:"MALAZGİRT", n:40595},
-    {il:"MUŞ",     ilce:"MERKEZ", n:203810},
-    {il:"MUŞ",     ilce:"VARTO", n:28804},
-    {il:"NEVŞEHİR",     ilce:"ACIGÖL", n:19430},
-    {il:"NEVŞEHİR",     ilce:"AVANOS", n:32093},
-    {il:"NEVŞEHİR",     ilce:"DERİNKUYU", n:21107},
-    {il:"NEVŞEHİR",     ilce:"GÜLŞEHİR", n:21173},
-    {il:"NEVŞEHİR",     ilce:"HACIBEKTAŞ", n:10564},
-    {il:"NEVŞEHİR",     ilce:"KOZAKLI", n:12678},
-    {il:"NEVŞEHİR",     ilce:"MERKEZ", n:163126},
-    {il:"NEVŞEHİR",     ilce:"ÜRGÜP", n:39979},
-    {il:"NİĞDE",     ilce:"ALTUNHİSAR", n:12004},
-    {il:"NİĞDE",     ilce:"BOR", n:62594},
-    {il:"NİĞDE",     ilce:"ÇAMARDI", n:11631},
-    {il:"NİĞDE",     ilce:"ÇİFTLİK", n:25157},
-    {il:"NİĞDE",     ilce:"MERKEZ", n:244326},
-    {il:"NİĞDE",     ilce:"ULUKIŞLA", n:18780},
-    {il:"ORDU",     ilce:"AKKUŞ", n:20465},
-    {il:"ORDU",     ilce:"ALTINORDU", n:239714},
-    {il:"ORDU",     ilce:"AYBASTI", n:19784},
-    {il:"ORDU",     ilce:"ÇAMAŞ", n:8407},
-    {il:"ORDU",     ilce:"ÇATALPINAR", n:12888},
-    {il:"ORDU",     ilce:"ÇAYBAŞI", n:11656},
-    {il:"ORDU",     ilce:"FATSA", n:129844},
-    {il:"ORDU",     ilce:"GÖLKÖY", n:24780},
-    {il:"ORDU",     ilce:"GÜLYALI", n:8881},
-    {il:"ORDU",     ilce:"GÜRGENTEPE", n:12499},
-    {il:"ORDU",     ilce:"İKİZCE", n:12537},
-    {il:"ORDU",     ilce:"KABADÜZ", n:6794},
-    {il:"ORDU",     ilce:"KABATAŞ", n:9949},
-    {il:"ORDU",     ilce:"KORGAN", n:26428},
-    {il:"ORDU",     ilce:"KUMRU", n:27638},
-    {il:"ORDU",     ilce:"MESUDİYE", n:11829},
-    {il:"ORDU",     ilce:"PERŞEMBE", n:30053},
-    {il:"ORDU",     ilce:"ULUBEY", n:18027},
-    {il:"ORDU",     ilce:"ÜNYE", n:135914},
-    {il:"OSMANİYE",     ilce:"BAHÇE", n:22989},
-    {il:"OSMANİYE",     ilce:"DÜZİÇİ", n:88274},
-    {il:"OSMANİYE",     ilce:"HASANBEYLİ", n:4914},
-    {il:"OSMANİYE",     ilce:"KADİRLİ", n:127644},
-    {il:"OSMANİYE",     ilce:"MERKEZ", n:284895},
-    {il:"OSMANİYE",     ilce:"SUMBAS", n:13049},
-    {il:"OSMANİYE",     ilce:"TOPRAKKALE", n:22358},
-    {il:"RİZE",     ilce:"ARDEŞEN", n:43519},
-    {il:"RİZE",     ilce:"ÇAMLIHEMŞİN", n:7051},
-    {il:"RİZE",     ilce:"ÇAYELİ", n:42032},
-    {il:"RİZE",     ilce:"DEREPAZARI", n:6772},
-    {il:"RİZE",     ilce:"FINDIKLI", n:16388},
-    {il:"RİZE",     ilce:"GÜNEYSU", n:15013},
-    {il:"RİZE",     ilce:"HEMŞİN", n:2299},
-    {il:"RİZE",     ilce:"İKİZDERE", n:6287},
-    {il:"RİZE",     ilce:"İYİDERE", n:8495},
-    {il:"RİZE",     ilce:"KALKANDERE", n:13350},
-    {il:"RİZE",     ilce:"MERKEZ", n:153597},
-    {il:"RİZE",     ilce:"PAZAR", n:32144},
-    {il:"SAKARYA",     ilce:"ADAPAZARI", n:284006},
-    {il:"SAKARYA",     ilce:"AKYAZI", n:99561},
-    {il:"SAKARYA",     ilce:"ARİFİYE", n:55589},
-    {il:"SAKARYA",     ilce:"ERENLER", n:92549},
-    {il:"SAKARYA",     ilce:"FERİZLİ", n:36015},
-    {il:"SAKARYA",     ilce:"GEYVE", n:51708},
-    {il:"SAKARYA",     ilce:"HENDEK", n:93990},
-    {il:"SAKARYA",     ilce:"KARAPÜRÇEK", n:13734},
-    {il:"SAKARYA",     ilce:"KARASU", n:75887},
-    {il:"SAKARYA",     ilce:"KAYNARCA", n:25440},
-    {il:"SAKARYA",     ilce:"KOCAALİ", n:24966},
-    {il:"SAKARYA",     ilce:"PAMUKOVA", n:31536},
-    {il:"SAKARYA",     ilce:"SAPANCA", n:47505},
-    {il:"SAKARYA",     ilce:"SERDİVAN", n:168855},
-    {il:"SAKARYA",     ilce:"SÖĞÜTLÜ", n:15288},
-    {il:"SAKARYA",     ilce:"TARAKLI", n:7064},
-    {il:"SAMSUN",     ilce:"19 MAYIS", n:28658},
-    {il:"SAMSUN",     ilce:"ALAÇAM", n:24560},
-    {il:"SAMSUN",     ilce:"ASARCIK", n:15673},
-    {il:"SAMSUN",     ilce:"ATAKUM", n:261809},
-    {il:"SAMSUN",     ilce:"AYVACIK", n:18557},
-    {il:"SAMSUN",     ilce:"BAFRA", n:143387},
-    {il:"SAMSUN",     ilce:"CANİK", n:100247},
-    {il:"SAMSUN",     ilce:"ÇARŞAMBA", n:143206},
-    {il:"SAMSUN",     ilce:"HAVZA", n:38103},
-    {il:"SAMSUN",     ilce:"İLKADIM", n:330290},
-    {il:"SAMSUN",     ilce:"KAVAK", n:25370},
-    {il:"SAMSUN",     ilce:"LADİK", n:15942},
-    {il:"SAMSUN",     ilce:"SALIPAZARI", n:19406},
-    {il:"SAMSUN",     ilce:"TEKKEKÖY", n:59356},
-    {il:"SAMSUN",     ilce:"TERME", n:71348},
-    {il:"SAMSUN",     ilce:"VEZİRKÖPRÜ", n:87575},
-    {il:"SAMSUN",     ilce:"YAKAKENT", n:8916},
-    {il:"SİİRT",     ilce:"BAYKAN", n:23219},
-    {il:"SİİRT",     ilce:"ERUH", n:18339},
-    {il:"SİİRT",     ilce:"KURTALAN", n:60674},
-    {il:"SİİRT",     ilce:"MERKEZ", n:180837},
-    {il:"SİİRT",     ilce:"PERVARİ", n:26437},
-    {il:"SİİRT",     ilce:"ŞİRVAN", n:18773},
-    {il:"SİİRT",     ilce:"TİLLO", n:4090},
-    {il:"SİNOP",     ilce:"AYANCIK", n:23818},
-    {il:"SİNOP",     ilce:"BOYABAT", n:44901},
-    {il:"SİNOP",     ilce:"DİKMEN", n:4810},
-    {il:"SİNOP",     ilce:"DURAĞAN", n:16788},
-    {il:"SİNOP",     ilce:"ERFELEK", n:12565},
-    {il:"SİNOP",     ilce:"GERZE", n:30701},
-    {il:"SİNOP",     ilce:"MERKEZ", n:70311},
-    {il:"SİNOP",     ilce:"SARAYDÜZÜ", n:5656},
-    {il:"SİNOP",     ilce:"TÜRKELİ", n:16298},
-    {il:"SİVAS",     ilce:"AKINCILAR", n:4641},
-    {il:"SİVAS",     ilce:"ALTINYAYLA", n:8245},
-    {il:"SİVAS",     ilce:"DİVRİĞİ", n:15657},
-    {il:"SİVAS",     ilce:"DOĞANŞAR", n:2770},
-    {il:"SİVAS",     ilce:"GEMEREK", n:21342},
-    {il:"SİVAS",     ilce:"GÖLOVA", n:2998},
-    {il:"SİVAS",     ilce:"GÜRÜN", n:17062},
-    {il:"SİVAS",     ilce:"HAFİK", n:8950},
-    {il:"SİVAS",     ilce:"İMRANLI", n:6788},
-    {il:"SİVAS",     ilce:"KANGAL", n:19406},
-    {il:"SİVAS",     ilce:"KOYULHİSAR", n:11782},
-    {il:"SİVAS",     ilce:"MERKEZ", n:393912},
-    {il:"SİVAS",     ilce:"SUŞEHRİ", n:25056},
-    {il:"SİVAS",     ilce:"ŞARKIŞLA", n:37282},
-    {il:"SİVAS",     ilce:"ULAŞ", n:7603},
-    {il:"SİVAS",     ilce:"YILDIZELİ", n:26567},
-    {il:"SİVAS",     ilce:"ZARA", n:21340},
-    {il:"ŞANLIURFA",     ilce:"AKÇAKALE", n:131351},
-    {il:"ŞANLIURFA",     ilce:"BİRECİK", n:91837},
-    {il:"ŞANLIURFA",     ilce:"BOZOVA", n:50534},
-    {il:"ŞANLIURFA",     ilce:"CEYLANPINAR", n:93105},
-    {il:"ŞANLIURFA",     ilce:"EYYÜBİYE", n:414516},
-    {il:"ŞANLIURFA",     ilce:"HALFETİ", n:41624},
-    {il:"ŞANLIURFA",     ilce:"HALİLİYE", n:395975},
-    {il:"ŞANLIURFA",     ilce:"HARRAN", n:101710},
-    {il:"ŞANLIURFA",     ilce:"HİLVAN", n:41969},
-    {il:"ŞANLIURFA",     ilce:"KARAKÖPRÜ", n:312031},
-    {il:"ŞANLIURFA",     ilce:"SİVEREK", n:277399},
-    {il:"ŞANLIURFA",     ilce:"SURUÇ", n:98022},
-    {il:"ŞANLIURFA",     ilce:"VİRANŞEHİR", n:215727},
-    {il:"ŞIRNAK",     ilce:"BEYTÜŞŞEBAP", n:13971},
-    {il:"ŞIRNAK",     ilce:"CİZRE", n:166290},
-    {il:"ŞIRNAK",     ilce:"GÜÇLÜKONAK", n:12562},
-    {il:"ŞIRNAK",     ilce:"İDİL", n:76548},
-    {il:"ŞIRNAK",     ilce:"MERKEZ", n:105697},
-    {il:"ŞIRNAK",     ilce:"SİLOPİ", n:152610},
-    {il:"ŞIRNAK",     ilce:"ULUDERE", n:45988},
-    {il:"TEKİRDAĞ",     ilce:"ÇERKEZKÖY", n:223975},
-    {il:"TEKİRDAĞ",     ilce:"ÇORLU", n:306939},
-    {il:"TEKİRDAĞ",     ilce:"ERGENE", n:68648},
-    {il:"TEKİRDAĞ",     ilce:"HAYRABOLU", n:29706},
-    {il:"TEKİRDAĞ",     ilce:"KAPAKLI", n:152509},
-    {il:"TEKİRDAĞ",     ilce:"MALKARA", n:50123},
-    {il:"TEKİRDAĞ",     ilce:"MARMARAEREĞLİSİ", n:33623},
-    {il:"TEKİRDAĞ",     ilce:"MURATLI", n:30410},
-    {il:"TEKİRDAĞ",     ilce:"SARAY", n:51468},
-    {il:"TEKİRDAĞ",     ilce:"SÜLEYMANPAŞA", n:226582},
-    {il:"TEKİRDAĞ",     ilce:"ŞARKÖY", n:34458},
-    {il:"TOKAT",     ilce:"ALMUS", n:28135},
-    {il:"TOKAT",     ilce:"ARTOVA", n:7589},
-    {il:"TOKAT",     ilce:"BAŞÇİFTLİK", n:8445},
-    {il:"TOKAT",     ilce:"ERBAA", n:103409},
-    {il:"TOKAT",     ilce:"MERKEZ", n:201969},
-    {il:"TOKAT",     ilce:"NİKSAR", n:63594},
-    {il:"TOKAT",     ilce:"PAZAR", n:12875},
-    {il:"TOKAT",     ilce:"REŞADİYE", n:43108},
-    {il:"TOKAT",     ilce:"SULUSARAY", n:6536},
-    {il:"TOKAT",     ilce:"TURHAL", n:77707},
-    {il:"TOKAT",     ilce:"YEŞİLYURT", n:8045},
-    {il:"TOKAT",     ilce:"ZİLE", n:52729},
-    {il:"TRABZON",     ilce:"AKÇAABAT", n:131162},
-    {il:"TRABZON",     ilce:"ARAKLI", n:49230},
-    {il:"TRABZON",     ilce:"ARSİN", n:31493},
-    {il:"TRABZON",     ilce:"BEŞİKDÜZÜ", n:23246},
-    {il:"TRABZON",     ilce:"ÇARŞIBAŞI", n:15004},
-    {il:"TRABZON",     ilce:"ÇAYKARA", n:12921},
-    {il:"TRABZON",     ilce:"DERNEKPAZARI", n:3717},
-    {il:"TRABZON",     ilce:"DÜZKÖY", n:13105},
-    {il:"TRABZON",     ilce:"HAYRAT", n:7410},
-    {il:"TRABZON",     ilce:"KÖPRÜBAŞI", n:4271},
-    {il:"TRABZON",     ilce:"MAÇKA", n:24931},
-    {il:"TRABZON",     ilce:"OF", n:43591},
-    {il:"TRABZON",     ilce:"ORTAHİSAR", n:335116},
-    {il:"TRABZON",     ilce:"SÜRMENE", n:25281},
-    {il:"TRABZON",     ilce:"ŞALPAZARI", n:10575},
-    {il:"TRABZON",     ilce:"TONYA", n:13332},
-    {il:"TRABZON",     ilce:"VAKFIKEBİR", n:27278},
-    {il:"TRABZON",     ilce:"YOMRA", n:51660},
-    {il:"TUNCELİ",     ilce:"ÇEMİŞGEZEK", n:7505},
-    {il:"TUNCELİ",     ilce:"HOZAT", n:5332},
-    {il:"TUNCELİ",     ilce:"MAZGİRT", n:7257},
-    {il:"TUNCELİ",     ilce:"MERKEZ", n:41045},
-    {il:"TUNCELİ",     ilce:"NAZIMİYE", n:3095},
-    {il:"TUNCELİ",     ilce:"OVACIK", n:6700},
-    {il:"TUNCELİ",     ilce:"PERTEK", n:10569},
-    {il:"TUNCELİ",     ilce:"PÜLÜMÜR", n:3580},
-    {il:"UŞAK",     ilce:"BANAZ", n:34624},
-    {il:"UŞAK",     ilce:"EŞME", n:34444},
-    {il:"UŞAK",     ilce:"KARAHALLI", n:9408},
-    {il:"UŞAK",     ilce:"MERKEZ", n:265371},
-    {il:"UŞAK",     ilce:"SİVASLI", n:19193},
-    {il:"UŞAK",     ilce:"ULUBEY", n:11365},
-    {il:"VAN",     ilce:"BAHÇESARAY", n:11438},
-    {il:"VAN",     ilce:"BAŞKALE", n:37568},
-    {il:"VAN",     ilce:"ÇALDIRAN", n:50170},
-    {il:"VAN",     ilce:"ÇATAK", n:16361},
-    {il:"VAN",     ilce:"EDREMİT", n:132309},
-    {il:"VAN",     ilce:"ERCİŞ", n:169040},
-    {il:"VAN",     ilce:"GEVAŞ", n:26253},
-    {il:"VAN",     ilce:"GÜRPINAR", n:28505},
-    {il:"VAN",     ilce:"İPEKYOLU", n:362816},
-    {il:"VAN",     ilce:"MURADİYE", n:41402},
-    {il:"VAN",     ilce:"ÖZALP", n:51357},
-    {il:"VAN",     ilce:"SARAY", n:17036},
-    {il:"VAN",     ilce:"TUŞBA", n:167758},
-    {il:"YALOVA",     ilce:"ALTINOVA", n:35490},
-    {il:"YALOVA",     ilce:"ARMUTLU", n:11984},
-    {il:"YALOVA",     ilce:"ÇINARCIK", n:40174},
-    {il:"YALOVA",     ilce:"ÇİFTLİKKÖY", n:58589},
-    {il:"YALOVA",     ilce:"MERKEZ", n:157901},
-    {il:"YALOVA",     ilce:"TERMAL", n:7497},
-    {il:"YOZGAT",     ilce:"AKDAĞMADENİ", n:39642},
-    {il:"YOZGAT",     ilce:"AYDINCIK", n:9317},
-    {il:"YOZGAT",     ilce:"BOĞAZLIYAN", n:35316},
-    {il:"YOZGAT",     ilce:"ÇANDIR", n:4360},
-    {il:"YOZGAT",     ilce:"ÇAYIRALAN", n:11777},
-    {il:"YOZGAT",     ilce:"ÇEKEREK", n:18426},
-    {il:"YOZGAT",     ilce:"KADIŞEHRİ", n:9854},
-    {il:"YOZGAT",     ilce:"MERKEZ", n:109042},
-    {il:"YOZGAT",     ilce:"SARAYKENT", n:12605},
-    {il:"YOZGAT",     ilce:"SARIKAYA", n:30785},
-    {il:"YOZGAT",     ilce:"SORGUN", n:80068},
-    {il:"YOZGAT",     ilce:"ŞEFAATLİ", n:14008},
-    {il:"YOZGAT",     ilce:"YENİFAKILI", n:5008},
-    {il:"YOZGAT",     ilce:"YERKÖY", n:33000},
-    {il:"ZONGULDAK",     ilce:"ALAPLI", n:43217},
-    {il:"ZONGULDAK",     ilce:"ÇAYCUMA", n:91796},
-    {il:"ZONGULDAK",     ilce:"DEVREK", n:56900},
-    {il:"ZONGULDAK",     ilce:"EREĞLİ", n:173884},
-    {il:"ZONGULDAK",     ilce:"GÖKÇEBEY", n:21070},
-    {il:"ZONGULDAK",     ilce:"KİLİMLİ", n:32441},
-    {il:"ZONGULDAK",     ilce:"KOZLU", n:50616},
-    {il:"ZONGULDAK",     ilce:"MERKEZ", n:115279},
+let catalog=null,current=null,mode=null,fontDelta=0;
 
-];
+function esc(s){
+  return (s||"").replace(/[&<>"']/g,c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#039;"
+  }[c]));
+}
 
-const buyuk = ["ADANA","ANKARA","ANTALYA","AYDIN","BALIKESİR","BURSA","DENİZLİ","DİYARBAKIR","ERZURUM","ESKİŞEHİR","GAZİANTEP","HATAY","İSTANBUL","İZMİR","KAHRAMANMARAŞ","KAYSERİ","KOCAELİ","KONYA","MALATYA","MANİSA","MARDİN","MERSİN","MUĞLA","ORDU","SAKARYA","SAMSUN","ŞANLIURFA","TEKİRDAĞ","TRABZON","VAN"];
+function officialHtml(s){
+  return esc(s||"")
+    .replace(/\[\[SUP\]\](.*?)\[\[\/SUP\]\]/g,"<sup>$1</sup>")
+    .replace(/\n/g,"<br>");
+}
+
+function plain(s){
+  return (s||"").replace(/\[\[SUP\]\](.*?)\[\[\/SUP\]\]/g,"$1");
+}
+
+function label(a){
+  const kind=a.tur==="gecici"
+    ? "Geçici Madde"
+    : (a.tur==="ek" ? "Ek Madde" : "Madde");
+
+  return kind+" "+a.madde+(a.baslik ? " - "+plain(a.baslik) : "");
+}
+
+function resetResult(){
+  mode=null;
+  document.getElementById("resultCard").classList.add("hidden");
+  document.getElementById("printCard").classList.add("hidden");
+  document.getElementById("articleControls").classList.add("hidden");
+  document.getElementById("fullControls").classList.add("hidden");
+}
 
 
+function scrollToElement(id, offset=12){
+  const el=document.getElementById(id);
+  if(!el)return;
+  const top=el.getBoundingClientRect().top+window.pageYOffset-offset;
+  window.scrollTo({top,behavior:"smooth"});
+}
 
-const ilSelect   = document.getElementById("il");
-const ilceSelect = document.getElementById("ilce");
+function fontChange(d){
+  fontDelta=Math.max(-2,Math.min(6,fontDelta+d));
+  document.getElementById("result").style.setProperty("--rfd",fontDelta+"px");
+}
 
-[...new Set(data.map(x=>x.il))].forEach(i=>{
-    const o = document.createElement("option");
-    o.textContent = i;
-    o.value = i;
-    ilSelect.appendChild(o);
-});
+async function loadCatalog(){
+  const r=await fetch("data/mevzuatlar.json?ts="+Date.now());
+  catalog=await r.json();
 
-// Başlangıçta boş seçenek
-ilSelect.insertAdjacentHTML("afterbegin", '<option value="">-- İl Seçiniz --</option>');
-ilceSelect.innerHTML = '<option value="">-- İlçe Seçiniz --</option>';
-ilSelect.value = "";
+  const sel=document.getElementById("law");
+  sel.innerHTML='<option value="">Lütfen Mevzuat Seçin</option>';
 
-ilSelect.onchange = () => {
-    ilceSelect.innerHTML = '<option value="">-- İlçe Seçiniz --</option>';
-    data.filter(x=>x.il===ilSelect.value).forEach(i=>{
-        const o = document.createElement("option");
-        o.textContent = i.ilce;
-        o.value = i.ilce;
-        ilceSelect.appendChild(o);
+  (catalog.mevzuatlar||[]).forEach(x=>{
+    const o=document.createElement("option");
+    o.value=x.id;
+    o.textContent=x.ad;
+    sel.appendChild(o);
+  });
+
+  if(catalog.son_guncelleme){
+    document.getElementById("updateInfo").textContent=
+      "Son güncelleme: "+
+      new Date(catalog.son_guncelleme).toLocaleString("tr-TR");
+  }
+}
+
+async function loadSelectedLaw(){
+  const id=document.getElementById("law").value;
+
+  current=null;
+  document.getElementById("modeCard").classList.add("hidden");
+  resetResult();
+
+  const aSel=document.getElementById("article");
+  aSel.innerHTML='<option value="">Madde seçin</option>';
+
+  if(!id){
+    return;
+  }
+
+  try{
+    const r=await fetch("data/"+id+".json?ts="+Date.now());
+
+    if(!r.ok){
+      throw new Error("Mevzuat dosyası bulunamadı.");
+    }
+
+    current=await r.json();
+
+    current.maddeler.forEach((a,i)=>{
+      const o=document.createElement("option");
+      o.value=i;
+      o.textContent=label(a);
+      aSel.appendChild(o);
     });
-    hesapla();
+
+    document.getElementById("modeCard").classList.remove("hidden");
+
+  }catch(e){
+    alert("Mevzuat yüklenemedi: "+e.message);
+  }
+}
+
+document.getElementById("articleMode").onclick=()=>{
+  mode="article";
+  resetResult();
+  mode="article";
+  document.getElementById("articleControls").classList.remove("hidden");
+  setTimeout(()=>scrollToElement("articleControls",10),60);
 };
 
-ilceSelect.onchange = hesapla;
+document.getElementById("fullMode").onclick=()=>{
+  if(!current)return;
 
-function sifirla(){
-    ilSelect.value = "";
-    ilceSelect.innerHTML = '<option value="">-- İlçe Seçiniz --</option>';
-    document.getElementById("sonuc").style.display = "none";
-    document.getElementById("bilgi").innerHTML = "";
-    document.getElementById("requirements").innerHTML = "";
-}
+  mode="full";
+  resetResult();
+  mode="full";
 
-function hesapla(){
-    const il   = ilSelect.value;
-    const ilce = ilceSelect.value;
-    if(!il || !ilce) return;
+  document.getElementById("fullControls").classList.remove("hidden");
 
-    const row = data.find(x => x.il === il && x.ilce === ilce);
-    if(!row) return;
+  const res=document.getElementById("result");
+  res.querySelector("h2").textContent=current.ad;
 
-    const n = row.n;
-    const buyukMu = buyuk.includes(il);
-    const nufus30BinUstu = n > 30000;
+  document.getElementById("articleTitle").innerHTML="";
 
-    let toplam, tescilli, kiralik, hibritElektrikli, turkiyeUretimi;
+  let h="";
 
-    if (buyukMu && nufus30BinUstu) {
-        toplam = 10;
-        tescilli = 5;
-        kiralik = 5;
-        hibritElektrikli = 2;
-        turkiyeUretimi = 1;
-    } else {
-        toplam = 5;
-        tescilli = 2;
-        kiralik = 3;
-        hibritElektrikli = 0;
-        turkiyeUretimi = 0;
+  current.maddeler.forEach(a=>{
+    const kind=a.tur==="gecici"
+      ? "GEÇİCİ MADDE"
+      : (a.tur==="ek" ? "EK MADDE" : "MADDE");
+
+    h+='<div class="full-article">';
+
+    if(a.baslik){
+      h+='<div class="full-title">'+officialHtml(a.baslik)+'</div>';
     }
 
-    document.getElementById("bilgi").innerHTML = `
-        <div class="info-row">
-            <span class="info-key">İl</span>
-            <span class="info-val">${il}</span>
-        </div>
-        <div class="info-row">
-            <span class="info-key">İlçe</span>
-            <span class="info-val">${ilce}</span>
-        </div>
-        <div class="info-row">
-            <span class="info-key">Büyükşehir Belediyesi</span>
-            <span class="info-val">${buyukMu ? "✓ Evet" : "✗ Hayır"}</span>
-        </div>
-        <div class="info-row">
-            <span class="info-key">İlçe Nüfusu</span>
-            <span class="info-val">${n.toLocaleString("tr-TR")}</span>
-        </div>
-        <div class="info-row">
-            <span class="info-key">30.000 nüfus eşiği</span>
-            <span class="info-val">${nufus30BinUstu ? "✓ Geçiyor" : "✗ Geçmiyor"}</span>
-        </div>
-    `;
+    h+='<div class="full-body"><strong>'+
+      kind+" "+esc(a.madde)+" –</strong> "+
+      officialHtml(a.metin)+
+      '</div></div>';
+  });
 
-    let details = `
-        <div class="req-card req-highlight">
-            <div class="req-card-title">Asgari toplam araç</div>
-            <div class="req-card-value">${toplam} adet</div>
-            <div class="req-card-note">Faaliyet gösterilebilmesi için bulundurulması gereken asgari toplam araç sayısı.</div>
-        </div>
+  document.getElementById("body").innerHTML=h;
+  document.getElementById("resultCard").classList.remove("hidden");
+  setTimeout(()=>scrollToElement("resultCard",10),60);
 
-        <div class="req-card">
-            <div class="req-card-title">İşletme adına tescilli</div>
-            <div class="req-card-value">En az ${tescilli} adet</div>
-            <div class="req-card-note">Araçların en az bu kadarı işletme adına tescilli olmalıdır.</div>
-        </div>
+  // Tam mevzuat görüntüsünde PDF/Yazdır gösterilmez.
+  document.getElementById("printCard").classList.add("hidden");
+};
 
-        <div class="req-card">
-            <div class="req-card-title">Kiralama yoluyla temin</div>
-            <div class="req-card-value">En fazla ${kiralik} adet</div>
-            <div class="req-card-note">Toplam asgari araç sayısının kalan kısmı kiralama yoluyla temin edilebilir.</div>
-        </div>
-    `;
+document.getElementById("article").onchange=()=>{
+  if(!current)return;
 
-    if (hibritElektrikli > 0) {
-        details += `
-        <div class="req-card req-highlight">
-            <div class="req-card-title">Hibrit veya yalnızca elektrik motorlu</div>
-            <div class="req-card-value">En az ${hibritElektrikli} adet</div>
-            <div class="req-card-note">Toplam 10 araç içinde en az 2 araç hibrit veya yalnızca elektrik motorlu olmalıdır.</div>
-        </div>
+  const v=document.getElementById("article").value;
 
-        <div class="req-card req-highlight">
-            <div class="req-card-title">Türkiye'de üretilmiş hibrit / elektrikli araç</div>
-            <div class="req-card-value">En az ${turkiyeUretimi} adet</div>
-            <div class="req-card-note">Hibrit veya yalnızca elektrik motorlu araçlardan en az biri Türkiye'de üretilmiş olmalıdır.</div>
-        </div>
-        `;
-    } else {
-        details += `
-        <div class="req-card">
-            <div class="req-card-title">Hibrit veya yalnızca elektrik motorlu</div>
-            <div class="req-card-value">Özel asgari şart yok</div>
-            <div class="req-card-note">Seçilen ilçe, 10 araçlık büyükşehir ve 30.000 nüfus üzeri kapsamına girmediğinden bu hükümde ayrıca hibrit/elektrikli araç sayısı öngörülmemektedir.</div>
-        </div>
-        `;
-    }
+  if(v===""){
+    document.getElementById("resultCard").classList.add("hidden");
+    document.getElementById("printCard").classList.add("hidden");
+    return;
+  }
 
-    document.getElementById("requirements").innerHTML = details;
-    document.getElementById("sonuc").style.display = "block";
-}
+  const a=current.maddeler[Number(v)];
 
+  const kind=a.tur==="gecici"
+    ? "GEÇİCİ MADDE"
+    : (a.tur==="ek" ? "EK MADDE" : "MADDE");
+
+  const res=document.getElementById("result");
+
+  res.querySelector("h2").textContent=current.ad;
+  document.getElementById("articleTitle").innerHTML=officialHtml(a.baslik||"");
+
+  document.getElementById("body").innerHTML=
+    '<strong>'+kind+" "+esc(a.madde)+" –</strong> "+
+    officialHtml(a.metin);
+
+  document.getElementById("resultCard").classList.remove("hidden");
+  document.getElementById("printCard").classList.remove("hidden");
+  setTimeout(()=>scrollToElement("resultCard",10),60);
+};
+
+document.getElementById("law").addEventListener("change",loadSelectedLaw);
+
+loadCatalog().catch(e=>{
+  alert("Mevzuat kataloğu yüklenemedi: "+e.message);
+});
 </script>
-
 </body>
 </html>
